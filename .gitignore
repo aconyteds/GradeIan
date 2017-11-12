@@ -1,5 +1,6 @@
 $ cat .gitignore
 
-/node_modules
+**/node_modules
+/FrontEnd/package-lock.json
 /build
 **/*.log
