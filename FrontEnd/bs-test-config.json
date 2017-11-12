@@ -1,0 +1,13 @@
+{
+  "startPath": "/node_modules/dojo-util/doh/runner.html?paths=tests,/tests;app,/app&test=tests/alltests",
+  "port": 3001,
+  "server": {
+    "baseDir": ".",
+    "routes": {
+      "/node_modules": "node_modules",
+      "/app": "src/app",
+      "/images": "build/images",
+      "/tests": "tests"
+    }
+  }
+}

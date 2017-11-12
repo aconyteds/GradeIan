@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>AWANA</title>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <link href='//fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet'>
+    <!-- 1. Load libraries -->
+    <!-- IE required polyfill -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="systemjs.config.js"></script>
+    <!-- 2. Load our 'modules' -->
+    <script>
+      System.import('main.js').catch(function(err){ console.error(err); });
+    </script>
+  </head>
+  <!-- 3. Display the application -->
+  <body class="awana">
+    <div class="header">
+        <h1>AWANA</h1>
+    </div>
+    <div class="body fluid-container">
+      <content></content>
+      <loader class="loader"><div><span>Loading...</span></div></loader>
+    </div>
+    <div class="footer">
+    </div>
+
+    <!-- <script src="js/main.js"></script> -->
+
+  </body>
+</html>
