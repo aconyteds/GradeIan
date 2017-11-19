@@ -34,6 +34,13 @@ gulp.task('sass:watch', function () {
   gulp.watch('./src/scss/*.scss', ['sass']);
 });
 
+//bootstrap css builder
+gulp.task("bootstrap", function(){
+  return gulp.src('./src/scss/themes/*/bootstrap.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('./src/css'));
+})
+
 //Build Tasks go here
 //Builds scss files and puts them in a build folder
 gulp.task('b_sass', function () {

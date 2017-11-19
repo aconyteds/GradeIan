@@ -1,0 +1,112 @@
+@import "../../node_modules/font-awesome/css/font-awesome.min.css";
+
+$header-bg:#171B20;
+
+html, body{
+  margin:0;
+  padding:0;
+  height:100%;
+}
+
+.input-group-btn button.btn{
+  padding-top:11px;
+  padding-bottom:11px;
+}
+
+body.gradeian{
+  width:100%;
+  display:table;
+  border-collapse:collapse;
+  font-family:"Source Code Pro", monospace;
+
+  .header,.footer{
+    display:table-row;
+    background:$header-bg;
+    height:1px;
+  }
+  .header{
+    border-bottom:1px solid #333;
+
+    &-content{
+      padding:13px 22px;
+    }
+    main-title, .menu-button{
+      display:inline-block;
+      font-size:34px;
+    }
+    .menu-button{
+      margin-right:5px;
+      cursor:pointer;
+    }
+  }
+
+  .body{
+    height:100%;
+    position:relative;
+  }
+  .fa{
+    font: FontAwesome;
+  }
+
+  .menu-container{
+    background:$header-bg;
+    height:100%;
+    z-index:500;
+    padding:13px 22px;
+    @media(min-width: $screen-xs){
+      position:absolute;
+      left:0;
+      display:none;
+      box-shadow: 2px 0 10px 1px #000;
+    }
+    @media(min-width:$screen-md){
+      position:relative;
+      display:inline-block;
+      box-shadow:none;
+    }
+    &[style*=none]+.content-container{
+      width:100%;
+    }
+  }
+}
+.search-container{
+  display:inline-block;
+  padding:5px;
+  &>*{
+    display:inline-block;
+    vertical-align: middle;
+  }
+  $size:34px;
+  .avatarded{
+    height:$size;
+    width:$size;
+    border-radius:50%;
+    background-position:50% 50%;
+    background-repeat:no-repeat;
+    background-size: 100%;
+    /* Prevent background color leak outs */
+    -webkit-background-clip: padding-box;
+    -moz-background-clip:    padding;
+    background-clip:         padding-box;
+  }
+}
+.loader{
+  position:fixed;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  background: $body-bg;
+  z-index:999;
+  &>*{
+    display: table;
+    height:100%;
+    width:100%;
+    &>*{
+      text-align: center;
+      vertical-align: middle;
+      display: table-cell;
+      font-size:4em;
+    }
+  }
+}

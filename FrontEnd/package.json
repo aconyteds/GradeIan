@@ -59,6 +59,8 @@
     "less-plugin-clean-css": "^1.5.1",
     "lite-server": "^2.2.2",
     "matchdep": "~2.0.0",
+    "node-forge": "0.7.1",
+    "popper.js": "^1.12.5",
     "scss": "^0.2.4",
     "tsify": "^3.0.1",
     "typescript": "^2.2.1",
