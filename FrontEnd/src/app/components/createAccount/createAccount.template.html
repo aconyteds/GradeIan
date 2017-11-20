@@ -1,0 +1,89 @@
+<form class="form-horizontal card-block" #createAccountForm="ngForm">
+  <div class="card-title">Create Account</div>
+  <div class="col">
+    <div class="col">
+      <div class="form-group">
+        <label class="control-label" for="firstName">First Name:</label>
+          <input class="form-control" type="text" id="firstName" placeholder="John" [(ngModel)]="user.firstName" required name="firstName" #firstName="ngModel" maxlength="30">
+          <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">A First Name is Required</div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col">
+      <div class="form-group">
+        <label class="control-label" for="lastName">Last Name:</label>
+        <input class="form-control" type="text" id="lastName" placeholder="Doe" [(ngModel)]="user.lastName" required name="lastName" #lastName="ngModel" maxlength="30">
+        <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">A Last Name is Required</div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col">
+      <div class="form-group">
+        <label class=" control-label" for="email">Email:</label>
+        <input class="form-control" type="email" id="email" placeholder="jdoe@mail.com" [(ngModel)]="user.email"  name="email" email
+         required #email="ngModel" (change)="checkEmail(user.email)" maxlength="100">
+        <div [hidden]="email.valid || email.pristine" class="alert alert-danger">An email is Required</div>
+        <div [hidden]="!emailInUse" class="alert alert-danger">Email is in use, click <a href="#login">here</a> to login.</div>
+      </div>
+    </div>
+  </div>
+  <hr/>
+  <div class="col">
+    <div class="col">
+      <div class="form-group">
+        <label class=" control-label" for="userName">User Name:</label>
+        <input class="form-control" type="text" id="userName" placeholder="jdoe6" [(ngModel)]="user.userName"  name="userName" required #userName="ngModel" maxlength="25">
+        <div [hidden]="userName.valid || userName.pristine" class="alert alert-danger">User Name is Required</div>
+        <div [hidden]="!userNameInUse" class="alert alert-danger">User Name is already in use, click <a href="#login?user.userName">here</a> to login.</div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col">
+      <div class="form-group">
+        <label class=" control-label" for="password">Password:</label>
+        <input class="form-control" type="password" id="password" placeholder="Password" (keyup)="checkPasswordStrength(user.password)"
+         [(ngModel)]="user.password"
+         pattern="(?=^.{8,20}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$"  name="password" required #password="ngModel" maxlength="20">
+         <div [hidden]="password.valid" class="alert alert-info">8 to 20 characters; include Upper, Lower, Numeric, and Special characters.</div>
+         <div class="row password-strength" [hidden]="password.pristine">
+           <span>Strength</span>
+           <div class="col-6">
+             <meter min="0" max="4" [value]="passwordStrength" class="password-meter"></meter>
+           </div>
+         </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col">
+      <div class="form-group">
+        <label class=" control-label" for="confirmPW">Confirm Password:</label>
+        <input class="form-control" type="password" id="confirmPW" placeholder="Confirm Password" [(ngModel)]="confirmPassword" name="confirmPW" pattern="{{user.password}}" required maxlength="20">
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col">
+      <div class="form-group">
+        <label class=" control-label" for="securityQuestion">Security Question:</label>
+        <security-question name="securityQuestion" id="securityQuestion"></security-question>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col">
+      <div class="form-group">
+        <label class=" control-label" for="securityAnswer">Answer:</label>
+        <input class="form-control" type="text" id="securityAnswer" placeholder="Answer the question above" [(ngModel)]="user.securityAnswer"  name="securityAnswer" required #securityAnswer="ngModel" maxlength="150">
+        <div [hidden]="securityAnswer.valid || securityAnswer.pristine" class="alert alert-danger">This is required should you need to recover your account</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col text-center">
+    <button class="btn btn-success" [disabled]="!createAccountForm.form.valid" (click)="onSubmit(user)"><i class="fa fa-plus"></i> Submit</button>
+  </div>
+</form>
