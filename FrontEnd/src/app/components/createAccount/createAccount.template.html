@@ -67,9 +67,11 @@
   </div>
   <div class="col">
     <div class="col">
-      <div class="form-group">
-        <label class=" control-label" for="securityQuestion">Security Question:</label>
-        <security-question name="securityQuestion" id="securityQuestion"></security-question>
+      <div class="form-group" >
+        <label class="control-label" for="securityQuestion">Security Question:</label>
+        <select id="securityQuestion" class='form-control' name="securityQuestion" [(ngModel)]="user.securityQuestion" >
+          <option *ngFor="let question of questions" [value]="question.ID">{{question.Question}}</option>
+        </select>
       </div>
     </div>
   </div>

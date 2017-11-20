@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {NgForm, PatternValidator, EmailValidator} from "@angular/forms";
 import {Router} from "@angular/router";
 import {UserModel} from "./userModel";
 
 import {AccountService} from "../../services/account.service";
-import {User} from "../../interfaces";
-import {SecurityQuestions} from "../securityQuestion/securityQuestion.component";
+import {User, SecurityQuestion} from "../../interfaces";
 
 import {PasswordCheckService} from "../../utilities/password-strength";
 
@@ -30,7 +29,7 @@ import {PasswordCheckService} from "../../utilities/password-strength";
   }
 })
 
-export class CreateAccount  {
+export class CreateAccount implements OnInit {
   private user:User;
   private invalid:boolean = true;
   private emailInUse:boolean = false;
@@ -38,11 +37,21 @@ export class CreateAccount  {
   private confirmPassword:string = "";
   private passwordStrength:number = 0;
   private passwordService:PasswordCheckService = new PasswordCheckService();
+  private questions:SecurityQuestion[];
   constructor(
     private accountService:AccountService,
     private router:Router
   ){
     this.user = new UserModel("", "", "", 1, "", "", "");
+  }
+
+  ngOnInit(){
+    this.getSecurityQuestions();
+  }
+
+  getSecurityQuestions(): void {
+    this.accountService.getSecurityQuestions()
+      .subscribe(response=>this.questions = response);
   }
 
   onSubmit(user:User):void{

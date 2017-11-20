@@ -10,7 +10,6 @@ import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 // import { MenuComponent } from "../components/menu/menu.component";
 // import {SearchComponent} from "../components/search/search.component";
 // import {AvatarComponent} from "../components/avatar";
-import {SecurityQuestions} from "../components/securityQuestion/securityQuestion.component";
 import {ContentComponent} from "../components/content.component";
 
 //services
@@ -40,8 +39,7 @@ import {CreateAccount} from "../components/createAccount/createAccount.component
   ],
   declarations: [
     CreateAccount,
-    ContentComponent,
-    SecurityQuestions
+    ContentComponent
   ],
   providers:[
     AccountService
