@@ -34,7 +34,7 @@
     <div class="col">
       <div class="form-group">
         <label class=" control-label" for="userName">User Name:</label>
-        <input class="form-control" type="text" id="userName" placeholder="jdoe6" [(ngModel)]="user.userName"  name="userName" required #userName="ngModel" maxlength="25">
+        <input class="form-control" type="text" id="userName" placeholder="jdoe6" [(ngModel)]="user.userName" (change)="checkUserName(user.userName)"  name="userName" required #userName="ngModel" maxlength="25">
         <div [hidden]="userName.valid || userName.pristine" class="alert alert-danger">User Name is Required</div>
         <div [hidden]="!userNameInUse" class="alert alert-danger">User Name is already in use, click <a href="#login?user.userName">here</a> to login.</div>
       </div>
@@ -47,8 +47,8 @@
         <input class="form-control" type="password" id="password" placeholder="Password" (keyup)="checkPasswordStrength(user.password)"
          [(ngModel)]="user.password"
          pattern="(?=^.{8,20}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$"  name="password" required #password="ngModel" maxlength="20">
-         <div [hidden]="password.valid" class="alert alert-info">8 to 20 characters; include Upper, Lower, Numeric, and Special characters.</div>
-         <div class="row password-strength" [hidden]="password.pristine">
+         <div [hidden]="user.password != ''" class="alert alert-info">8 to 20 characters; include Upper, Lower, Numeric, and Special characters.</div>
+         <div class="row password-strength" [hidden]="user.password == ''">
            <span>Strength</span>
            <div class="col-6">
              <meter min="0" max="4" [value]="passwordStrength" class="password-meter"></meter>
