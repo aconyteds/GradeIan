@@ -14,6 +14,7 @@ html, body{
 }
 
 body.gradeian{
+
   width:100%;
   display:table;
   border-collapse:collapse;
@@ -21,7 +22,6 @@ body.gradeian{
 
   .header,.footer{
     display:table-row;
-    background:$header-bg;
     height:1px;
   }
   .header{
@@ -47,56 +47,42 @@ body.gradeian{
   .fa{
     font: FontAwesome;
   }
+}
 
-  .menu-container{
-    background:$header-bg;
-    height:100%;
-    z-index:500;
-    padding:13px 22px;
-    @media(min-width: $screen-xs){
-      position:absolute;
-      left:0;
-      display:none;
-      box-shadow: 2px 0 10px 1px #000;
-    }
-    @media(min-width:$screen-md){
-      position:relative;
-      display:inline-block;
-      box-shadow:none;
-    }
-    &[style*=none]+.content-container{
-      width:100%;
-    }
+meter {
+  width: 100%;
+  height: 12px;
+  margin-top:6px;
+  margin-left:10px;
+  /* Applicable only to Firefox */
+  background: none;
+  background-color: rgba(0, 0, 0, 0.1);
+  &::-webkit-meter-bar {
+    background: none;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &.password-meter{
+    /* Webkit based browsers */
+    &[value="1"]::-webkit-meter-optimum-value { background: red; }
+    &[value="2"]::-webkit-meter-optimum-value { background: orange; }
+    &[value="3"]::-webkit-meter-optimum-value { background: yellow; }
+    &[value="4"]::-webkit-meter-optimum-value { background: green; }
+
+    /* Gecko based browsers */
+    &[value="1"]::-moz-meter-bar { background: red; }
+    &[value="2"]::-moz-meter-bar { background: orange; }
+    &[value="3"]::-moz-meter-bar { background: yellow; }
+    &[value="4"]::-moz-meter-bar { background: green; }
   }
 }
-.search-container{
-  display:inline-block;
-  padding:5px;
-  &>*{
-    display:inline-block;
-    vertical-align: middle;
-  }
-  $size:34px;
-  .avatarded{
-    height:$size;
-    width:$size;
-    border-radius:50%;
-    background-position:50% 50%;
-    background-repeat:no-repeat;
-    background-size: 100%;
-    /* Prevent background color leak outs */
-    -webkit-background-clip: padding-box;
-    -moz-background-clip:    padding;
-    background-clip:         padding-box;
-  }
-}
+
 .loader{
   position:fixed;
   left:0;
   right:0;
   top:0;
   bottom:0;
-  background: $body-bg;
   z-index:999;
   &>*{
     display: table;

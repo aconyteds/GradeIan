@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" id="bs_sketchy" href="css/sketchy/bootstrap.css">
-    <!-- <link rel="stylesheet" id="bs_minty" href="css/minty/bootstrap.css"> -->
+    <!-- <link rel="stylesheet" id="bs_sketchy" href="css/sketchy/bootstrap.css"> -->
+    <link rel="stylesheet" id="bs_minty" href="css/minty/bootstrap.css">
     <!-- 1. Load libraries -->
     <!-- IE required polyfill -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
     <script src="node_modules/zone.js/dist/zone.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
     <script src="systemjs.config.js"></script>
+    <script src="node_modules/zxcvbn/dist/zxcvbn.js"></script>
     <!-- 2. Load our 'modules' -->
     <script>
       System.import('main.js').catch(function(err){ console.error(err); });
@@ -23,8 +24,8 @@
     <div class="header">
         <h1>GradeIan</h1>
     </div>
-    <div class="body fluid-container">
-      <content></content>
+    <div class="body ">
+      <content class="fluid-container"></content>
       <loader class="loader"><div><span>Loading...</span></div></loader>
     </div>
     <div class="footer">
