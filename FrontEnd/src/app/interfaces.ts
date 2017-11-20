@@ -3,7 +3,7 @@ export interface User{
   lastName:string;
   email:string;
   securityQuestion:number;
-  securityAnswer:string;
+  securityAnswer:string; 
   userName:string;
   password?:string;
 }

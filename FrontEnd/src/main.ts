@@ -8,5 +8,5 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 //platformBrowser().bootstrapModuleFactory(AppModule);
 //DOM is ready, so lets get started
 $(function(){
-  $("loader.loader").remove();
+  $("loader.loader").remove(); 
 });
