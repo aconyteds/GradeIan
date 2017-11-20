@@ -2,23 +2,27 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
+import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 
 //Bootstraped Components
+
 // import {TitleComponent} from "../components/title.component";
 // import { MenuComponent } from "../components/menu/menu.component";
 // import {SearchComponent} from "../components/search/search.component";
 // import {AvatarComponent} from "../components/avatar";
-// import {ContentComponent} from "../components/content";
+import {SecurityQuestions} from "../components/securityQuestion/securityQuestion.component";
+import {ContentComponent} from "../components/content.component";
 
 //services
-// import {UserService} from "../services/user.service";
+import {AccountService} from "../services/account.service";
 
 //Test Data imports
 import {InMemoryWebApiModule} from "angular-in-memory-web-api";
 // import {UserData} from "../test/data/users";
 //
 // //Route Components
-// import {RouteModule} from "./router.module";
+import {RouteModule} from "./router.module";
+import {CreateAccount} from "../components/createAccount/createAccount.component";
 // import {NewUserForm} from "../components/NewUser/newUser.component";
 // import {ViewUser} from "../components/ViewUser/viewUser.component";
 // import {Directory} from "../components/Directory/directory.component";
@@ -28,31 +32,26 @@ import {InMemoryWebApiModule} from "angular-in-memory-web-api";
 @NgModule({
   imports:      [
     BrowserModule,
-    //RouteModule,
+    RouteModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
-    //InMemoryWebApiModule.forRoot(UserData)
+    HttpModule,
+    HttpClientModule
   ],
   declarations: [
-    // TitleComponent,
-    // MenuComponent,
-    // SearchComponent,
-    // AvatarComponent,
-    // ContentComponent,
-    // NewUserForm,
-    // ViewUser,
-    // Directory
+    CreateAccount,
+    ContentComponent,
+    SecurityQuestions
   ],
   providers:[
-    //UserService
+    AccountService
   ],
   bootstrap:    [
     // TitleComponent,
     // MenuComponent,
     // SearchComponent,
     // AvatarComponent,
-    // ContentComponent
+    ContentComponent
   ]
 })
 
