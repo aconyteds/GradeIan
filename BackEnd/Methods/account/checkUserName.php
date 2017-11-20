@@ -5,7 +5,7 @@
 
   $response = $conn->query("call checkUserName('$userName')")->fetch(PDO::FETCH_OBJ);
 
-  echo $response->response;
-  
+  echo json_encode($response);
+
   $conn=null;
  ?>

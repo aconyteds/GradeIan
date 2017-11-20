@@ -5,7 +5,7 @@
 
   $response = $conn->query("call checkEmail('$email')")->fetch(PDO::FETCH_OBJ);
 
-  echo $response->response;
-  
+  echo json_encode($response);
+
   $conn=null;
  ?>
