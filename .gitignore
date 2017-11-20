@@ -2,9 +2,10 @@ $ cat .gitignore
 
 **/node_modules
 /FrontEnd/package-lock.json
-/FrontEnd/src/app/main.js
-/FrontEnd/src/app/main.js.map
+/FrontEnd/src/main.js
+/FrontEnd/src/main.js.map
 /FrontEnd/src/app/**/*.js
 /FrontEnd/src/app/**/*.map
+/FrontEnd/src/css
 /build
 **/*.log
