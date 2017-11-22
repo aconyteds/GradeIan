@@ -1,8 +1,6 @@
 <?php
   require "../dbConnect.php";
 
-
-
   if($_GET["userName"]){
     //handle GET requests
     $firstName = $_GET["firstName"];
