@@ -4,6 +4,11 @@ $ cat .gitignore
 /FrontEnd/package-lock.json
 /FrontEnd/src/main.js
 /FrontEnd/src/main.js.map
+/FrontEnd/src/test.js
+/FrontEnd/src/test.js.map
+/FrontEnd/src/polyfills.js
+/FrontEnd/src/polyfills.js.map
+
 /FrontEnd/src/app/**/*.js
 /FrontEnd/src/app/**/*.map
 /FrontEnd/src/css
