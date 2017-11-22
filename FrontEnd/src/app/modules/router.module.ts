@@ -11,7 +11,14 @@ const appRoutes: Routes = [
     pathMatch:"full",
     component: MainLogin
   },{
+    path:"home",
+    pathMatch:"full",
+    component:CreateAccount
+  },{
     path:"register",
+    component: CreateAccount
+  },{
+    path:"register/:userName",
     component: CreateAccount
   }
   // },{
