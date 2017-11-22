@@ -3,7 +3,7 @@ export interface User{
   lastName:string;
   email:string;
   securityQuestion:number;
-  securityAnswer:string; 
+  securityAnswer:string;
   userName:string;
   password?:string;
 }
@@ -11,4 +11,14 @@ export interface User{
 export interface SecurityQuestion{
   ID:number;
   Question:string;
+}
+
+export interface Login{
+  userName:string;
+  password:string;
+}
+
+export interface Credential{
+  userId:string;
+  token?:string;
 }

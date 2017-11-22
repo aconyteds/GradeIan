@@ -1,0 +1,23 @@
+<form class="form-horizontal col-12" #loginForm="ngForm">
+  <div class="form-group row">
+    <label class="col-form-label col-12 col-sm-3 text-sm-right" for="userName">User Name:</label>
+    <div class=" col-12 col-sm-9">
+      <input class="form-control" type="text" id="userName" [(ngModel)]="credentials.userName" required name="userName" maxlength="30">
+    </div>
+  </div>
+  <br/>
+  <div class="form-group row">
+    <label class="col-form-label col-12 col-sm-3 text-sm-right" for="password">Password:</label>
+    <div class=" col-12 col-sm-9">
+      <input class="form-control" type="password" id="password" [(ngModel)]="credentials.password" required name="password">
+    </div>
+  </div>
+  <div class="col">
+    <div class="alert alert-danger" [hidden]="response!='failed' ">Login Failed, either User Name or Password was incorrect!</div>
+    <div class="alert alert-danger" [hidden]="response!='locked' ">This account has been locked out due to too many failed login attempts, please wait and try again later!</div>
+  </div>
+  <div class="col-12 text-center">
+    <button class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="login()"><i class="fa fa-sign-in"></i> Login</button>
+    <!-- <button class="btn btn-primary" routerLink="/register/{{credentials.userName}}"><i class="fa fa-plus"></i> Register</button> -->
+  </div>
+</form>
