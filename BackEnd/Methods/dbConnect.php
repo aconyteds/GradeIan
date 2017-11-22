@@ -1,7 +1,7 @@
 <?php
 $dbserver = "localhost:3306";
-$dbun = "root";
-$dbpw = "Spring@@03072017";
+$dbun = "jamesbond";
+$dbpw = "forYourEyesOnly007!";
 
 try {
     $conn = new PDO("mysql:host=$dbserver;dbname=gradeIan", $dbun, $dbpw);
