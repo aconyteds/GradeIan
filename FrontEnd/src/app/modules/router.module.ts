@@ -4,6 +4,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {CreateAccount} from "../components/createAccount/createAccount.component";
 import {LoginForm} from "../components/login/login.component";
 import {MainLogin} from "../components/login/mainLogin.component";
+import {Home} from "../components/home.component";
 
 const appRoutes: Routes = [
   {
@@ -13,7 +14,7 @@ const appRoutes: Routes = [
   },{
     path:"home",
     pathMatch:"full",
-    component:CreateAccount
+    component:Home
   },{
     path:"register",
     component: CreateAccount

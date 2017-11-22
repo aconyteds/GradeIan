@@ -36,6 +36,10 @@ export class AccountService {
   login(credentials:Login): Observable<Credential>{
     return this.http.post<Credential>(this.urls.login, JSON.stringify(credentials));
   }
+
+  getUserDetails(id:number): Observable<any>{
+    return this.http.post<any>(this.urls.getUserDetails, JSON.stringify({"id":id}));
+  }
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

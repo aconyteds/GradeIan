@@ -19,6 +19,7 @@ import {RouteModule} from "./router.module";
 import {CreateAccount} from "../components/createAccount/createAccount.component";
 import {LoginForm} from "../components/login/login.component";
 import {MainLogin} from "../components/login/mainLogin.component";
+import {Home} from "../components/home.component";
 // import {NewUserForm} from "../components/NewUser/newUser.component";
 // import {ViewUser} from "../components/ViewUser/viewUser.component";
 // import {Directory} from "../components/Directory/directory.component";
@@ -38,7 +39,8 @@ import {MainLogin} from "../components/login/mainLogin.component";
     CreateAccount,
     ContentComponent,
     MainLogin,
-    LoginForm
+    LoginForm,
+    Home
   ],
   providers:[
     AccountService

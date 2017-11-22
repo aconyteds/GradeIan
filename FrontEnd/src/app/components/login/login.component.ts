@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NgForm, PatternValidator, EmailValidator} from "@angular/forms";
+import {NgForm} from "@angular/forms";
 import {Router} from "@angular/router";
 import {LoginModel} from "./login.model";
 
