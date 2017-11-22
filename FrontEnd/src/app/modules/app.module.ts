@@ -5,11 +5,6 @@ import {HttpModule} from "@angular/http";
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 
 //Bootstraped Components
-
-// import {TitleComponent} from "../components/title.component";
-// import { MenuComponent } from "../components/menu/menu.component";
-// import {SearchComponent} from "../components/search/search.component";
-// import {AvatarComponent} from "../components/avatar";
 import {ContentComponent} from "../components/content.component";
 
 //services
@@ -22,6 +17,8 @@ import {InMemoryWebApiModule} from "angular-in-memory-web-api";
 // //Route Components
 import {RouteModule} from "./router.module";
 import {CreateAccount} from "../components/createAccount/createAccount.component";
+import {LoginForm} from "../components/login/login.component";
+import {MainLogin} from "../components/login/mainLogin.component";
 // import {NewUserForm} from "../components/NewUser/newUser.component";
 // import {ViewUser} from "../components/ViewUser/viewUser.component";
 // import {Directory} from "../components/Directory/directory.component";
@@ -39,7 +36,9 @@ import {CreateAccount} from "../components/createAccount/createAccount.component
   ],
   declarations: [
     CreateAccount,
-    ContentComponent
+    ContentComponent,
+    MainLogin,
+    LoginForm
   ],
   providers:[
     AccountService
