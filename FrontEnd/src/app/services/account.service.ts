@@ -5,7 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import 'rxjs/add/operator/toPromise';
-import { User, SecurityQuestion, Login, Credential } from '../interfaces';
+import { User, SecurityQuestion, Login, Credential, NewAccount } from '../interfaces';
 import {AccountUrls} from "../config";
 
 const httpOptions = {
@@ -30,8 +30,8 @@ export class AccountService {
     return this.http.get<SecurityQuestion[]>(this.urls.getSecurityQuestions);
   }
   //Create a new account
-  create(user: User): Observable<JSON> {
-    return this.http.post<JSON>(this.urls.createAccount, JSON.stringify(user));
+  create(user: User): Observable<NewAccount> {
+    return this.http.post<NewAccount>(this.urls.createAccount, JSON.stringify(user));
   }
   login(credentials:Login): Observable<Credential>{
     return this.http.post<Credential>(this.urls.login, JSON.stringify(credentials));

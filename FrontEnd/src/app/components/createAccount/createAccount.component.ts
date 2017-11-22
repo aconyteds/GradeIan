@@ -4,9 +4,12 @@ import {Router} from "@angular/router";
 import {UserModel} from "./userModel";
 
 import {AccountService} from "../../services/account.service";
-import {User, SecurityQuestion} from "../../interfaces";
+import {User, SecurityQuestion, Login} from "../../interfaces";
 
 import {PasswordCheckService} from "../../utilities/password-strength";
+
+///<reference path="../../../utilities/typings/node-forge.d.ts" />
+import forge = require("node-forge");
 
 
 @Component({
@@ -58,14 +61,43 @@ export class CreateAccount implements OnInit {
     //Not everything is filled out yet
     if(!user.firstName || !user.lastName || !user.email || !user.userName || !user.email || this.emailInUse || this.userNameInUse){return;}
 
-    //Before we send the Password, we need to obfuscate it, this is a great place to do that
+    //Enforce upper case on first characters of names
+    user.firstName = user.firstName.charAt(0).toUpperCase() + user.firstName.substr(1);
+    user.lastName = user.lastName.charAt(0).toUpperCase() + user.lastName.substr(1);
 
+    //Before we send the Password, we need to obfuscate it
+    var tempPW = user.password;
+    //Create a sha256 object
+    var encryptPW = forge.md.sha256.create();
+    //Set the sha256 object to the users password
+    encryptPW.update(user.password);
+    //Set the password being sent to the server to a sha256 Hex string
+    user.password = encryptPW.digest().toHex();
     //Call the user creation service method
-    this.accountService.create(this.user)
-      .subscribe(function(response){
+    this.accountService.create(user)
+      .subscribe(response=>{
         //{newUserID: "4"}
-        //Need to route to login
-        console.log(response)
+        if(parseInt(response.newUserID)>0){
+        //We want to log in for the user immediately because we're nice
+          var credential:Login = {
+            userName: user.userName,
+            password: user.password
+          };
+          //Call the login service
+          this.accountService.login(credential)
+          .subscribe(response=>{
+            //Store the session credentials for the user
+            window.sessionStorage.setItem("userId", response.userId);
+            window.sessionStorage.setItem("token", response.token);
+            //Go to the user's homepage :)
+            this.router.navigate(["/home"]);
+          });
+        }
+        else{
+          //something went wrong, sorry gov'na
+          //Reset the user's PW back to it's original state so they can re-submit correctly
+          user.password=tempPW;
+        }
       });
   }
 

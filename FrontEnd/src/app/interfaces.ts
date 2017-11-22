@@ -8,6 +8,10 @@ export interface User{
   password?:string;
 }
 
+export interface NewAccount{
+  newUserID:string;
+}
+
 export interface SecurityQuestion{
   ID:number;
   Question:string;
