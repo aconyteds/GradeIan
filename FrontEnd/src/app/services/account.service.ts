@@ -5,7 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import 'rxjs/add/operator/toPromise';
-import { User, SecurityQuestion } from '../interfaces';
+import { User, SecurityQuestion, Login, Credential } from '../interfaces';
 import {AccountUrls} from "../config";
 
 const httpOptions = {
@@ -33,9 +33,9 @@ export class AccountService {
   create(user: User): Observable<JSON> {
     return this.http.post<JSON>(this.urls.createAccount, JSON.stringify(user));
   }
-  // login(login:Login): Observable<JSON>{
-  //
-  // }
+  login(credentials:Login): Observable<Credential>{
+    return this.http.post<Credential>(this.urls.login, JSON.stringify(credentials));
+  }
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
