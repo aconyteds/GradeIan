@@ -32,7 +32,7 @@ export class PasswordService {
     numberOfElements = /[^a-zA-Z0-9]/.test(password) ? ++numberOfElements : numberOfElements;   // Special characters (inc. space)
 
     // Check then strenth of this password using some simple rules
-    if (password === null || password.length < PasswordCheckService.MinimumLength) {
+    if (password === null || password.length < PasswordService.MinimumLength) {
       passwordStrength=0;
     } else {
       passwordStrength= numberOfElements;

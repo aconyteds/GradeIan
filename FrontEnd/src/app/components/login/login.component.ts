@@ -19,10 +19,10 @@ export class LoginForm {
   private password:string = "";
   private token:string;
   private response:string = "success";
+  private passwordService:PasswordService = new PasswordService();
   constructor(
     private accountService:AccountService,
-    private router:Router,
-    private passwordService:PasswordService = new PasswordService()
+    private router:Router    
   ){
     //we want to get any stored credentials
     this.getCredentials();
