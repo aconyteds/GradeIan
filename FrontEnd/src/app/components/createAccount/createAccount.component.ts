@@ -6,10 +6,7 @@ import {UserModel} from "./userModel";
 import {AccountService} from "../../services/account.service";
 import {User, SecurityQuestion, Login} from "../../interfaces";
 
-import {PasswordCheckService} from "../../utilities/password-strength";
-
-///<reference path="../../../utilities/typings/node-forge.d.ts" />
-import forge = require("node-forge");
+import {PasswordService} from "../../utilities/passwords";
 
 
 @Component({
@@ -36,7 +33,7 @@ export class CreateAccount implements OnInit {
   private userNameInUse:boolean = false;
   private confirmPassword:string = "";
   private passwordStrength:number = 0;
-  private passwordService:PasswordCheckService = new PasswordCheckService();
+  private passwordService:PasswordService = new PasswordService();
   private questions:SecurityQuestion[];
   constructor(
     private accountService:AccountService,
@@ -64,13 +61,7 @@ export class CreateAccount implements OnInit {
 
     //Before we send the Password, we need to obfuscate it
     var tempPW = user.password;
-    //Create a sha256 object
-    var encryptPW = forge.md.sha256.create();
-    //Set the sha256 object to the users password
-    encryptPW.update(user.password);
-    //Set the password being sent to the server to a sha256 Hex string
-    user.password = encryptPW.digest().toHex();
-    //Call the user creation service method
+    user.password = this.passwordService.obfuscatePassword(user.password);
     this.accountService.create(user)
       .subscribe(response=>{
         //{newUserID: "4"}

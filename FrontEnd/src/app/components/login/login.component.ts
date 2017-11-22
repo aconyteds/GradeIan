@@ -6,9 +6,7 @@ import {LoginModel} from "./login.model";
 import {AccountService} from "../../services/account.service";
 import {Login} from "../../interfaces";
 
-///<reference path="../../../utilities/typings/node-forge.d.ts" />
-import forge = require("node-forge");
-
+import {PasswordService} from "../../utilities/passwords";
 
 @Component({
   selector: 'login',
@@ -23,7 +21,8 @@ export class LoginForm {
   private response:string = "success";
   constructor(
     private accountService:AccountService,
-    private router:Router
+    private router:Router,
+    private passwordService:PasswordService = new PasswordService()
   ){
     //we want to get any stored credentials
     this.getCredentials();
@@ -54,13 +53,7 @@ export class LoginForm {
     //This is where we obfuscate the password
     //Before we send the Password, we need to obfuscate it
     var tempPW = this.credentials.password;
-    //Create a sha256 object
-    var encryptPW = forge.md.sha256.create();
-    //Set the sha256 object to the users password
-    encryptPW.update(this.credentials.password);
-    //Set the password being sent to the server to a sha256 Hex string
-    this.credentials.password = encryptPW.digest().toHex();
-    //call obfuscate code
+    this.credentials.password = this.passwordService.obfuscatePassword(this.credentials.password);
     this.accountService.login(this.credentials)
       .subscribe(response=>{
         var userId:string = response.userId;

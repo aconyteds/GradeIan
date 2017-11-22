@@ -1,5 +1,8 @@
+///<reference path="./typings/node-forge.d.ts" />
+import forge = require("node-forge");
+
 // Object to check password strengths and various properties
-export class PasswordCheckService {
+export class PasswordService {
 
   // Expected length of all passwords
   public static get MinimumLength(): number {
@@ -47,5 +50,13 @@ export class PasswordCheckService {
 
     // Return the strength of this password
     return passwordStrength;
+  }
+
+  public obfuscatePassword(pw:string):string{
+    var encryptPW = forge.md.sha256.create();
+    //Set the sha256 object to the users password
+    encryptPW.update(pw);
+    //Set the password being sent to the server to a sha256 Hex string
+    return encryptPW.digest().toHex();;
   }
 }
