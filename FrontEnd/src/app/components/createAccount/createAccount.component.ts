@@ -26,10 +26,7 @@ import forge = require("node-forge");
         margin-left:15px;
       }
     `],
-  templateUrl: "./createAccount.template.html",
-  host:{
-    'class':"col col-md-8 offset-md-2  col-lg-6 offset-lg-3 card"
-  }
+  templateUrl: "./createAccount.template.html"
 })
 
 export class CreateAccount implements OnInit {

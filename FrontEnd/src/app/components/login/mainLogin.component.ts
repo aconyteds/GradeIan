@@ -20,7 +20,7 @@ import {Component} from '@angular/core';
   ],
   template: `
     <div class="main-login">
-      <div class="col col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+      <div class="col col-md-8 offset-md-2 col-lg-6 offset-lg-3" style="margin-top:10px;">
         <div class="card">
           <div class="card-header text-center" style="margin-bottom:15px;">
             <h1 class="card-title">GradeIan</h1>
