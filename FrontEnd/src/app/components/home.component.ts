@@ -22,11 +22,11 @@ export class Home implements OnInit {
   }
 
   ngOnInit(){
-    this.getFirstName(parseInt(window.sessionStorage.getItem("userId")));
+    this.getFirstName(window.sessionStorage.getItem("token"));
   }
 
-  getFirstName(id:number):void{
-    this.accountService.getUserDetails(id)
+  getFirstName(token:string):void{
+    this.accountService.getUserDetails(token)
       .subscribe(response => this.firstName = response.FirstName);
   }
 };

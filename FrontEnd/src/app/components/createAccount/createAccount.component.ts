@@ -75,7 +75,6 @@ export class CreateAccount implements OnInit {
           this.accountService.login(credential)
           .subscribe(response=>{
             //Store the session credentials for the user
-            window.sessionStorage.setItem("userId", response.userId);
             window.sessionStorage.setItem("token", response.token);
             //Go to the user's homepage :)
             this.router.navigate(["/home"]);

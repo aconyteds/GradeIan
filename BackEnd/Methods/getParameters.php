@@ -20,14 +20,15 @@
         foreach ($params as $value) {
           $response->$value = $_POST[$value];
         }
+
       }
       //Now we want to handle payloads
       else{
         $request_body = file_get_contents('php://input');
         $data = json_decode($request_body);
         //Same iteration, but with the payload
-        foreach($param as $value){
-          $response->$value = $data[$value];
+        foreach($params as $value){
+          $response->$value = $data->$value;
         }
       }
       //Return the class containing all the parameters and their respective values

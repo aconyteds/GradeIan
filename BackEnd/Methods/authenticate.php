@@ -1,11 +1,11 @@
 <?php
-  require "./dbConnect.php";
-  require "./getParameters.php";
+  require realpath(dirname(__FILE__)."./getParameters.php");
+  require realpath(dirname(__FILE__)."./dbConnect.php");
 
   $token = getParameters(["token"])->token;
   if($token){
-    $UserId = $conn->query("call authenticate('$token')")->fetch(PDO::FETCH_OBJ)->UserId;
-    if(!$UserId){
+    $userId = $conn->query("call authenticate('$token')")->fetch(PDO::FETCH_OBJ)->UserId;
+    if(!$userId){
       http_response_code(401);
     }
     else{
@@ -15,6 +15,4 @@
   else{
     http_response_code(401);
   }
-  $token=null;
-  $conn=null;
  ?>

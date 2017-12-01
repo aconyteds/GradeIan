@@ -36,11 +36,22 @@ export class AccountService {
   login(credentials:Login): Observable<Credential>{
     return this.http.post<Credential>(this.urls.login, JSON.stringify(credentials));
   }
-
-  getUserDetails(id:number): Observable<any>{
-    return this.http.post<any>(this.urls.getUserDetails, JSON.stringify({"id":id}));
+  getUserDetails(token:string): Observable<any>{
+    return this.http.post<any>(this.urls.getUserDetails, JSON.stringify({"token":token}))
+      .pipe(catchError(this.handleError));
   }
   private handleError(error: any): Promise<any> {
+    if(error.status == 401){
+      if(window.sessionStorage.getItem("userName") && window.sessionStorage.getItem("password")){
+        let creds:Login = {
+          userName:window.sessionStorage.getItem("userName"),
+          password:window.sessionStorage.getItem("password")
+        }
+        this.login(creds).subscribe(response=>{
+          console.log(response);
+        });
+      }
+    }
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }

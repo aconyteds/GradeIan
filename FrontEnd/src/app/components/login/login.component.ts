@@ -22,7 +22,7 @@ export class LoginForm {
   private passwordService:PasswordService = new PasswordService();
   constructor(
     private accountService:AccountService,
-    private router:Router    
+    private router:Router
   ){
     //we want to get any stored credentials
     this.getCredentials();
@@ -56,14 +56,12 @@ export class LoginForm {
     this.credentials.password = this.passwordService.obfuscatePassword(this.credentials.password);
     this.accountService.login(this.credentials)
       .subscribe(response=>{
-        var userId:string = response.userId;
         var token:string = response.token;
-        if(parseInt(userId)>0){
+        if(!!token){
           //Successful login, yay!
-          // window.sessionStorage.setItem("userName", this.credentials.userName);
-          // window.sessionStorage.setItem("password", this.credentials.password);
+          window.sessionStorage.setItem("userName", this.credentials.userName);
+          window.sessionStorage.setItem("password", this.credentials.password);
           //Store the userId and Token for credentials used for transactions to the server
-          window.sessionStorage.setItem("userId", userId.toString());
           window.sessionStorage.setItem("token", token);
           if(this.router.url == "/"){
             //Initial login we want to route the user to the home page
