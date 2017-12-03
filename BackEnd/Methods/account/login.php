@@ -22,7 +22,7 @@
   $response = $conn->query("call login('$userName', '$userPassword')")->fetch(PDO::FETCH_OBJ);
   $state = $response->response;
   if($state == -2 || $state == -1 || $state == 0 || $state == null){
-    echo json_encode(Array("userId"=>$state));
+    echo json_encode(Array("token"=>$state));
   }
   else{
     //Success!

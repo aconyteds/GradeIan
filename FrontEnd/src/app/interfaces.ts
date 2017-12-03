@@ -23,6 +23,5 @@ export interface Login{
 }
 
 export interface Credential{
-  userId:string;
-  token?:string;
+  token:string;
 }

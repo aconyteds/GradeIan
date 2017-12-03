@@ -57,11 +57,13 @@ export class LoginForm {
     this.accountService.login(this.credentials)
       .subscribe(response=>{
         var token:string = response.token;
-        if(!!token){
+        //Token will either come back with a valid token, or a number signifying the error code
+        if(response.token.search(/[a-zA-Z]/)>-1){
           //Successful login, yay!
+          //Store un and pw for subsequent logins during the users session, later they can provide the option to remember through subsequent logins
           window.sessionStorage.setItem("userName", this.credentials.userName);
           window.sessionStorage.setItem("password", this.credentials.password);
-          //Store the userId and Token for credentials used for transactions to the server
+          //Store the Token for credentials used for transactions to the server
           window.sessionStorage.setItem("token", token);
           if(this.router.url == "/"){
             //Initial login we want to route the user to the home page
@@ -69,9 +71,9 @@ export class LoginForm {
           }
         }
         else{
-          //Reset the password back to the original
+          //Reset the password back to the original so the form looks right
           this.credentials.password = tempPW;
-          if(response.userId =="-2"){
+          if(response.token =="-2"){
             this.response = "locked";
           }
           else {

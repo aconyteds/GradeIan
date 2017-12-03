@@ -27,6 +27,14 @@ export class Home implements OnInit {
 
   getFirstName(token:string):void{
     this.accountService.getUserDetails(token)
-      .subscribe(response => this.firstName = response.FirstName);
+      .subscribe(response => {
+        if(response.token && response.token.search(/[a-zA-Z]/)>-1){
+          //Means our token ran out, but we fetched a new one so recursive this
+          this.getFirstName(response.token);
+        }
+        else if(response.FirstName){
+          this.firstName = response.FirstName;
+        }
+      } );
   }
 };
