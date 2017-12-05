@@ -11,6 +11,12 @@ $ cat .gitignore
 
 /FrontEnd/src/app/**/*.js
 /FrontEnd/src/app/**/*.map
+/FrontEnd/src/environments/**/*.js
+/FrontEnd/src/environments/**/*.map
+
 /FrontEnd/src/css
-/build
+
+/FrontEnd/build
+/FrontEnd/dist
+
 **/*.log
