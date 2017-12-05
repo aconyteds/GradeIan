@@ -14,11 +14,11 @@ import {PasswordService} from "../../utilities/passwords";
 })
 
 export class LoginForm {
-  private credentials:Login;
+  public credentials:Login;
   private userName:string ="";
   private password:string = "";
   private token:string;
-  private response:string = "success";
+  public response:string = "success";
   private passwordService:PasswordService = new PasswordService();
   constructor(
     private accountService:AccountService,

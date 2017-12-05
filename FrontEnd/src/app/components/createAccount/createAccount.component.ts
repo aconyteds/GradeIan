@@ -27,14 +27,14 @@ import {PasswordService} from "../../utilities/passwords";
 })
 
 export class CreateAccount implements OnInit {
-  private user:User;
+  public user:User;
   private invalid:boolean = true;
-  private emailInUse:boolean = false;
-  private userNameInUse:boolean = false;
-  private confirmPassword:string = "";
-  private passwordStrength:number = 0;
+  public emailInUse:boolean = false;
+  public userNameInUse:boolean = false;
+  public confirmPassword:string = "";
+  public passwordStrength:number = 0;
   private passwordService:PasswordService = new PasswordService();
-  private questions:SecurityQuestion[];
+  public questions:SecurityQuestion[];
   constructor(
     private accountService:AccountService,
     private router:Router

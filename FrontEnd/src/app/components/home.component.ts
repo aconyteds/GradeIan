@@ -15,7 +15,7 @@ import {AccountService} from "../services/account.service";
 })
 
 export class Home implements OnInit {
-  private firstName:string = "";
+  public firstName:string = "";
   constructor(
     private accountService:AccountService
   ){
