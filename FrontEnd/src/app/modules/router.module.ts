@@ -16,11 +16,12 @@ const appRoutes: Routes = [
     pathMatch:"full",
     component:Home
   },{
-    path:"register",
+    path:"newAccount",
+    pathMatch:"full",
     component: CreateAccount
   },{
-    path:"register/:userName",
-    component: CreateAccount
+    path:"**",
+    redirectTo:""
   }
   // },{
   //   path:"login",
