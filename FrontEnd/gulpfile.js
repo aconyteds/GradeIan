@@ -2,9 +2,17 @@
 
 var gulp = require('gulp'),
   sass = require('gulp-sass'),
-  path = require('path'),
-  browserify = require("browserify"),
-  source = require("vinyl-source-stream");
+  gulpRemoveHtml = require('gulp-remove-html');
+  // path = require('path'),
+  // browserify = require("browserify"),
+  // source = require("vinyl-source-stream"),
+  // typescript = require("gulp-typescript"),
+  // tsify = require("tsify"),
+  // uglify = require("gulp-uglify"),
+  // sourcemaps = require('gulp-sourcemaps'),
+  // buffer = require('vinyl-buffer');
+
+//var tsProject = typescript.createProject("src/tsconfig.json");
 
 /**
 Setup Watchers
@@ -54,7 +62,36 @@ gulp.task("copy-html", function(){
     .pipe(gulp.dest("build"));
 });
 
-gulp.task("build", ["b_sass", "copy-html"]);
+gulp.task("b_bootstrap", function(){
+  return gulp.src('./src/scss/themes/*/bootstrap.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('./build/css'));
+});
+
+// gulp.task("b_tsc", function(){
+//   return browserify({
+//     basedir:".",
+//     debug:true,
+//     entries:["src/main.ts"],
+//     cache:{},
+//     packageCache:{}
+//   })
+//   .plugin(tsify)
+//   .bundle()
+//   .pipe(source('main.js'))
+//   .pipe(buffer())
+//   .pipe(uglify())
+//   .pipe(gulp.dest("build/js"));
+// });
+
+gulp.task("prod-index", function(){
+  return gulp.src('build/index.html')
+    .pipe(gulpRemoveHtml())
+    .pipe(gulp.dest('build'));
+});
+
+//This is now in the ng build
+gulp.task("build", ["b_sass", "copy-html", "b_bootstrap", "prod-index"]);
 
 gulp.task("startup", ["sass", "sass-component"]);
 gulp.task("default", ["startup", "sass:watch", "sc:watch"]);

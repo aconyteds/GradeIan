@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "module": "umd",
+        "module": "commonjs",
         "moduleResolution":"node",
         "target":"es2015",
         "noImplicitAny": true,
@@ -10,6 +10,7 @@
         "outDir":"./build/js",
         "experimentalDecorators":true,
         "allowSyntheticDefaultImports": true,
+        "noLib":false,
         "baseUrl":".",
         "paths":{
           "@angular":["node_modules/@angular"],
@@ -21,7 +22,15 @@
           "core-js"
         ],
         "typeRoots":[
-          "node_modules/@types"
+          "./node_modules/@types",
+          "./src/app/utilities/typings"
+        ],
+        "lib": [
+          "es2015",
+          "dom",
+          "dom.iterable",
+          "scripthost",
+          "es5"
         ]
     },
     "compileOnSave":false,

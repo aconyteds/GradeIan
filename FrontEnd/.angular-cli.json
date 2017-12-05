@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "angular.io-example"
+    "name": "gradeian"
   },
   "apps": [
     {
@@ -18,7 +18,8 @@
       "tsconfig": "tsconfig.json",
       "prefix": "app",
       "styles": [
-        "css/main.css"
+        "css/main.css",
+        "css/minty/bootstrap.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
@@ -54,6 +55,9 @@
   },
   "defaults": {
     "styleExt": "css",
-    "component": {}
+    "component": {},
+    "build":{
+      "baseHref":"./"
+    }
   }
 }

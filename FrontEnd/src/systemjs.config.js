@@ -29,7 +29,7 @@
 
       // other libraries
       'rxjs': 'npm:rxjs',
-      'rxjs/operators': 'npm:rxjs/operators/index.js',
+      //'rxjs/operators': 'npm:rxjs/operators/index.js',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
       "jquery": "npm:jquery/dist/jquery.min.js",
       "node-forge":"npm:node-forge/dist/forge.all.min.js"
