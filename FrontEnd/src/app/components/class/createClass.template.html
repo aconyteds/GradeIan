@@ -1,0 +1,44 @@
+<div>
+  <div class="col-lg-6">
+    <div class="col-12">
+      <form class="form-horizontal" #createClassForm="ngForm">
+        <div class="col">
+          <div class="form-group">
+            <label class="control-label" for="classTitle">Class Title:</label>
+            <input class="form-control" type="text" id="classTitle" placeholder="Bio 101" [(ngModel)]="classData.classTitle" required name="classTitle" #classTitle="ngModel" maxlength="100">
+            <div [hidden]="classTitle.valid || classTitle.pristine" class="alert alert-danger">Please provide a title for your class</div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label class="control-label" for="classIcon">Class Icon:</label>
+            <input class="form-control" type="hidden" id="classIcon"  [(ngModel)]="classData.classIcon"  name="classIcon" #classIcon="ngModel" >
+            <div class="icon-container">
+              <span *ngFor="let icon of icons" (click)="selectIcon(icon)" class="fa {{icon}}" [ngClass]="{'selected text-primary':classData.classIcon === icon}"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label class="control-label" for="startDate">Start Date:</label>
+            <input class="form-control" type="date" id="startDate" [(ngModel)]="classData.startDate" name="startDate" #startDate="ngModel">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label class="control-label" for="endDate">End Date:</label>
+            <input class="form-control" type="date" id="endDate" [(ngModel)]="classData.endDate" name="endDate" #endDate="ngModel">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-12">
+      <!-- <student-form></student-form> -->
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="col-12">
+      <!-- <assignment-form></assignment-form> -->
+    </div>
+  </div>
+</div>

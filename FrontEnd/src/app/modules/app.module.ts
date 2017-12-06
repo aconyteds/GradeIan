@@ -9,20 +9,16 @@ import {ContentComponent} from "../components/content.component";
 
 //services
 import {AccountService} from "../services/account.service";
+import {ClassesService} from "../services/classes.service";
 
-//Test Data imports
-import {InMemoryWebApiModule} from "angular-in-memory-web-api";
-// import {UserData} from "../test/data/users";
 //
 // //Route Components
 import {RouteModule} from "./router.module";
 import {CreateAccount} from "../components/createAccount/createAccount.component";
+import {CreateClass} from "../components/class/createClass.component";
 import {LoginForm} from "../components/login/login.component";
 import {MainLogin} from "../components/login/mainLogin.component";
 import {Home} from "../components/home.component";
-// import {NewUserForm} from "../components/NewUser/newUser.component";
-// import {ViewUser} from "../components/ViewUser/viewUser.component";
-// import {Directory} from "../components/Directory/directory.component";
 
 //Directives
 
@@ -37,13 +33,15 @@ import {Home} from "../components/home.component";
   ],
   declarations: [
     CreateAccount,
+    CreateClass,
     ContentComponent,
     MainLogin,
     LoginForm,
     Home
   ],
   providers:[
-    AccountService
+    AccountService,
+    ClassesService
   ],
   bootstrap:    [
     // TitleComponent,

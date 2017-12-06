@@ -25,3 +25,12 @@ export interface Login{
 export interface Credential{
   token:string;
 }
+
+export interface Class{
+  classId?:number;
+  classTitle:string;
+  classIcon?:string;
+  startDate?:Date;
+  endDate?:Date;
+  teacherId?:string;
+}
