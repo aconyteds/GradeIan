@@ -40,7 +40,7 @@ export const classIcons:string[] = [
   "fa-calendar",
   "fa-camera-retro",
   "fa-certificate",
-  "fa-clock",
+  "fa-clock-o",
   "fa-coffee",
   "fa-comment",
   "fa-dashboard",

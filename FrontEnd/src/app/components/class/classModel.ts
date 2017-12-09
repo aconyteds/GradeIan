@@ -4,8 +4,8 @@ export class ClassModel implements Class{
   constructor(
     public classTitle:string,
     public classIcon:string,
-    public startDate:Date,
-    public endDate:Date,
+    public startDate:string,
+    public endDate:string,
     public token:string
   ){
   }

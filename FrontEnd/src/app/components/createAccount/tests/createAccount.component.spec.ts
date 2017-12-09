@@ -49,6 +49,10 @@ describe('CreateAccountComponent (external template)', () => {
     de = fixture.debugElement.query(By.css('form'));
   });
 
+  afterEach(()=>{
+    TestBed.resetTestingModule();
+  });
+
   it('Check Required Inputs have Required Attribute', () => {
     let requiredInputs = ["firstName", "lastName", "email", "password", "securityAnswer", "userName"];
     requiredInputs.forEach((input)=>{

@@ -22,6 +22,10 @@ import {Class} from "../../interfaces";
         margin:2px;
         padding:5px;
         cursor:pointer;
+        height: 28px;
+        width: 28px;
+        vertical-align: middle;
+        text-align: center;
       }
       .icon-container > span.fa.selected{
         border:1px solid;
@@ -37,7 +41,15 @@ export class CreateClass {
   constructor(
     private ClassService:ClassesService
   ){
-    this.classData = new ClassModel("", this.icons[0], new Date(), new Date(), window.sessionStorage.getItem("token"));
+    this.classData = new ClassModel("", this.icons[0], this.now(), this.now(), window.sessionStorage.getItem("token"));
+  }
+  now():string{
+    var now = new Date(),
+      month = (now.getMonth()+1).toString(),
+      day = (now.getDate()).toString();
+    month = month.length == 2?month:"0"+month;
+    day = day.length == 2?day:"0"+day;
+    return now.getFullYear() +"-"+month+"-"+day;
   }
   selectIcon(iconClass:string){
     this.classData.classIcon = iconClass;

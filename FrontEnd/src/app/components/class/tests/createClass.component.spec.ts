@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement }    from '@angular/core';
+import {click} from "../../../test/utilities";
 
 //Imports for dependencies
 import {FormsModule} from "@angular/forms";
@@ -81,15 +82,35 @@ describe('CreateClassComponent (external template)', () => {
     expect(comp.classData.classIcon).toEqual(comp.icons[1]);
   });
 
+  it("#now should return a proper date string", ()=>{
+    let dateString = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
+    expect(dateString.test(comp.now())).toBeTruthy();
+
+  });
+
   it("Create a Class", ()=>{
     comp.classData.classTitle = "Bio 101";
     comp.classData.classIcon = "fa-book";
-    comp.classData.startDate = new Date();
-    comp.classData.endDate = new Date();
+    comp.classData.startDate = comp.now();
+    comp.classData.endDate = comp.now();
     fixture.detectChanges();
     comp.createClass();
     fixture.detectChanges();
     expect(classService.classCreated).toBeGreaterThan(0);
+  });
+
+  it("Verify submit button is working", ()=>{
+    let submitButton:DebugElement = fixture.debugElement.query(By.css("button[type='submit']"));
+    click(submitButton);
+    expect(classService.classCreated).toEqual(1);
+    comp.classData.classTitle = "Bio 101";
+    comp.classData.classIcon = "fa-book";
+    comp.classData.startDate = comp.now();
+    comp.classData.endDate = comp.now();
+    fixture.detectChanges();
+    click(submitButton);
+    fixture.detectChanges();
+    expect(classService.classCreated).toBeGreaterThan(1);
   });
 
 

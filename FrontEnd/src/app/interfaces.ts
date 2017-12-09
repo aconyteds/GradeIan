@@ -30,7 +30,7 @@ export interface Class{
   classId?:number;
   classTitle:string;
   classIcon?:string;
-  startDate?:Date;
-  endDate?:Date;
+  startDate?:string;
+  endDate?:string;
   teacherId?:string;
 }

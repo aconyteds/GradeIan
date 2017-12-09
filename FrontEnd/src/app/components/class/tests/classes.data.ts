@@ -6,8 +6,8 @@ export interface TestClass{
   teacherId:number;
   classTitle:string;
   classIcon:string;
-  startDate:Date;
-  endDate:Date;
+  startDate:string;
+  endDate:string;
 }
 
 interface response{
