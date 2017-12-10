@@ -1,63 +1,68 @@
 <div class="col-12">
   <div class="row">
-  <div class="col-lg-6">
-    <div class="col-12">
-      <div class="title-pane">
-        <div class="title-pane-title">Class Details</div>
-        <form class="form-horizontal" #createClassForm="ngForm">
-          <div class="col">
-            <div class="form-group">
-              <label class="control-label" for="classTitle">Class Title:</label>
-              <input class="form-control" type="text" id="classTitle" placeholder="Bio 101" [(ngModel)]="classData.classTitle" required name="classTitle" #classTitle="ngModel" maxlength="100">
-              <div [hidden]="classTitle.valid || classTitle.pristine" class="alert alert-danger">Please provide a title for your class</div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <label class="control-label" for="classIcon">Class Icon:</label>
-              <input class="form-control" type="hidden" id="classIcon"  [(ngModel)]="classData.classIcon"  name="classIcon" #classIcon="ngModel" >
-              <div class="icon-container">
-                <span *ngFor="let icon of icons" (click)="selectIcon(icon)" class="fa {{icon}}" [ngClass]="{'selected text-primary':classData.classIcon === icon}"></span>
+    <div class="col-lg-6">
+      <div class="col-12">
+        <div class="title-pane">
+          <div class="title-pane-title">Class Details</div>
+          <form class="form-horizontal" #createClassForm="ngForm">
+            <div class="col">
+              <div class="form-group">
+                <label class="control-label" for="classTitle">Class Title:</label>
+                <input class="form-control" type="text" id="classTitle" placeholder="Bio 101" [(ngModel)]="classData.classTitle" required name="classTitle" #classTitle="ngModel" maxlength="100">
+                <div [hidden]="classTitle.valid || classTitle.pristine" class="alert alert-danger">Please provide a title for your class</div>
               </div>
             </div>
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <label class="control-label" for="startDate">Start Date:</label>
-              <input class="form-control" type="date" id="startDate" [(ngModel)]="classData.startDate" name="startDate" #startDate="ngModel">
+            <div class="col">
+              <div class="form-group">
+                <label class="control-label" for="classIcon">Class Icon:</label>
+                <input class="form-control" type="hidden" id="classIcon"  [(ngModel)]="classData.classIcon"  name="classIcon" #classIcon="ngModel" >
+                <div class="icon-container">
+                  <span *ngFor="let icon of icons" (click)="selectIcon(icon)" class="fa {{icon}}" [ngClass]="{'selected text-primary':classData.classIcon === icon}"></span>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <label class="control-label" for="endDate">End Date:</label>
-              <input class="form-control" type="date" id="endDate" [(ngModel)]="classData.endDate" name="endDate" #endDate="ngModel" min="{{classData.startDate}}">
+            <div class="col">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="control-label" for="startDate">Start Date:</label>
+                    <input class="form-control" type="date" id="startDate" [(ngModel)]="classData.startDate" name="startDate" #startDate="ngModel">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="control-label" for="endDate">End Date:</label>
+                    <input class="form-control" type="date" id="endDate" [(ngModel)]="classData.endDate" name="endDate" #endDate="ngModel" min="{{classData.startDate}}">
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
-    <div class="col-12">
-      <div class="title-pane">
-        <div class="title-pane-title">Studen Details</div>
-        <div class="col-12">
-          Coming Soon!
-          <!-- <student-form></student-form> -->
+      <div class="col-12">
+        <div class="title-pane">
+          <div class="title-pane-title">Studen Details</div>
+          <div class="col-12">
+            Coming Soon!
+            <!-- <student-form></student-form> -->
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-lg-6">
-    <div class="col-12">
-      <div class="title-pane">
-        <div class="title-pane-title">Assignments</div>
-        <div class="col-12">
-          Coming Soon!
-          <!-- <assignment-form></assignment-form> -->
+    <div class="col-lg-6">
+      <div class="col-12">
+        <div class="title-pane">
+          <div class="title-pane-title">Assignments</div>
+          <div class="col-12">
+            Coming Soon!
+            <!-- <assignment-form></assignment-form> -->
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-12 text-center" style="margin-top:10px;">
-    <button class="btn btn-success" type="submit" [disabled]="!createClassForm.form.valid" (click)="createClass()"><i class="fa fa-plus"> </i> Create Class</button>
+    <div class="col-12 text-center" style="margin-top:10px;">
+      <button class="btn btn-success" type="submit" [disabled]="!createClassForm.form.valid" (click)="createClass()"><i class="fa fa-plus"> </i> Create Class</button>
+    </div>
   </div>
 </div>
