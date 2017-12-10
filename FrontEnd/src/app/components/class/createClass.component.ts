@@ -39,7 +39,8 @@ export class CreateClass {
   public classData:ClassModel;
   public icons:string[]=classIcons;
   constructor(
-    private ClassService:ClassesService
+    private ClassService:ClassesService,
+    private router:Router
   ){
     this.classData = new ClassModel("", this.icons[0], this.now(), this.now(), window.sessionStorage.getItem("token"));
   }
@@ -57,12 +58,14 @@ export class CreateClass {
   createClass(){
     this.ClassService.createClass(this.classData)
       .subscribe((response) =>{
-        if(response.token){
+        if(!!response.token){
           //Had to log in again, token expired
           this.createClass();
         }
-        else if(!!response.response){
+        else if(!!response.classId){
           //Class Created
+          //Route to the class
+          this.router.navigate(["/home"]);
         }
         else{
           //Failure
