@@ -14,7 +14,7 @@ export class AuthenticationUrls {
 }
 
 export class ClassesUrls{
-  public createClass:string = baseUrl + "/class/create.php";
+  public createClass:string = baseUrl + "/classes/create.php";
 }
 
 //Icons available for selection for classes
