@@ -7,8 +7,12 @@ import {AccountService} from "../services/account.service";
   selector: 'home',
   template: `
     <div class="loader">
-      <div>
-        <span>Hello, {{firstName}}.</span>
+      <div class="text-center">
+        <span>Hello, {{firstName}}.
+          <br/>
+          <button class="btn btn-primary" routerLink="/newClass"><i class="fa fa-plus"> </i> Create Class</button>
+        </span>
+
       </div>
     </div>
   `
