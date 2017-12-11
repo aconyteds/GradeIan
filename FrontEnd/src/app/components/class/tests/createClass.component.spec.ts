@@ -110,7 +110,7 @@ describe('CreateClassComponent (external template)', () => {
     fixture.detectChanges();
     click(submitButton);
     fixture.detectChanges();
-    expect(classService.classCreated).toBeGreaterThan(1);
+    expect(classService.classCreated).toBeGreaterThan(0);
   });
 
 
