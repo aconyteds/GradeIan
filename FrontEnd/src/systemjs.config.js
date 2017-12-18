@@ -32,6 +32,7 @@
       //'rxjs/operators': 'npm:rxjs/operators/index.js',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
       "jquery": "npm:jquery/dist/jquery.min.js",
+      "bootstrap":"npm:bootstrap/dist/js/bootstrap.bundle.min.js",
       "node-forge":"npm:node-forge/dist/forge.all.min.js"
     },
     // packages tells the System loader how to load when no filename and/or no extension

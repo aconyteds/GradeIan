@@ -14,7 +14,8 @@
         "baseUrl":".",
         "paths":{
           "@angular":["node_modules/@angular"],
-          "@jquery":["node_modules/jquery/dist/jquery.min.js"]
+          "@jquery":["node_modules/jquery/dist/jquery.min.js"],
+          "@bootstap":["node_modules/bootstap/dist/js/bootstrap.min.js"]
         },
         "types":[
           "node",

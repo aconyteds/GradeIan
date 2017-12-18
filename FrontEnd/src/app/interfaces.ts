@@ -34,3 +34,9 @@ export interface Class{
   endDate?:string;
   teacherId?:string;
 }
+
+export interface Student{
+  ID?:number;
+  name:string;
+  email:string;
+}

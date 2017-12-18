@@ -17,6 +17,11 @@ export class ClassesUrls{
   public createClass:string = baseUrl + "/classes/create.php";
 }
 
+export class StudentUrls{
+  public createStudents:string = baseUrl + "/students/create.php";
+  public checkStudentEmail:string = baseUrl + "/students/checkEmail.php";
+}
+
 //Icons available for selection for classes
 export const classIcons:string[] = [
   "fa-anchor",

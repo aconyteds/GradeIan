@@ -3,6 +3,7 @@ import {RouterModule, Routes} from "@angular/router";
 
 import {CreateAccount} from "../components/createAccount/createAccount.component";
 import {CreateClass} from "../components/class/createClass.component";
+import {CreateStudents} from "../components/students/createStudent.component";
 import {LoginForm} from "../components/login/login.component";
 import {MainLogin} from "../components/login/mainLogin.component";
 import {Home} from "../components/home.component";
@@ -24,6 +25,10 @@ const appRoutes: Routes = [
     path:"newClass",
     pathMatch:"full",
     component:CreateClass
+  },{
+    path:"newStudent",
+    pathMatch:"full",
+    component:CreateStudents
   },{
     path:"**",
     redirectTo:""

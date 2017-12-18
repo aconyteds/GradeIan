@@ -1,0 +1,59 @@
+<div>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createStudentModal">
+    <i class="fa fa-edit"></i> Create Students
+  </button>
+
+  <div class="modal fade" id="createStudentModal" tabindex="-1" role="dialog" aria-labelledby="createStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createStudentModalLabel">Create Students</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="fa fa-close"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div [hidden]="!students.length">
+            <ul class="student-container list-group">
+              <li  class="list-group-item active">
+                <div class="row">
+                  <span class="col-4">Name</span>
+                  <span class="col-7">Email</span>
+                </div>
+              </li>
+              <li *ngFor="let student of students" class="student list-group-item">
+                <div class="row">
+                  <span class="col-4">{{student.name}}</span>
+                  <span class="col-7">{{student.email}}</span>
+                  <span class="col-1 text-center"><i class="fa fa-close text-danger" (click)="removeStudent(student.name);"></i></span>
+                </div>
+              </li>
+            </ul>
+            <hr />
+          </div>
+          <div [hidden]="!!students.length" class="row">
+            <span class="col">Add a Student</span>
+          </div>
+          <form class="form-horizontal" #createStudentForm="ngForm">
+            <div class="col">
+              <div class="form-group row">
+                <div class="input-group">
+                  <input class="form-control" type="text" id="studentName" aria-label="Student Name" placeholder="Student Name" [(ngModel)]="studentData.name" required name="name" #studentName="ngModel" maxlength="100">
+                  <input class="form-control" type="email" id="studentEmail" aria-label="Student Email" placeholder="Student Email" [(ngModel)]="studentData.email" required  name="email" #studentEmail="ngModel" maxlength="100" email (change)="checkStudentEmail()">
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary" id="addStudentButton" aria-label="Add to list" (click)="addStudent(); createStudentForm.reset();"><i class="fa fa-plus"></i></button>
+                  </span>
+                </div>
+                <div [hidden]="studentName.valid || studentName.pristine" class="alert alert-danger">Student name is required</div>
+                <div [hidden]="studentEmail.valid || studentEmail.pristine" class="alert alert-danger">Student email is required</div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal"><i class="fa fa-save"></i> Save and Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
