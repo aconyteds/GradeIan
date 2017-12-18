@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import {NgClass} from "@angular/common";
 import {NgForm, PatternValidator, EmailValidator} from "@angular/forms";
 
@@ -12,10 +12,10 @@ import {Student} from "../../interfaces";
   selector: 'create-student',
   styles:[`
       .ng-valid[required], .ng-valid.required  {
-        border-left: 5px solid #42A948; /* green */
+        border-color: #42A948; /* green */
       }
       .ng-invalid:not(form)  {
-        border-left: 5px solid #a94442; /* red */
+        color: #a94442; /* red */
       }
       .student>span+span{
         border-left:1px solid #ccc;
@@ -35,6 +35,7 @@ import {Student} from "../../interfaces";
 })
 
 export class CreateStudents {
+  @ViewChild("studentName", {read: ElementRef}) studentName: ElementRef;
   public studentData:StudentModel;
   public students:Student[]=[];
   public invalidEmail:boolean = false;
@@ -65,8 +66,8 @@ export class CreateStudents {
         email:this.studentData.email
       });
       this.studentData = new StudentModel("","");
-      //This causes the unit test to fail
-      //$("#studentEmail").focus();
+      //Reset the input form so that multiple students can be added quickly
+      this.studentName.nativeElement.focus();
     }
   }
   createStudents(){
