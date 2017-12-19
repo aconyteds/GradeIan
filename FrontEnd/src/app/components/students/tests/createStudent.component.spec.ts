@@ -123,10 +123,33 @@ describe('Create Students Component (external template)', () => {
 
     //Fire the change event on the email to see if it works properly
     fixture.detectChanges();
-    el.dispatchEvent(new Event("change"));
+    el.dispatchEvent(new Event("keyup"));
     //Need to wait until the observable is completed to check the value
     fixture.whenStable().then(()=>{
       expect(comp.invalidEmail).toBeTruthy();
+    });
+  });
+
+  it("Form creates students and resets properly", ()=>{
+    //Send some dummy
+    comp.students=[{
+      name:"jimmy",
+      email:"jimmy@DD.com"
+    },{
+      name:"bimmy",
+      email:"bimmy@DD.com"
+    }];
+    //Get the create student button and click it
+    let createButton:DebugElement = fixture.debugElement.query(By.css("#createStudentButton"));
+    click(createButton);
+    //Make sure the students were added to the list properly
+    expect(studentService.testData.length).toBeGreaterThan(1);
+    //Wait for the async process to complete
+    fixture.whenStable().then(()=>{
+    //Check that the form submitted properly
+      expect(comp.students.length).toBe(0);
+      expect(comp.studentData.name).toEqual("");
+      expect(comp.studentData.email).toEqual("");
     });
   });
 

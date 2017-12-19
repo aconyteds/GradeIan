@@ -45,10 +45,32 @@ export class CreateStudents {
     this.studentData = new StudentModel("", "");
   }
   checkStudentEmail():void{
-    this.studentService.checkStudentEmail(this.studentData.email)
-      .subscribe((response)=>{
-        this.invalidEmail = !!response.response;
-      });
+    //Setting an extra variable helps with screen popping :)
+    let invalid:boolean = false
+    //See if the email is already in the list
+    this.students.forEach((student)=>{
+      //set the validit flag
+      invalid = student.email == this.studentData.email;
+      if(invalid){
+        this.invalidEmail = true;
+        return;
+      }
+    });
+
+    if(!invalid){
+      //Email does not appear to be in the list, not a duplicate here
+      this.studentService.checkStudentEmail(this.studentData.email)
+        .subscribe((response)=>{
+          if(response.token){
+            //Failed authentication
+            this.checkStudentEmail();
+          }
+          else{
+            //See if the things exists in the database
+            this.invalidEmail = !!response.response;
+          }
+        });
+    }
   }
   removeStudent(name:string):void{
     let i:number = 0;
@@ -79,7 +101,10 @@ export class CreateStudents {
         }
         else if(!!response.students){
           //Students Created
+          //Reset
+          this.students = [];
           //Send the student list to the parent handler
+          //TODO
         }
         else{
           //Failure

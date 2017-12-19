@@ -19,7 +19,7 @@ export class ClassesUrls{
 
 export class StudentUrls{
   public createStudents:string = baseUrl + "/students/create.php";
-  public checkStudentEmail:string = baseUrl + "/students/checkEmail.php";
+  public checkStudentEmail:string = baseUrl + "/students/checkStudentEmail.php";
 }
 
 //Icons available for selection for classes

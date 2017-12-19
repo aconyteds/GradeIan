@@ -38,20 +38,23 @@
             <div class="col">
               <div class="form-group row">
                 <div class="input-group">
-                  <input class="form-control" type="text" id="studentName" aria-label="Student Name" placeholder="Student Name" [(ngModel)]="studentData.name" required name="name" #studentName="ngModel" maxlength="100">
-                  <input class="form-control" type="email" id="studentEmail" aria-label="Student Email" placeholder="Student Email" [(ngModel)]="studentData.email" required  name="email" #studentEmail="ngModel" maxlength="100" email (change)="checkStudentEmail()">
+                  <input class="form-control" type="text" id="studentName" aria-label="Student Name" placeholder="Student Name" [(ngModel)]="studentData.name" required
+                   name="name" #studentName="ngModel" maxlength="100">
+                  <input class="form-control" type="email" id="studentEmail" aria-label="Student Email" placeholder="Student Email" [(ngModel)]="studentData.email" required
+                    name="email" #studentEmail="ngModel" maxlength="100" email (keyup)="checkStudentEmail()">
                   <span class="input-group-btn">
-                    <button type="submit" class="btn btn-primary" id="addStudentButton" aria-label="Add to list" (click)="addStudent(); createStudentForm.reset();"><i class="fa fa-plus"></i></button>
+                    <button type="submit" class="btn btn-primary" id="addStudentButton" aria-label="Add to list" (click)="addStudent(); createStudentForm.reset();" [disabled]="createStudentForm.invalid || invalidEmail"><i class="fa fa-plus"></i></button>
                   </span>
                 </div>
                 <div [hidden]="studentName.valid || studentName.pristine" class="alert alert-danger">Student name is required</div>
                 <div [hidden]="studentEmail.valid || studentEmail.pristine" class="alert alert-danger">Student email is required</div>
+                <div [hidden]="!invalidEmail" class="alert alert-danger">Email is already in use</div>
               </div>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-dismiss="modal"><i class="fa fa-save"></i> Save and Close</button>
+          <button type="button" class="btn btn-success" id="createStudentButton" data-dismiss="modal" [disabled]="!students.length" (click)="createStudents(); createStudentForm.reset();"><i class="fa fa-save"></i> Save and Close</button>
         </div>
       </div>
     </div>

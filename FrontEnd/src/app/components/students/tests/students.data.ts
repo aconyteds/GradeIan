@@ -14,24 +14,24 @@ interface response{
 
 export class StudentServiceStub {
   public testData:StudentClass[] = [];
-  public studentCreated:number = -1;
-  createStudents(students:Student[]):Observable<response>{
+  createStudents(students:Student[]):Observable<any>{
+    let studentArray:number[] = [];
     students.forEach((student)=>{
+      studentArray.push(this.testData.length+1);
       this.testData.push({
         ID:this.testData.length+1,
         name:student.name,
         email:student.email
       });
     });
-    this.studentCreated = this.testData.length;
-    return of({response:true});
+    return of({students:studentArray});
   }
   checkStudentEmail(email:string):Observable<response>{
     let inUse:boolean = false;
     this.testData.forEach((student)=>{
       inUse = inUse || student.email == email;
     });
-    
+
     return of({response:inUse});
   }
 };

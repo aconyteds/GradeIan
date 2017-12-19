@@ -27,6 +27,7 @@ export class StudentService extends Authentication {
       .pipe(catchError(this.authenticateValidation('createStudents')));
   }
   checkStudentEmail(email:string):Observable<any>{
-    return this.http.post<any>(this.urls.checkStudentEmail, JSON.stringify({email:email}));
+    return this.http.get<any>(this.urls.checkStudentEmail+"?token="+window.sessionStorage.getItem("token")+"&email="+email)
+      .pipe(catchError(this.authenticateValidation('checkStudentEmail')));
   }
 }
