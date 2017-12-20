@@ -6,7 +6,7 @@ import {CreateClass} from "../components/class/createClass.component";
 import {CreateStudents} from "../components/students/createStudent.component";
 import {LoginForm} from "../components/login/login.component";
 import {MainLogin} from "../components/login/mainLogin.component";
-import {Home} from "../components/home.component";
+import {UserDashboard} from "../components/dashboard.component";
 
 const appRoutes: Routes = [
   {
@@ -16,7 +16,7 @@ const appRoutes: Routes = [
   },{
     path:"home",
     pathMatch:"full",
-    component:Home
+    component:UserDashboard
   },{
     path:"newAccount",
     pathMatch:"full",
