@@ -8,15 +8,16 @@ import {FormsModule} from "@angular/forms";
 import {Router} from "@angular/router";
 import { CreateClass } from '../createClass.component';
 import { ClassesService } from "../../../services/classes.service";
+import {Class} from "../../../interfaces";
 
 //Import Test info
-import {ClassesServiceStub, TestClass} from "./classes.data";
+import {ClassesServiceStub} from "./classes.data";
 
 
 
 describe('CreateClassComponent (external template)', () => {
   //Default Test data
-  let testData:TestClass[];
+  let testData:Class[];
   //
   let comp: CreateClass;
   let fixture: ComponentFixture<CreateClass>;

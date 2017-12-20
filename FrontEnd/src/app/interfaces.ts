@@ -32,7 +32,10 @@ export interface Class{
   classIcon?:string;
   startDate?:string;
   endDate?:string;
-  teacherId?:string;
+  teacherId?:number;
+  students?:number;
+  classAverage?:number;
+  classProgress?:number;
 }
 
 export interface Student{

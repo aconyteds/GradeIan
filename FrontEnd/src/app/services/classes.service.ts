@@ -22,4 +22,8 @@ export class ClassesService extends Authentication {
     return this.http.post<any>(this.urls.createClass, JSON.stringify(classData))
       .pipe(catchError(this.authenticateValidation('createClass')));;
   }
+  getClasses():Observable<any>{
+    return this.http.get<any>(this.urls.getClass + "?token="+window.sessionStorage.getItem("token"))
+      .pipe(catchError(this.authenticateValidation('getClasses')));
+  }
 }

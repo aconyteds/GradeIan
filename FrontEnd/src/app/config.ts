@@ -15,6 +15,7 @@ export class AuthenticationUrls {
 
 export class ClassesUrls{
   public createClass:string = baseUrl + "/classes/create.php";
+  public getClass:string = baseUrl + "/classes/get.php";
 }
 
 export class StudentUrls{

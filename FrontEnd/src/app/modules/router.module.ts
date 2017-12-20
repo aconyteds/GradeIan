@@ -30,6 +30,10 @@ const appRoutes: Routes = [
     pathMatch:"full",
     component:CreateStudents
   },{
+    path:"class/:id",
+    pathMatch:"full",
+    redirectTo:""
+  },{
     path:"**",
     redirectTo:""
   }

@@ -1,0 +1,32 @@
+<div class="col">
+  <div class="row">
+    <div class="col class-container">
+      <div *ngFor="let classData of classes" class="card text-white bg-primary mb-3 class-item" (click)="openClass(classData.classId)">
+        <div class="card-header">
+          <span class="class-title"><i class="fa {{classData.classIcon}} class-icon"></i> {{classData.classTitle}}</span>
+        </div>
+        <div class="card-body">
+          <ul class="class-data">
+            <li>
+              <label>Students</label>
+              <span class="student-count">{{classData.students}}</span>
+            </li>
+            <li>
+              <label>Progress</label>
+              <span class="class-progress">{{classData.classProgress}}</span>
+            </li>
+            <li>
+              <label>Average</label>
+              <span class="class-average">{{classData.classAverage}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary" routerLink="/newClass"><i class="fa fa-plus"> </i> Create Class</button>
+    </div>
+  </div>
+</div>
