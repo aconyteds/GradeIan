@@ -28,4 +28,9 @@ call checkStudentEmail("mail@mail.com");
 
 call getClasses(1);
 
+call getStudentCount(1);
+
 call getStudent("joh");
+
+
+
