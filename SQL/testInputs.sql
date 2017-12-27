@@ -25,3 +25,7 @@ Update Tokens set ExpirationDate = NOW() where user_id = 1;
 call createStudent(1, "John Doe", "mail@mail.com");
 
 call checkStudentEmail("mail@mail.com");
+
+call getClasses(1);
+
+call getStudent("joh");

@@ -1,30 +1,35 @@
 <div class="col">
   <div class="row">
     <div class="col class-container">
-      <div *ngFor="let classData of classes" class="card text-white bg-primary mb-3 class-item" (click)="openClass(classData.classId)">
-        <div class="card-header">
-          <span class="class-title"><i class="fa {{classData.classIcon}} class-icon"></i> {{classData.classTitle}}</span>
-        </div>
-        <div class="card-body">
-          <ul class="class-data">
-            <li>
-              <label>Students</label>
-              <span class="student-count">{{classData.students}}</span>
-            </li>
-            <li>
-              <label>Progress</label>
-              <span class="class-progress">{{classData.classProgress}}</span>
-            </li>
-            <li>
-              <label>Average</label>
-              <span class="class-average">{{classData.classAverage}}</span>
-            </li>
-          </ul>
+      <div class="row">
+        <div *ngFor="let classData of classes" class="col-lg-3 col-md-4 col-sm-6 col-12 class-item " (click)="openClass(classData.classId)">
+          <div  class="card mb-3 ">
+            <div class="card-header text-white " [ngClass]="getGradeColoration(classData.classAverage)">
+              <span class="class-title "><i class="fa {{classData.classIcon}} class-icon"></i> {{classData.classTitle}}</span>
+            </div>
+            <div class="card-body row">
+              <div class="col">
+                <ul class="class-data ">
+                  <li class=" row">
+                    <label class="col-8">Students</label>
+                    <span class="student-count col-4 text-center">{{classData.students}}</span>
+                  </li >
+                  <li class="row">
+                    <label class="col-8">Progress</label>
+                    <span class="class-progress col-4 text-center">{{classData.classProgress}}%</span>
+                  </li>
+                  <li class="row">
+                    <label class="col-8">Average</label>
+                    <span class="class-average col-4 text-center">{{classData.classAverage}}%</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <h3 [hidden]="classes.length">You have no classes scheduled</h3>
     </div>
-
   </div>
   <div class="row">
     <div class="col">
