@@ -1,5 +1,6 @@
-///<reference path="./typings/node-forge.d.ts" />
-import forge = require("node-forge");
+/// <reference path="./typings/node-forge.d.ts" />
+declare function require(name: string);
+const forge = require('node-forge');
 
 // Object to check password strengths and various properties
 export class PasswordService {
@@ -33,18 +34,18 @@ export class PasswordService {
 
     // Check then strenth of this password using some simple rules
     if (password === null || password.length < PasswordService.MinimumLength) {
-      passwordStrength=0;
+      passwordStrength = 0;
     } else {
-      passwordStrength= numberOfElements;
+      passwordStrength = numberOfElements;
     }
 
     if (this.isPasswordCommon(password) === true) {
       passwordStrength--;
     }
 
-    if(passwordStrength <0){
+    if (passwordStrength < 0) {
       passwordStrength = 0;
-    } else if (passwordStrength >4){
+    } else if (passwordStrength > 4) {
       passwordStrength = 4;
     }
 
@@ -52,11 +53,11 @@ export class PasswordService {
     return passwordStrength;
   }
 
-  public obfuscatePassword(pw:string):string{
-    var encryptPW = forge.md.sha256.create();
-    //Set the sha256 object to the users password
+  public obfuscatePassword(pw: string): string {
+    const encryptPW = forge.md.sha256.create();
+    // Set the sha256 object to the users password
     encryptPW.update(pw);
-    //Set the password being sent to the server to a sha256 Hex string
-    return encryptPW.digest().toHex();;
+    // Set the password being sent to the server to a sha256 Hex string
+    return encryptPW.digest().toHex();
   }
 }

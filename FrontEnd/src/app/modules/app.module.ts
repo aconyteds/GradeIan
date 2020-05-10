@@ -1,8 +1,7 @@
-import { NgModule }      from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpModule} from "@angular/http";
-import { HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 //Bootstraped Components
 import {ContentComponent} from "../components/content.component";
@@ -16,10 +15,13 @@ import {StudentService} from "../services/students.service";
 import {RouteModule} from "./router.module";
 import {CreateAccount} from "../components/createAccount/createAccount.component";
 import {CreateClass} from "../components/class/createClass.component";
+import {ViewClass} from "../components/class/viewClass.component";
 import {CreateStudents} from "../components/students/createStudent.component";
 import {LoginForm} from "../components/login/login.component";
 import {MainLogin} from "../components/login/mainLogin.component";
 import {UserDashboard} from "../components/dashboard.component";
+import {StudentsView} from "../components/students/studentsView.component";
+import {AddStudent} from "../components/students/addStudent.component";
 
 //Directives
 
@@ -29,17 +31,19 @@ import {UserDashboard} from "../components/dashboard.component";
     RouteModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
     HttpClientModule
   ],
   declarations: [
     CreateAccount,
     CreateClass,
+    ViewClass,
     ContentComponent,
     MainLogin,
     LoginForm,
     UserDashboard,
-    CreateStudents
+    CreateStudents,
+    AddStudent,
+    StudentsView
   ],
   providers:[
     AccountService,
@@ -52,7 +56,8 @@ import {UserDashboard} from "../components/dashboard.component";
     // SearchComponent,
     // AvatarComponent,
     ContentComponent
-  ]
+  ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class AppModule {

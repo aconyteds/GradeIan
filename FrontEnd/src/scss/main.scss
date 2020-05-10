@@ -1,66 +1,73 @@
 @import "../../node_modules/font-awesome/css/font-awesome.min.css";
+@import "./themes/minty/bootstrap.scss";
+$header-bg: #171B20;
 
-$header-bg:#171B20;
-
-html, body{
-  margin:0;
-  padding:0;
-  height:100%;
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
-.input-group-btn button.btn{
-  padding-top:11px;
-  padding-bottom:11px;
+.input-group-btn button.btn {
+  padding-top: 11px;
+  padding-bottom: 11px;
 }
 
-body.gradeian{
+body.gradeian {
+  width: 100%;
+  display: table;
+  border-collapse: collapse;
+  font-family: "Source Code Pro", monospace;
 
-  width:100%;
-  display:table;
-  border-collapse:collapse;
-  font-family:"Source Code Pro", monospace;
-
-  .header,.footer{
-    display:table-row;
-    height:1px;
-  }
-  .header{
-    border-bottom:1px solid #333;
-
-    &-content{
-      padding:13px 22px;
-    }
-    main-title, .menu-button{
-      display:inline-block;
-      font-size:34px;
-    }
-    .menu-button{
-      margin-right:5px;
-      cursor:pointer;
-    }
+  .footer,
+  .header {
+    display: table-row;
+    height: 1px;
   }
 
-  .body{
-    height:100%;
-    position:relative;
+  .header {
+    border-bottom: 1px solid #333;
+
+    &-content {
+      padding: 13px 22px;
+    }
+
+    .menu-button,
+    main-title {
+      display: inline-block;
+      font-size: 34px;
+    }
+
+    .menu-button {
+      margin-right: 5px;
+      cursor: pointer;
+    }
   }
-  .fa{
+
+  .body {
+    height: 100%;
+    position: relative;
+  }
+
+  .fa {
     font: FontAwesome;
   }
 
-  .title-pane{
-    border:1px solid #000;
-    position:relative;
-    margin-top:15px;
-    padding-top:10px;
-    &-title{
-      background:#FFF;
-      position:absolute;
-      padding:0 3px;
-      left:5px;
-      top:-10px;
-      height:20px;
-      font-size:18px;
+  .title-pane {
+    border: 1px solid #000;
+    position: relative;
+    margin-top: 15px;
+    padding-top: 10px;
+
+    &-title {
+      background: #FFF;
+      position: absolute;
+      padding: 0 3px;
+      left: 5px;
+      top: -10px;
+      height: 20px;
+      font-size: 18px;
       line-height: 18px;
       vertical-align: middle;
     }
@@ -70,48 +77,72 @@ body.gradeian{
 meter {
   width: 100%;
   height: 12px;
-  margin-top:6px;
-  margin-left:10px;
+  margin-top: 6px;
+  margin-left: 10px;
   /* Applicable only to Firefox */
   background: none;
   background-color: rgba(0, 0, 0, 0.1);
+
   &::-webkit-meter-bar {
     background: none;
     background-color: rgba(0, 0, 0, 0.1);
   }
 
-  &.password-meter{
+  &.password-meter {
     /* Webkit based browsers */
-    &[value="1"]::-webkit-meter-optimum-value { background: red; }
-    &[value="2"]::-webkit-meter-optimum-value { background: orange; }
-    &[value="3"]::-webkit-meter-optimum-value { background: yellow; }
-    &[value="4"]::-webkit-meter-optimum-value { background: green; }
+    &[value="1"]::-webkit-meter-optimum-value {
+      background: red;
+    }
 
+    &[value="2"]::-webkit-meter-optimum-value {
+      background: orange;
+    }
+
+    &[value="3"]::-webkit-meter-optimum-value {
+      background: yellow;
+    }
+
+    &[value="4"]::-webkit-meter-optimum-value {
+      background: green;
+    }
     /* Gecko based browsers */
-    &[value="1"]::-moz-meter-bar { background: red; }
-    &[value="2"]::-moz-meter-bar { background: orange; }
-    &[value="3"]::-moz-meter-bar { background: yellow; }
-    &[value="4"]::-moz-meter-bar { background: green; }
+    &[value="1"]::-moz-meter-bar {
+      background: red;
+    }
+
+    &[value="2"]::-moz-meter-bar {
+      background: orange;
+    }
+
+    &[value="3"]::-moz-meter-bar {
+      background: yellow;
+    }
+
+    &[value="4"]::-moz-meter-bar {
+      background: green;
+    }
   }
 }
 
-.loader{
-  position:fixed;
-  left:0;
-  right:0;
-  top:0;
-  bottom:0;
-  z-index:999;
-  background:#FFF;
-  &>*{
+.loader {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 999;
+  background: #FFF;
+
+  & > * {
     display: table;
-    height:100%;
-    width:100%;
-    &>*{
+    height: 100%;
+    width: 100%;
+
+    & > * {
       text-align: center;
       vertical-align: middle;
       display: table-cell;
-      font-size:4em;
+      font-size: 4em;
     }
   }
 }

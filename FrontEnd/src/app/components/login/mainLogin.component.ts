@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'main-login',
-  styles:[
+  styles: [
     `
     .main-login{
       position:fixed;
@@ -33,9 +33,8 @@ import {Component} from '@angular/core';
     </div>
   `
 })
-
+// TODO:: Add a check to see if the user has a valid token, if so route to the home page instead
 export class MainLogin {
-  constructor(
-  ){
+  constructor() {
   }
 };

@@ -84,6 +84,6 @@ export class LoginForm {
   }
 
   register():void{
-
+    this.router.navigate([`/newAccount`]);
   }
 };
