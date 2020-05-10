@@ -7,7 +7,9 @@ import {ClassModel} from "./classModel";
 import {classIcons} from "../../config";
 
 import {ClassesService} from "../../services/classes.service";
-import {Class} from "../../interfaces";
+// import {Class} from "../../interfaces";
+
+import {StudentsView} from "../students/studentsView.component";
 
 @Component({
   selector: 'create-class',
@@ -44,6 +46,7 @@ export class CreateClass {
   ){
     this.classData = new ClassModel("", this.icons[0], this.now(), this.now(), window.sessionStorage.getItem("token"));
   }
+
   now():string{
     var now = new Date(),
       month = (now.getMonth()+1).toString(),
@@ -52,12 +55,14 @@ export class CreateClass {
     day = day.length == 2?day:"0"+day;
     return now.getFullYear() +"-"+month+"-"+day;
   }
+
   selectIcon(iconClass:string){
     this.classData.classIcon = iconClass;
   }
+
   createClass(){
     this.ClassService.createClass(this.classData)
-      .subscribe((response) =>{
+      .subscribe((response:any) =>{
         if(!!response.token){
           //Had to log in again, token expired
           this.createClass();

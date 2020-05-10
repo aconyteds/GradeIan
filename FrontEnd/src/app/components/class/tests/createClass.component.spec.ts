@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement }    from '@angular/core';
+import { DebugElement , CUSTOM_ELEMENTS_SCHEMA}    from '@angular/core';
 import {click} from "../../../test/utilities";
 
 //Imports for dependencies
@@ -9,6 +9,7 @@ import {Router} from "@angular/router";
 import { CreateClass } from '../createClass.component';
 import { ClassesService } from "../../../services/classes.service";
 import {Class} from "../../../interfaces";
+import {StudentsView} from "../../students/studentsView.component";
 
 //Import Test info
 import {ClassesServiceStub} from "./classes.data";
@@ -36,7 +37,8 @@ describe('CreateClassComponent (external template)', () => {
           useValue:{
             navigate(url:string){return url;}
           }
-        }]
+        }],
+        schemas:[CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   });
