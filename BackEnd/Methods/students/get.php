@@ -16,7 +16,7 @@
         $students=[];
       }
 
-      echo json_encode(array("results"=>$students));
+      echo json_encode($students);
     }
   }
 ?>

@@ -23,14 +23,24 @@ call createClass("Title", "fa", 1, DATE(NOW()), DATE_ADD(NOW(), INTERVAL 2 MONTH
 Update Tokens set ExpirationDate = NOW() where user_id = 1;
 
 call createStudent(1, "John Doe", "mail@mail.com");
+call createStudent(1, "Jane Doe", "jane@mail.com");
 
 call checkStudentEmail("mail@mail.com");
 
 call getClasses(1);
 
-call getStudentCount(1);
+call getStudentCount(3);
 
 call getStudent("joh");
+
+call getStudents(3);
+
+call enrollStudent(3,1);
+call enrollStudent(3,2);
+
+call withdrawStudent(3, 1);
+
+
 
 
 

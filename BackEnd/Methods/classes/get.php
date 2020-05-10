@@ -13,7 +13,7 @@
       if(!!$classes){
         foreach ($classes as $i => $class) {
           //Get the number of students for each class
-          $students = $conn->query("call getStudentCount('$class->classId')")->students;
+          $students = $conn->query("call getStudentCount('$class->classId')")->fetch(PDO::FETCH_OBJ)->students;
           if(!$students){
             $students=0;
           }
