@@ -7,10 +7,9 @@ import {StudentModel} from "./studentModel";
 import {StudentService} from "../../services/students.service";
 import {Student} from "../../interfaces";
 
-
 @Component({
   selector: 'create-student',
-  styles:[`
+  styles: [`
       .ng-valid[required], .ng-valid.required  {
         border-color: #42A948; /* green */
       }
@@ -35,80 +34,76 @@ import {Student} from "../../interfaces";
 })
 
 export class CreateStudents {
-  @ViewChild("studentName", {read: ElementRef}) studentName: ElementRef;
-  public studentData:StudentModel;
-  public students:Student[]=[];
-  public invalidEmail:boolean = false;
+  @ViewChild("studentName", {read: ElementRef}) public studentName: ElementRef;
+  public studentData: StudentModel;
+  public students: Student[] = [];
+  public invalidEmail = false;
   constructor(
-    private studentService:StudentService
-  ){
+    private studentService: StudentService
+  ) {
     this.studentData = new StudentModel("", "");
   }
-  checkStudentEmail():void{
-    //Setting an extra variable helps with screen popping :)
-    let invalid:boolean = false
-    //See if the email is already in the list
-    this.students.forEach((student)=>{
-      //set the validit flag
-      invalid = student.email == this.studentData.email;
-      if(invalid){
+  public checkStudentEmail(): void {
+    // Setting an extra variable helps with screen popping :)
+    let invalid = false;
+    // See if the email is already in the list
+    this.students.forEach((student) => {
+      // set the validit flag
+      invalid = student.email === this.studentData.email;
+      if (invalid) {
         this.invalidEmail = true;
         return;
       }
     });
 
-    if(!invalid){
-      //Email does not appear to be in the list, not a duplicate here
+    if (!invalid) {
+      // Email does not appear to be in the list, not a duplicate here
       this.studentService.checkStudentEmail(this.studentData.email)
-        .subscribe((response)=>{
-          if(response.token){
-            //Failed authentication
+        .subscribe((response) => {
+          if (response.token) {
+            // Failed authentication
             this.checkStudentEmail();
-          }
-          else{
-            //See if the things exists in the database
+          } else {
+            // See if the things exists in the database
             this.invalidEmail = !!response.response;
           }
         });
     }
   }
-  removeStudent(name:string):void{
-    let i:number = 0;
-    for(let i:number =0; i<this.students.length; i++){
-      if(this.students[i].name === name){
+  public removeStudent(name: string): void {
+    for (let i = 0; i < this.students.length; i++) {
+      if (this.students[i].name === name) {
         this.students.splice(i, 1);
         return;
       }
     }
   }
-  addStudent():void{
-    if(this.studentData.name && this.studentData.email){
+  public addStudent(): void {
+    if (this.studentData.name && this.studentData.email) {
       this.students.push({
-        name:this.studentData.name,
-        email:this.studentData.email
+        name: this.studentData.name,
+        email: this.studentData.email
       });
-      this.studentData = new StudentModel("","");
-      //Reset the input form so that multiple students can be added quickly
+      this.studentData = new StudentModel("", "");
+      // Reset the input form so that multiple students can be added quickly
       this.studentName.nativeElement.focus();
     }
   }
-  createStudents(){
+  public createStudents() {
     this.studentService.createStudents(this.students)
-      .subscribe((response) =>{
-        if(!!response.token){
-          //Had to log in again, token expired
+      .subscribe((response) => {
+        if (!!response.token) {
+          // Had to log in again, token expired
           this.createStudents();
-        }
-        else if(!!response.students){
-          //Students Created
-          //Reset
+        } else if (!!response.students) {
+          // Students Created
+          // Reset
           this.students = [];
-          //Send the student list to the parent handler
-          //TODO
+          // Send the student list to the parent handler
+          // TODO
+        } else {
+          // Failure
         }
-        else{
-          //Failure
-        }
-      })
+      });
   }
 }

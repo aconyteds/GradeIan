@@ -54,6 +54,7 @@ export class UserDashboard implements OnInit {
       }
     });
   }
+  
   //Open the Class for the provided ID
   openClass(classId:number):void{
     this.router.navigate(["/class/"+classId]);

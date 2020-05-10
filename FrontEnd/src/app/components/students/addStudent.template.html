@@ -1,0 +1,16 @@
+<form class="form-horizontal row" #searchStudentForm="ngForm">
+  <div class="col">
+    <div class="form-group">
+      <label class="search-label" for="studentSearchTerm">Student Search: </label>
+      <div style="position:relative;">
+        <input class="form-control" type="text" id="studentSearchTerm" aria-label="Student Search Input" placeholder="John Doe" #searchTerm (keyup)="search(searchTerm.value)" name="searchTerm" maxlength="100" autocomplete="off" />
+        <ul class="search-results list-group">
+          <li *ngFor="let student of students$ | async" (click)="studentClickHandler(student, searchTerm)" class="search-item list-group-item list-group-item-action" tabindex="0" (keydown.enter)="studentClickHandler(student, searchTerm)">
+            {{student.name}} <span class="email-display">{{student.email}}</span>
+          </li>
+          <li *ngIf="!searchStudentForm.pristine && (searchTerm.value.length > 0 && searchResultCount < 1)" class="list-group-item">No Student Found</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</form>

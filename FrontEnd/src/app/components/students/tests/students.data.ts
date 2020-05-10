@@ -1,37 +1,53 @@
-import { of } from 'rxjs/observable/of';
-import { Observable } from 'rxjs/Observable';
-import {Student} from "../../../interfaces";
+import { Observable, of, defer } from 'rxjs';
+import { Student } from "../../../interfaces";
 
-export interface StudentClass{
-  ID:number;
-  name:string;
-  email:string;
+export interface StudentClass {
+  ID: number;
+  name: string;
+  email: string;
 }
 
-interface response{
-  response:any;
+interface Response {
+  response: any;
 }
 
 export class StudentServiceStub {
-  public testData:StudentClass[] = [];
-  createStudents(students:Student[]):Observable<any>{
-    let studentArray:number[] = [];
-    students.forEach((student)=>{
-      studentArray.push(this.testData.length+1);
+  public testData: StudentClass[] = [];
+
+  public createStudents(students: Student[]): Observable<any> {
+    const studentArray: number[] = [];
+    students.forEach((student) => {
+      studentArray.push(this.testData.length + 1);
       this.testData.push({
-        ID:this.testData.length+1,
-        name:student.name,
-        email:student.email
+        ID: this.testData.length + 1,
+        name: student.name,
+        email: student.email
       });
     });
-    return of({students:studentArray});
+    return of({ students: studentArray });
   }
-  checkStudentEmail(email:string):Observable<response>{
-    let inUse:boolean = false;
-    this.testData.forEach((student)=>{
-      inUse = inUse || student.email == email;
+
+  public checkStudentEmail(email: string): Observable<Response> {
+    let inUse = false;
+    this.testData.forEach((student) => {
+      inUse = (inUse || student.email === email);
     });
 
-    return of({response:inUse});
+    return of({ response: inUse });
   }
-};
+
+  public getStudent(term: string): Observable<Student[]> {
+    const studentArray: StudentClass[] = [];
+    this.testData.forEach((student) => {
+      if (student.name.search(term) > -1 || student.email.search(term) > -1) {
+        studentArray.push(student);
+      }
+    });
+
+    return of(studentArray);
+  }
+}
+
+export function asyncData<T>(data: T) {
+  return defer(() => Promise.resolve(data));
+}
