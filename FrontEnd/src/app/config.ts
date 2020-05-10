@@ -1,30 +1,31 @@
-const baseUrl:string ="//localhost/gradeIan";
+const baseUrl = "//localhost/gradeIan";
 
 export class AccountUrls {
-  public checkUserName:string = baseUrl + "/account/checkUserName.php";
-  public checkEmail:string = baseUrl + "/account/checkEmail.php";
-  public getSecurityQuestions:string = baseUrl+"/account/getSecurityQuestions.php";
-  public createAccount:string = baseUrl+"/account/create.php";
+  public checkUserName: string = baseUrl + "/account/checkUserName.php";
+  public checkEmail: string = baseUrl + "/account/checkEmail.php";
+  public getSecurityQuestions: string = baseUrl + "/account/getSecurityQuestions.php";
+  public createAccount: string = baseUrl + "/account/create.php";
 
-  public getUserDetails:string = baseUrl+"/account/getUserDetails.php";
+  public getUserDetails: string = baseUrl + "/account/getUserDetails.php";
 }
 
 export class AuthenticationUrls {
-  public login:string = baseUrl+"/account/login.php";
+  public login: string = baseUrl + "/account/login.php";
 }
 
-export class ClassesUrls{
-  public createClass:string = baseUrl + "/classes/create.php";
-  public getClass:string = baseUrl + "/classes/get.php";
+export class ClassesUrls {
+  public createClass: string = baseUrl + "/classes/create.php";
+  public getClass: string = baseUrl + "/classes/get.php";
 }
 
-export class StudentUrls{
-  public createStudents:string = baseUrl + "/students/create.php";
-  public checkStudentEmail:string = baseUrl + "/students/checkStudentEmail.php";
+export class StudentUrls {
+  public createStudents: string = baseUrl + "/students/create.php";
+  public checkStudentEmail: string = baseUrl + "/students/checkStudentEmail.php";
+  public getStudents: string = baseUrl + "/students/get.php";
 }
 
-//Icons available for selection for classes
-export const classIcons:string[] = [
+// Icons available for selection for classes
+export const classIcons: string[] = [
   "fa-anchor",
   "fa-archive",
   "fa-asterisk",
