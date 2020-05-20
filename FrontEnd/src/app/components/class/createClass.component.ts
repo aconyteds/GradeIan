@@ -1,19 +1,19 @@
-import { Component } from '@angular/core';
-import {NgClass} from "@angular/common";
-import {NgForm, PatternValidator, EmailValidator} from "@angular/forms";
-import {Router} from "@angular/router";
+import { Component, ViewChild } from '@angular/core';
+import { NgClass } from "@angular/common";
+import { NgForm, PatternValidator, EmailValidator } from "@angular/forms";
+import { Router } from "@angular/router";
 
-import {ClassModel} from "./classModel";
-import {classIcons} from "../../config";
+import { ClassModel } from "./classModel";
+import { classIcons } from "../../config";
 
-import {ClassesService} from "../../services/classes.service";
+import { ClassesService } from "../../services/classes.service";
 // import {Class} from "../../interfaces";
 
-import {StudentsView} from "../students/studentsView.component";
+import { StudentsView } from "../students/studentsView.component";
 
 @Component({
   selector: 'create-class',
-  styles:[`
+  styles: [`
       .ng-valid[required], .ng-valid.required  {
         border-left: 5px solid #42A948; /* green */
       }
@@ -38,43 +38,46 @@ import {StudentsView} from "../students/studentsView.component";
 })
 
 export class CreateClass {
-  public classData:ClassModel;
-  public icons:string[]=classIcons;
+  @ViewChild('classRoster') public classRoster: StudentsView;
+  public classData: ClassModel;
+  public icons: string[] = classIcons;
   constructor(
-    private ClassService:ClassesService,
-    private router:Router
-  ){
+    private ClassService: ClassesService,
+    private router: Router
+  ) {
     this.classData = new ClassModel("", this.icons[0], this.now(), this.now(), window.sessionStorage.getItem("token"));
   }
 
-  now():string{
-    var now = new Date(),
-      month = (now.getMonth()+1).toString(),
-      day = (now.getDate()).toString();
-    month = month.length == 2?month:"0"+month;
-    day = day.length == 2?day:"0"+day;
-    return now.getFullYear() +"-"+month+"-"+day;
+  public now(): string {
+    const now = new Date();
+    let month = (now.getMonth() + 1).toString();
+    let day = (now.getDate()).toString();
+    month = month.length === 2 ? month : "0" + month;
+    day = day.length === 2 ? day : "0" + day;
+    return now.getFullYear() + "-" + month + "-" + day;
   }
 
-  selectIcon(iconClass:string){
+  public selectIcon(iconClass: string) {
     this.classData.classIcon = iconClass;
   }
 
-  createClass(){
+  public createClass() {
     this.ClassService.createClass(this.classData)
-      .subscribe((response:any) =>{
-        if(!!response.token){
-          //Had to log in again, token expired
+      .subscribe((response: any) => {
+        if (!!response.token) {
+          // Had to log in again, token expired
           this.createClass();
-        }
-        else if(!!response.classId){
-          //Class Created
-          //Route to the class
+        } else if (!!response.classId) {
+          // Class Created
+          // Enroll Students
+          this.classRoster.updateStudents(response.classId).subscribe((rosterResponse) => {
+            console.log(rosterResponse);
+          });
+          // Route to the class
           this.router.navigate(["/home"]);
+        } else {
+          // Failure
         }
-        else{
-          //Failure
-        }
-      })
+      });
   }
 }

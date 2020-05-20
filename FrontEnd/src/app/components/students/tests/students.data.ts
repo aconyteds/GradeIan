@@ -13,6 +13,8 @@ interface Response {
 
 export class StudentServiceStub {
   public testData: StudentClass[] = [];
+  public enrolledStudents: number[] = [];
+  public withdrawnStudents: number[] = [];
 
   public createStudents(students: Student[]): Observable<any> {
     const studentArray: number[] = [];
@@ -45,6 +47,30 @@ export class StudentServiceStub {
     });
 
     return of(studentArray);
+  }
+
+  public enrollStudents(classIdentifier: number, students: Student[]) {
+    const response = [];
+    students.forEach((student) => {
+      this.enrolledStudents.push(student.ID);
+      response.push({
+        successful: true,
+        ID: student.ID
+      });
+    });
+    return of(response);
+  }
+
+  public withdrawStudents(classIdentifier: number, students: Student[]) {
+    const response = [];
+    students.forEach((student) => {
+      this.withdrawnStudents.push(student.ID);
+      response.push({
+        successful: true,
+        ID: student.ID
+      });
+    });
+    return of(response);
   }
 }
 

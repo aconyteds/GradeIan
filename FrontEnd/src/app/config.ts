@@ -21,7 +21,9 @@ export class ClassesUrls {
 export class StudentUrls {
   public createStudents: string = baseUrl + "/students/create.php";
   public checkStudentEmail: string = baseUrl + "/students/checkStudentEmail.php";
+  public enrollStudents: string = baseUrl + "/students/enroll.php";
   public getStudents: string = baseUrl + "/students/get.php";
+  public withdrawStudents: string = baseUrl + "/students/withdraw.php";
 }
 
 // Icons available for selection for classes

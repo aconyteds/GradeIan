@@ -36,4 +36,24 @@ export class StudentService extends Authentication {
     return this.http.get<any>(this.urls.getStudents + "?token=" + window.sessionStorage.getItem("token") + "&searchTerm=" + term)
       .pipe(catchError(this.authenticateValidation('getStudent')));
   }
+
+  public enrollStudents(classIdentifier: number, studentData: Student[]): Observable<any> {
+    const data = {
+      token: window.sessionStorage.getItem("token"),
+      students: studentData.map((student) => student.ID).toString(),
+      classId: classIdentifier
+    };
+    return this.http.post<any>(this.urls.enrollStudents, JSON.stringify(data))
+      .pipe(catchError(this.authenticateValidation('enrollStudents')));
+  }
+
+  public withdrawStudents(classIdentifier: number, studentData: Student[]): Observable<any> {
+    const data = {
+      token: window.sessionStorage.getItem("token"),
+      students: studentData.map((student) => student.ID).toString(),
+      classId: classIdentifier
+    };
+    return this.http.post<any>(this.urls.withdrawStudents, JSON.stringify(data))
+      .pipe(catchError(this.authenticateValidation('withdrawSetudents')));
+  }
 }

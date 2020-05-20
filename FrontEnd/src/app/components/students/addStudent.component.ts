@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {NgClass} from "@angular/common";
 import {NgForm, PatternValidator, EmailValidator} from "@angular/forms";
 import { Observable, Subject } from 'rxjs';
-import {debounceTime, distinctUntilChanged, switchMap, count} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 
 import {StudentModel} from "./studentModel";
 

@@ -1,10 +1,10 @@
-import {Student} from "../../interfaces";
+import { Student } from "../../interfaces";
 
-export class StudentModel implements Student{
+export class StudentModel implements Student {
   constructor(
-    public name:string,
-    public email:string,
-    public studentId?:number
-  ){
+    public name: string,
+    public email: string,
+    public ID?: number
+  ) {
   }
 }

@@ -1,51 +1,49 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement , CUSTOM_ELEMENTS_SCHEMA}    from '@angular/core';
-import {click} from "../../../test/utilities";
+import { DebugElement, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { click } from "../../../test/utilities";
 
-//Imports for dependencies
-import {FormsModule} from "@angular/forms";
-import {Router} from "@angular/router";
+// Imports for dependencies
+import { FormsModule } from "@angular/forms";
+import { Router } from "@angular/router";
 import { CreateClass } from '../createClass.component';
 import { ClassesService } from "../../../services/classes.service";
-import {Class} from "../../../interfaces";
-import {StudentsView} from "../../students/studentsView.component";
+import { Class } from "../../../interfaces";
+import { StudentsView } from "../../students/studentsView.component";
 
-//Import Test info
-import {ClassesServiceStub} from "./classes.data";
-
-
+// Import Test info
+import { ClassesServiceStub } from "./classes.data";
 
 describe('CreateClassComponent (external template)', () => {
-  //Default Test data
-  let testData:Class[];
+  // Default Test data
+  const testData: Class[] = [];
   //
   let comp: CreateClass;
   let fixture: ComponentFixture<CreateClass>;
   let de: DebugElement;
-  let classService:any;
+  let classService: any;
   //
-  beforeEach(async() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [ CreateClass ], // declare the test component
-      //import dependency modules
-      imports:[FormsModule],
-      providers:[
-        {provide:ClassesService, useClass:ClassesServiceStub},
+      declarations: [CreateClass], // declare the test component
+      // import dependency modules
+      imports: [FormsModule],
+      providers: [
+        { provide: ClassesService, useClass: ClassesServiceStub },
         {
-          provide:Router,
-          useValue:{
-            navigate(url:string){return url;}
+          provide: Router,
+          useValue: {
+            navigate(url: string) { return url; }
           }
         }],
-        schemas:[CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   });
   //
   // // synchronous beforeEach
   beforeEach(() => {
-    //Reset our test data
+    // Reset our test data
     fixture = TestBed.createComponent(CreateClass);
 
     comp = fixture.componentInstance; // BannerComponent test instance
@@ -59,39 +57,39 @@ describe('CreateClassComponent (external template)', () => {
     expect(de.query(By.css('[name="classTitle"]')).nativeElement.required).toBeTruthy();
   });
 
-  it('Verify class inputs exist', () =>{
-    let requiredInputs = ["classTitle", "classIcon", "startDate", "endDate"];
-    requiredInputs.forEach((input)=>{
-      let currInput:DebugElement = de.query(By.css('[name="'+input+'"]'));
+  it('Verify class inputs exist', () => {
+    const requiredInputs = ["classTitle", "classIcon", "startDate", "endDate"];
+    requiredInputs.forEach((input) => {
+      const currInput: DebugElement = de.query(By.css('[name="' + input + '"]'));
       expect(currInput.nativeElement).toBeDefined();
     });
   });
 
-  it("Ensure there are icons for the user to click", ()=>{
+  it("Ensure there are icons for the user to click", () => {
     expect(comp.icons.length).toBeGreaterThan(0);
-    let container:DebugElement = de.query(By.css(".icon-container"));
+    const container: DebugElement = de.query(By.css(".icon-container"));
     fixture.detectChanges();
-    comp.icons.forEach((icon) =>{
-      let iconInput:DebugElement = container.query(By.css("."+icon));
+    comp.icons.forEach((icon) => {
+      const iconInput: DebugElement = container.query(By.css("." + icon));
       expect(iconInput.nativeElement).toBeDefined();
     });
   });
 
-  it("Select an Icon", ()=>{
+  it("Select an Icon", () => {
     comp.selectIcon(comp.icons[1]);
     fixture.detectChanges();
-    let input:DebugElement = de.query(By.css(".icon-container ."+comp.icons[1]));
+    const input: DebugElement = de.query(By.css(".icon-container ." + comp.icons[1]));
     expect(input.nativeElement.className).toContain("selected");
     expect(comp.classData.classIcon).toEqual(comp.icons[1]);
   });
 
-  it("#now should return a proper date string", ()=>{
-    let dateString = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
+  it("#now should return a proper date string", () => {
+    const dateString = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
     expect(dateString.test(comp.now())).toBeTruthy();
 
   });
 
-  it("Create a Class", ()=>{
+  it("Create a Class", () => {
     comp.classData.classTitle = "Bio 101";
     comp.classData.classIcon = "fa-book";
     comp.classData.startDate = comp.now();
@@ -102,8 +100,8 @@ describe('CreateClassComponent (external template)', () => {
     expect(classService.classCreated).toBeGreaterThan(0);
   });
 
-  it("Verify submit button is working", ()=>{
-    let submitButton:DebugElement = fixture.debugElement.query(By.css("button[type='submit']"));
+  it("Verify submit button is working", () => {
+    const submitButton: DebugElement = fixture.debugElement.query(By.css("button[type='submit']"));
     click(submitButton);
     expect(classService.classCreated).toEqual(1);
     comp.classData.classTitle = "Bio 101";
@@ -115,8 +113,6 @@ describe('CreateClassComponent (external template)', () => {
     fixture.detectChanges();
     expect(classService.classCreated).toBeGreaterThan(0);
   });
-
-
   //
   // // it("Check submit Disabled correctly", () =>{
   // //   fixture.detectChanges();
