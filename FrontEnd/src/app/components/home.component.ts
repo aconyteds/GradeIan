@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 
-import {AccountService} from "../services/account.service";
+import { AccountService } from "../services/account.service";
 
 @Component({
   selector: 'home',
@@ -19,26 +19,31 @@ import {AccountService} from "../services/account.service";
 })
 
 export class Home implements OnInit {
-  public firstName:string = "";
+  public firstName = "";
   constructor(
-    private accountService:AccountService
-  ){
+    private accountService: AccountService,
+    private router: Router
+  ) {
   }
 
-  ngOnInit(){
+  public ngOnInit() {
     this.getFirstName(window.sessionStorage.getItem("token"));
   }
 
-  getFirstName(token:string):void{
-    this.accountService.getUserDetails(token)
-      .subscribe(response => {
-        if(response.token && response.token.search(/[a-zA-Z]/)>-1){
-          //Means our token ran out, but we fetched a new one so recursive this
-          this.getFirstName(response.token);
-        }
-        else if(response.FirstName){
-          this.firstName = response.FirstName;
-        }
-      } );
+  public getFirstName(token: string): void {
+    if (!!token) {
+      this.accountService.getUserDetails(token)
+        .subscribe((response) => {
+          console.log(response);
+          if (response.token && response.token.search(/[a-zA-Z]/) > -1) {
+            // Means our token ran out, but we fetched a new one so recursive this
+            this.getFirstName(response.token);
+          } else if (response.FirstName) {
+            this.firstName = response.FirstName;
+          }
+        });
+    } else {
+      // this.router.navigate(['/login', {}]);
+    }
   }
-};
+}

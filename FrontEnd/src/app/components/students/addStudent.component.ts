@@ -19,6 +19,8 @@ import {StudentService} from "../../services/students.service";
       position: absolute;
       width: 100%;
       z-index: 1;
+      max-height:150px;
+      overflow:auto;
     }
 
     .search-item{

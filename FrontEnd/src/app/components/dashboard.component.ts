@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {NgClass} from "@angular/common";
-import {Router} from "@angular/router";
+import { NgClass } from "@angular/common";
+import { Router } from "@angular/router";
 
-import {ClassesService} from "../services/classes.service";
-import {Class} from "../interfaces";
+import { ClassesService } from "../services/classes.service";
+import { Class } from "../interfaces";
 import * as helpers from "../utilities/helpers";
 
 @Component({
   selector: 'dashboard',
-  styles:[`
+  styles: [`
     .class-container{
       margin-top:15px;
     }
@@ -34,43 +34,41 @@ import * as helpers from "../utilities/helpers";
 })
 
 export class UserDashboard implements OnInit {
-  public classes:Class[] = [];
+  public classes: Class[] = [];
   constructor(
-    private ClassService:ClassesService,
-    private router:Router
-  ){}
+    private ClassService: ClassesService,
+    private router: Router
+  ) { }
 
-  ngOnInit(){
+  public ngOnInit() {
     this.getClasses();
   }
 
-  getClasses():void{
-    this.ClassService.getClasses().subscribe((response)=>{
-      if(response.token){
+  public getClasses(): void {
+    this.ClassService.getClasses().subscribe((response) => {
+      if (helpers.validateToken(response.token)) {
         this.getClasses();
-      }
-      else{
-        this.classes=response.classes;
+      } else if (response.classes) {
+        this.classes = response.classes;
+      } else {
+        this.router.navigate(["/login", {}]);
       }
     });
   }
-  
-  //Open the Class for the provided ID
-  openClass(classId:number):void{
-    this.router.navigate(["/class/"+classId]);
+
+  // Open the Class for the provided ID
+  public openClass(classId: number): void {
+    this.router.navigate(["/class/" + classId]);
   }
 
-  getGradeColoration(average:number):string{
-    if(average < 75){
+  public getGradeColoration(average: number): string {
+    if (average < 75) {
       return "bg-danger";
-    }
-    else if(average < 80){
+    } else if (average < 80) {
       return "bg-warning";
-    }
-    else if(average < 90){
+    } else if (average < 90) {
       return "bg-secondary";
-    }
-    else{
+    } else {
       return "bg-success";
     }
   }

@@ -1,42 +1,41 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement }    from '@angular/core';
-import {click} from "../../../test/utilities";
+import { DebugElement } from '@angular/core';
+import { click } from "../../../test/utilities";
 
-//Imports for dependencies
-import {FormsModule} from "@angular/forms";
+// Imports for dependencies
+import { FormsModule } from "@angular/forms";
 import { CreateStudents } from '../createStudent.component';
 import { StudentService } from "../../../services/students.service";
 
-//Import Test info
-import {StudentServiceStub, StudentClass} from "./students.data";
-
+// Import Test info
+import { StudentServiceStub, StudentClass } from "./students.data";
 
 describe('Create Students Component (external template)', () => {
-  //Default Test data
-  let testData:StudentClass[];
+  // Default Test data
+  const testData: StudentClass[] = [];
   //
   let comp: CreateStudents;
   let fixture: ComponentFixture<CreateStudents>;
   let form: DebugElement;
   let table: DebugElement;
-  let studentService:any;
+  let studentService: any;
   //
-  beforeEach(async() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [ CreateStudents ], // declare the test component
-      //import dependency modules
-      imports:[FormsModule],
-      providers:[
-        {provide:StudentService, useClass:StudentServiceStub}
+      declarations: [CreateStudents], // declare the test component
+      // import dependency modules
+      imports: [FormsModule],
+      providers: [
+        { provide: StudentService, useClass: StudentServiceStub }
       ]
     })
-    .compileComponents();
+      .compileComponents();
   });
   //
   // // synchronous beforeEach
   beforeEach(() => {
-    //Reset our test data
+    // Reset our test data
     fixture = TestBed.createComponent(CreateStudents);
 
     comp = fixture.componentInstance; // BannerComponent test instance
@@ -54,99 +53,99 @@ describe('Create Students Component (external template)', () => {
   });
 
   //
-  it('Verify student inputs exist', () =>{
-    let requiredInputs = ["name", "email"];
-    requiredInputs.forEach((input)=>{
-      let currInput:DebugElement = form.query(By.css('[name="'+input+'"]'));
+  it('Verify student inputs exist', () => {
+    const requiredInputs = ["name", "email"];
+    requiredInputs.forEach((input) => {
+      const currInput: DebugElement = form.query(By.css('[name="' + input + '"]'));
       expect(currInput.nativeElement).toBeDefined();
     });
   });
 
-  it("Place to list students", ()=>{
+  it("Place to list students", () => {
     expect(table.nativeElement).toBeDefined();
     expect(table.query(By.css(".student"))).toBeNull();
-    //Add a student to the list
+    // Add a student to the list
     comp.students.push({
-      name:"bill Snith",
-      email:"mail@mail"
+      name: "bill Snith",
+      email: "mail@mail"
     });
     fixture.detectChanges();
-    //Verify the student is there
+    // Verify the student is there
     expect(table.query(By.css(".student")).nativeElement).toBeDefined();
   });
 
-  it("Able to add Student to list", ()=>{
-    //Setup the test strings
-    let name = "John Doe",
-      email = "mail@mail";
-    //set the inputs to hold values
+  it("Able to add Student to list", () => {
+    // Setup the test strings
+    const name = "John Doe";
+    const email = "mail@mail";
+    // set the inputs to hold values
     comp.studentData.name = name;
     comp.studentData.email = email;
-    //Update the form with changes
+    // Update the form with changes
     fixture.detectChanges();
-    //Click the add student button
+    // Click the add student button
     click(fixture.debugElement.query(By.css('#addStudentButton')));
     fixture.detectChanges();
-    //See if the student was added to the list
+    // See if the student was added to the list
     expect(comp.students[0].name).toMatch(name);
     expect(comp.students[0].email).toMatch(email);
   });
 
-  it("Click to Remove Student", ()=>{
-    //Add a student to the list
+  it("Click to Remove Student", () => {
+    // Add a student to the list
     comp.students.push({
-      name:"bill Snith",
-      email:"mail@mail"
+      name: "bill Snith",
+      email: "mail@mail"
     });
 
     fixture.detectChanges();
 
-    //Find the close Button so we can click it
+    // Find the close Button so we can click it
     click(table.query(By.css(".fa-close")));
     expect(comp.students.length).toEqual(0);
   });
 
-  it("Not able to add duplicate Emails", ()=>{
-    //Add a student to the student service
+  it("Not able to add duplicate Emails", () => {
+    // Add a student to the student service
     studentService.createStudents([{
-      name:"bill Snith",
-      email:"mail@mail"
+      name: "bill Snith",
+      email: "mail@mail"
     }]);
 
-    //Set the email to the already stored email
-    comp.studentData.email="mail@mail";
-    //Get Our element
-    let emailInput:DebugElement = form.query(By.css("#studentEmail"));
-    let el = emailInput.nativeElement;
+    // Set the email to the already stored email
+    comp.studentData.email = "mail@mail";
+    // Get Our element
+    const emailInput: DebugElement = form.query(By.css("#studentEmail"));
+    const el = emailInput.nativeElement;
     // el.value = "mail@mail";
     // el.dispatchEvent(new Event('input'));
 
-    //Fire the change event on the email to see if it works properly
+    // Fire the change event on the email to see if it works properly
     fixture.detectChanges();
     el.dispatchEvent(new Event("keyup"));
-    //Need to wait until the observable is completed to check the value
-    fixture.whenStable().then(()=>{
+    // Need to wait until the observable is completed to check the value
+    fixture.whenStable().then(() => {
       expect(comp.invalidEmail).toBeTruthy();
     });
   });
 
-  it("Form creates students and resets properly", ()=>{
-    //Send some dummy
-    comp.students=[{
-      name:"jimmy",
-      email:"jimmy@DD.com"
-    },{
-      name:"bimmy",
-      email:"bimmy@DD.com"
+  it("Form creates students and resets properly", () => {
+    // Send some dummy
+    comp.students = [{
+      name: "jimmy",
+      email: "jimmy@DD.com"
+    }, {
+      name: "bimmy",
+      email: "bimmy@DD.com"
     }];
-    //Get the create student button and click it
-    let createButton:DebugElement = fixture.debugElement.query(By.css("#createStudentButton"));
+    // Get the create student button and click it
+    const createButton: DebugElement = fixture.debugElement.query(By.css("#createStudentButton"));
     click(createButton);
-    //Make sure the students were added to the list properly
+    // Make sure the students were added to the list properly
     expect(studentService.testData.length).toBeGreaterThan(1);
-    //Wait for the async process to complete
-    fixture.whenStable().then(()=>{
-    //Check that the form submitted properly
+    // Wait for the async process to complete
+    fixture.whenStable().then(() => {
+      // Check that the form submitted properly
       expect(comp.students.length).toBe(0);
       expect(comp.studentData.name).toEqual("");
       expect(comp.studentData.email).toEqual("");
@@ -201,7 +200,6 @@ describe('Create Students Component (external template)', () => {
   //   fixture.detectChanges();
   //   expect(classService.classCreated).toBeGreaterThan(0);
   // });
-
 
   //
   // // it("Check submit Disabled correctly", () =>{

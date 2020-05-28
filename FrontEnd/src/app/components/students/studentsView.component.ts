@@ -34,6 +34,7 @@ import { StudentModel } from "./studentModel";
     </ul>
   </div>
   <add-student (addStudent)="addStudent($event)"></add-student>
+  <create-student class="row" style="margin-bottom:10px;" ></create-student>
   `
 })
 
@@ -78,6 +79,7 @@ export class StudentsView implements OnInit {
       this.withdrawableStudents.push(student);
     }
     this.students = this.students.filter((studentListItem) => student.ID !== studentListItem.ID);
+    // Update the list of enrollable students
     this.enrollableStudents = this.enrollableStudents.filter((enrollableStudent) => student.ID !== enrollableStudent.ID);
   }
 

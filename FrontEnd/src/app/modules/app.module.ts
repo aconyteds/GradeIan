@@ -1,32 +1,32 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA }      from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 
-//Bootstraped Components
-import {ContentComponent} from "../components/content.component";
+// Bootstraped Components
+import { ContentComponent } from "../components/content.component";
 
-//services
-import {AccountService} from "../services/account.service";
-import {ClassesService} from "../services/classes.service";
-import {StudentService} from "../services/students.service";
+// services
+import { AccountService } from "../services/account.service";
+import { ClassesService } from "../services/classes.service";
+import { StudentService } from "../services/students.service";
 //
 // //Route Components
-import {RouteModule} from "./router.module";
-import {CreateAccount} from "../components/createAccount/createAccount.component";
-import {CreateClass} from "../components/class/createClass.component";
-import {ViewClass} from "../components/class/viewClass.component";
-import {CreateStudents} from "../components/students/createStudent.component";
-import {LoginForm} from "../components/login/login.component";
-import {MainLogin} from "../components/login/mainLogin.component";
-import {UserDashboard} from "../components/dashboard.component";
-import {StudentsView} from "../components/students/studentsView.component";
-import {AddStudent} from "../components/students/addStudent.component";
+import { RouteModule } from "./router.module";
+import { CreateAccount } from "../components/createAccount/createAccount.component";
+import { CreateClass } from "../components/class/createClass.component";
+import { ViewClass } from "../components/class/viewClass.component";
+import { CreateStudents } from "../components/students/createStudent.component";
+import { LoginForm } from "../components/login/login.component";
+import { MainLogin } from "../components/login/mainLogin.component";
+import { UserDashboard } from "../components/dashboard.component";
+import { StudentsView } from "../components/students/studentsView.component";
+import { AddStudent } from "../components/students/addStudent.component";
 
-//Directives
+// Directives
 
 @NgModule({
-  imports:      [
+  imports: [
     BrowserModule,
     RouteModule,
     FormsModule,
@@ -45,19 +45,19 @@ import {AddStudent} from "../components/students/addStudent.component";
     AddStudent,
     StudentsView
   ],
-  providers:[
+  providers: [
     AccountService,
     ClassesService,
     StudentService
   ],
-  bootstrap:    [
+  bootstrap: [
     // TitleComponent,
     // MenuComponent,
     // SearchComponent,
     // AvatarComponent,
     ContentComponent
   ],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class AppModule {

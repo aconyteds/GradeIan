@@ -10,6 +10,8 @@ call login('iwilson', 'password');
 -- Failed Login
 call login('iwilson', "abFFF");
 
+call login('user', "e9b3c904a0b80fcf5674061e57f1c7d6539c9393ec7b404b136a0b216a67d037");
+
 call generateToken(1);
 
 call checkEmail("ianwilson1337@gmail.com");
