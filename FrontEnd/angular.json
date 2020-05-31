@@ -30,6 +30,11 @@
             "styles": [
               "src/scss/main.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules/@fortawesome/fontawesome-free/scss/"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -94,6 +99,11 @@
             "styles": [
               "src/scss/main.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules/@fortawesome/fontawesome-free/scss/"
+              ]
+            },
             "scripts": []
           }
         },
@@ -127,6 +137,6 @@
   },
   "defaultProject": "gradeian",
   "cli": {
-    "analytics": "dfb66d63-e539-4612-95b8-165b403077a3"
+    "analytics": "142839e2-258e-4819-87f9-6fd4fd37da56"
   }
 }

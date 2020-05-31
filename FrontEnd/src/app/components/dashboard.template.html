@@ -5,7 +5,7 @@
         <div *ngFor="let classData of classes" class="col-lg-3 col-md-4 col-sm-6 col-12 class-item " (click)="openClass(classData.classId)">
           <div  class="card mb-3 ">
             <div class="card-header text-white " [ngClass]="getGradeColoration(classData.classAverage)">
-              <span class="class-title "><i class="fa {{classData.classIcon}} class-icon"></i> {{classData.classTitle}}</span>
+              <span class="class-title "><i class="{{classData.classIcon}} class-icon"></i> {{classData.classTitle}}</span>
             </div>
             <div class="card-body row">
               <div class="col">

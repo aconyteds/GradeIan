@@ -22,10 +22,10 @@ import {Student} from "../../interfaces";
       .student:nth-child(odd){
         background:#F5F5F5;
       }
-      .fa-close:before{
+      .fa-times:before{
         cursor:pointer;
       }
-      .student .fa-close{
+      .student .fa-times{
         vertical-align:middle;
         line-height:24px;
       }

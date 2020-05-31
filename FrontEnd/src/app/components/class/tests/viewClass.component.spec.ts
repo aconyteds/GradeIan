@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement }    from '@angular/core';
-import {click} from "../../../test/utilities";
+import { DebugElement } from '@angular/core';
+import { click } from "../../../test/utilities";
 
-//Imports for dependencies
-import {FormsModule} from "@angular/forms";
-import {Router} from "@angular/router";
+// Imports for dependencies
+import { FormsModule } from "@angular/forms";
+import { Router } from "@angular/router";
 import { ViewClass } from '../ViewClass.component';
 import { ClassesService } from "../../../services/classes.service";
-import {Class} from "../../../interfaces";
+import { Class } from "../../../interfaces";
 
-//Import Test info
-import {ClassesServiceStub} from "./classes.data";
+// Import Test info
+import { ClassesServiceStub } from "./classes.data";
 
 describe('ViewClassComponent (external template)', () => {
   // //Default Test data

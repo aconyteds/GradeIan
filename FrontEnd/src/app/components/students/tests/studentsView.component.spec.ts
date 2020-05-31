@@ -46,6 +46,11 @@ describe('Students View Component', () => {
     el = fixture.debugElement.query(By.css(".student-container"));
   });
 
+  afterEach(() => {
+    fixture.destroy();
+    comp = null;
+  });
+
   it("Students added to interface properly", () => {
     comp.students = testData;
     fixture.detectChanges();

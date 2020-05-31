@@ -70,7 +70,8 @@ describe('CreateClassComponent (external template)', () => {
     const container: DebugElement = de.query(By.css(".icon-container"));
     fixture.detectChanges();
     comp.icons.forEach((icon) => {
-      const iconInput: DebugElement = container.query(By.css("." + icon));
+      const iconClass = icon.split(" ")[1];
+      const iconInput: DebugElement = container.query(By.css("." + iconClass));
       expect(iconInput.nativeElement).toBeDefined();
     });
   });
@@ -78,7 +79,7 @@ describe('CreateClassComponent (external template)', () => {
   it("Select an Icon", () => {
     comp.selectIcon(comp.icons[1]);
     fixture.detectChanges();
-    const input: DebugElement = de.query(By.css(".icon-container ." + comp.icons[1]));
+    const input: DebugElement = de.query(By.css(".icon-container ." + comp.icons[1].split(" ")[1]));
     expect(input.nativeElement.className).toContain("selected");
     expect(comp.classData.classIcon).toEqual(comp.icons[1]);
   });
@@ -105,7 +106,7 @@ describe('CreateClassComponent (external template)', () => {
     click(submitButton);
     expect(classService.classCreated).toEqual(1);
     comp.classData.classTitle = "Bio 101";
-    comp.classData.classIcon = "fa-book";
+    comp.classData.classIcon = "fa fa-book";
     comp.classData.startDate = comp.now();
     comp.classData.endDate = comp.now();
     fixture.detectChanges();

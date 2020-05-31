@@ -1,46 +1,44 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement }    from '@angular/core';
+import { DebugElement } from '@angular/core';
 
-//Imports for dependencies
-import {FormsModule} from "@angular/forms";
-import {Router} from "@angular/router";
+// Imports for dependencies
+import { FormsModule } from "@angular/forms";
+import { Router } from "@angular/router";
 import { CreateAccount } from '../createAccount.component';
 import { AccountService } from "../../../services/account.service";
 
-//Import Test info
-import {TestUser, AccountServiceStub} from "./createAccount.data";
-
-
+// Import Test info
+import { TestUser, AccountServiceStub } from "./createAccount.data";
 
 describe('CreateAccountComponent (external template)', () => {
-  //Default Test data
-  let testData:TestUser[] ;
+  // Default Test data
+  // let testData: TestUser[];
 
   let comp: CreateAccount;
   let fixture: ComponentFixture<CreateAccount>;
   let de: DebugElement;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [ CreateAccount ], // declare the test component
-      //import dependency modules
-      imports:[FormsModule],
-      providers:[
-        {provide:AccountService, useClass:AccountServiceStub},
+      declarations: [CreateAccount], // declare the test component
+      // import dependency modules
+      imports: [FormsModule],
+      providers: [
+        { provide: AccountService, useClass: AccountServiceStub },
         {
-          provide:Router,
-          useValue:{
-            navigate(url:string){return url;}
+          provide: Router,
+          useValue: {
+            navigate(url: string) { return url; }
           }
         }]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   // synchronous beforeEach
   beforeEach(() => {
-    //Reset our test data
+    // Reset our test data
     fixture = TestBed.createComponent(CreateAccount);
 
     comp = fixture.componentInstance; // BannerComponent test instance
@@ -49,14 +47,16 @@ describe('CreateAccountComponent (external template)', () => {
     de = fixture.debugElement.query(By.css('form'));
   });
 
-  afterEach(()=>{
+  afterEach(() => {
     TestBed.resetTestingModule();
+    fixture.destroy();
+    comp = null;
   });
 
   it('Check Required Inputs have Required Attribute', () => {
-    let requiredInputs = ["firstName", "lastName", "email", "password", "securityAnswer", "userName"];
-    requiredInputs.forEach((input)=>{
-      let currInput:DebugElement = de.query(By.css('[name="'+input+'"]'));
+    const requiredInputs = ["firstName", "lastName", "email", "password", "securityAnswer", "userName"];
+    requiredInputs.forEach((input) => {
+      const currInput: DebugElement = de.query(By.css('[name="' + input + '"]'));
       expect(currInput.nativeElement.required).toBeTruthy();
     });
   });
@@ -68,7 +68,7 @@ describe('CreateAccountComponent (external template)', () => {
   //   expect(submitButton.properties.disabled).toBeTruthy();
   // });
 
-  it("Check Submit Enables Properly", ()=>{
+  it("Check Submit Enables Properly", () => {
     de.query(By.css('[name="firstName"]')).nativeElement.value = "Jimmy";
     de.query(By.css('[name="lastName"]')).nativeElement.value = "John";
     de.query(By.css('[name="email"]')).nativeElement.value = "jimmy@mail";
@@ -76,7 +76,7 @@ describe('CreateAccountComponent (external template)', () => {
     de.query(By.css('[name="securityAnswer"]')).nativeElement.value = "answer";
     de.query(By.css('[name="password"]')).nativeElement.value = "CorrectPa$$w0rd1";
     de.query(By.css('[name="confirmPW"]')).nativeElement.value = "CorrectPa$$w0rd1";
-    let submitButton:DebugElement = de.query(By.css('button'));
+    const submitButton: DebugElement = de.query(By.css('button'));
     expect(submitButton.properties.disabled).toBeFalsy();
   });
 

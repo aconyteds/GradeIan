@@ -47,6 +47,11 @@ describe('Create Students Component (external template)', () => {
     comp.students = [];
   });
 
+  afterEach(() => {
+    fixture.destroy();
+    comp = null;
+  });
+
   it('Check Component has required attributes', () => {
     expect(form.query(By.css('[name="name"]')).nativeElement.required).toBeTruthy();
     expect(form.query(By.css('[name="email"]')).nativeElement.required).toBeTruthy();
@@ -101,7 +106,7 @@ describe('Create Students Component (external template)', () => {
     fixture.detectChanges();
 
     // Find the close Button so we can click it
-    click(table.query(By.css(".fa-close")));
+    click(table.query(By.css(".fa-times")));
     expect(comp.students.length).toEqual(0);
   });
 
@@ -129,7 +134,7 @@ describe('Create Students Component (external template)', () => {
     });
   });
 
-  it("Form creates students and resets properly", () => {
+  it("Form creates students and resets properly", (done) => {
     // Send some dummy
     comp.students = [{
       name: "jimmy",
@@ -149,6 +154,7 @@ describe('Create Students Component (external template)', () => {
       expect(comp.students.length).toBe(0);
       expect(comp.studentData.name).toEqual("");
       expect(comp.studentData.email).toEqual("");
+      done();
     });
   });
 

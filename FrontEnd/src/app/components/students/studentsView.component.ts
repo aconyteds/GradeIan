@@ -29,7 +29,7 @@ import { StudentModel } from "./studentModel";
     <ul *ngIf="students.length>0" class="col  list-group">
       <li *ngFor="let student of students" class="student-item list-group-item d-flex justify-content-between align-items-center">
         {{student.name}}
-        <div class="badge close-icon btn btn-danger" (click)="removeStudent(student)"><i class="fa fa-close"></i></div>
+        <div class="badge close-icon btn btn-danger" (click)="removeStudent(student)"><i class="fas fa-times"></i></div>
       </li>
     </ul>
   </div>

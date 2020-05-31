@@ -42,6 +42,10 @@ call enrollStudent(3,2);
 
 call withdrawStudent(3, 1);
 
+call createAssignment(1, "Title", 20);
+
+call createAssignmentItem(1, "Title 1", 20, 20);
+
 
 
 
