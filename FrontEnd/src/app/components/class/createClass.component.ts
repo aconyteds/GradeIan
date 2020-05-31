@@ -20,7 +20,9 @@ import { StudentsView } from "../students/studentsView.component";
       .ng-invalid:not(form)  {
         border-left: 5px solid #a94442; /* red */
       }
-      .icon-container > span.fa{
+      .icon-container > span.fa,
+      .icon-container > span.fas,
+      .icon-container > span.far{
         margin:2px;
         padding:5px;
         cursor:pointer;
@@ -29,7 +31,9 @@ import { StudentsView } from "../students/studentsView.component";
         vertical-align: middle;
         text-align: center;
       }
-      .icon-container > span.fa.selected{
+      .icon-container > span.fa.selected,
+      .icon-container > span.fas.selected,
+      .icon-container > span.far.selected{
         border:1px solid;
         padding:4px;
       }

@@ -1,4 +1,6 @@
-@import "../../node_modules/font-awesome/css/font-awesome.min.css";
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import "fontawesome";
+@import "solid";
 @import "./themes/minty/bootstrap.scss";
 $header-bg: #171B20;
 
@@ -145,4 +147,8 @@ meter {
       font-size: 4em;
     }
   }
+}
+
+.btn:disabled{
+  cursor:not-allowed;
 }

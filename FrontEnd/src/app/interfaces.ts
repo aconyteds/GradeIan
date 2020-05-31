@@ -43,3 +43,22 @@ export interface Student {
   name: string;
   email: string;
 }
+
+export interface AssignmentGroup {
+  ID?: number;
+  classId: number;
+  title: string;
+  weight: number;
+}
+
+export interface AssignmentItem {
+  ID?: number;
+  assignmentId?: number;
+  label: string;
+  questions: number;
+  weight: number;
+}
+
+export interface Response {
+  response: any;
+}

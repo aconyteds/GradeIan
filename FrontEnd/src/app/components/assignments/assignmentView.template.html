@@ -1,0 +1,47 @@
+<div>
+  <section class="assignment-container">
+    <div class="no-assignments" *ngIf="assignmentData.length===0">Use the button below to add an assignment group</div>
+    <div *ngIf="assignmentData.length>0" class="col">
+      <ul class="list-group">
+        <li *ngFor="let assignment of assignmentData; index as indx;" class="assignment-item list-group-item d-flex">
+          <div class="col">
+            <div class="badge close-icon btn btn-danger float-right" (click)="removeAssignment(assignment)"><i class="fas fa-times"></i></div>
+            <form class="row">
+              <div class="col-12 col-md-6 mb-3">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="assignment_title_{{indx}}">Name</label>
+                  </div>
+                  <input class="form-control" type="text" id="assignment_title_{{indx}}" aria-label="Assignment Title" placeholder="Homework" [(ngModel)]="assignment.title" required name="title" #assignmentTitle="ngModel" maxlength="50">
+                </div>
+                <div [hidden]="assignmentTitle.valid || assignmentTitle.pristine" class="alert alert-danger">Assignment title is required</div>
+              </div>
+              <div class="col-12 col-md-6">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="assignment_weight_{{indx}}">Weight</label>
+                  </div>
+                  <input class="form-control" type="number" id="assignment_weight_{{indx}}" aria-label="Assignment Weight" placeholder="Grade Weight" [(ngModel)]="assignment.weight" required name="weight" #assignmentWeight="ngModel" min="1" max="100" (keyup)="calculateTotalWeight()">
+                  <div class="input-group-append">
+                    <span class="input-group-text">%</span>
+                  </div>
+                </div>
+                <div [hidden]="assignmentWeight.valid || assignmentWeight.pristine" class="alert alert-danger">Weight is required and must be between 1 and 100</div>
+              </div>
+            </form>
+            <div class="row">
+              <div>assignments will go here</div>
+              <!-- <assignment-list></assignment-list> -->
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <div [hidden]="assignmentData.length === 0 || totalWeight === 100" class="weight-warning alert alert-warning">Current assignments are a total of <span class="font-weight-bold text-info">{{totalWeight}}</span>, it is recommended to have a combined value of <span class="font-weight-bold">100</span>.</div>
+  <section class="col text-center">
+    <button type="button" name="createAssignmentGroupButton" class="btn btn-primary" (click)="addAssignment()">
+      <i class="fas fa-folder-plus"></i> Create New Assignment Type
+    </button>
+  </section>
+</div>

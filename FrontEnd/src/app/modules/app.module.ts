@@ -10,6 +10,7 @@ import { ContentComponent } from "../components/content.component";
 import { AccountService } from "../services/account.service";
 import { ClassesService } from "../services/classes.service";
 import { StudentService } from "../services/students.service";
+import { AssignmentService } from "../services/assignment.service";
 //
 // //Route Components
 import { RouteModule } from "./router.module";
@@ -22,6 +23,7 @@ import { MainLogin } from "../components/login/mainLogin.component";
 import { UserDashboard } from "../components/dashboard.component";
 import { StudentsView } from "../components/students/studentsView.component";
 import { AddStudent } from "../components/students/addStudent.component";
+import { AssignmentView } from "../components/assignments/assignmentView.component";
 
 // Directives
 
@@ -43,12 +45,14 @@ import { AddStudent } from "../components/students/addStudent.component";
     UserDashboard,
     CreateStudents,
     AddStudent,
-    StudentsView
+    StudentsView,
+    AssignmentView
   ],
   providers: [
     AccountService,
     ClassesService,
-    StudentService
+    StudentService,
+    AssignmentService
   ],
   bootstrap: [
     // TitleComponent,

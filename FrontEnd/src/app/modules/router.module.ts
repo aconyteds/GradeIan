@@ -9,6 +9,7 @@ import { MainLogin } from "../components/login/mainLogin.component";
 import { UserDashboard } from "../components/dashboard.component";
 import { StudentsView } from "../components/students/studentsView.component";
 import { ViewClass } from "../components/class/viewClass.component";
+import { AssignmentView } from "../components/assignments/assignmentView.component";
 
 const appRoutes: Routes = [
   {
@@ -39,6 +40,9 @@ const appRoutes: Routes = [
     path: "addStudent",
     pathMatch: "full",
     component: StudentsView
+  }, {
+    path: "assignment",
+    component: AssignmentView
   }, {
     path: "**",
     redirectTo: ""
