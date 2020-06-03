@@ -12,8 +12,8 @@ export class AssignmentGroupModel implements AssignmentGroup {
 export class AssignmentItemModel implements AssignmentItem {
   constructor(
     public label: string,
-    public questions: number,
     public weight: number,
+    public questions?: number,
     public ID?: number,
     public assignmentId?: number
   ) { }
