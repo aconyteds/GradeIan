@@ -14,8 +14,7 @@ import { AssignmentServieStub } from "./assignments.data";
 
 describe('Assignment View Component (external template)', () => {
   // Default Test data
-  const assignmentGroups: AssignmentGroup[] = [];
-  const assignmentItems: AssignmentItem[] = [];
+  const testData: AssignmentGroup[] = [];
   //
   let comp: AssignmentView;
   let fixture: ComponentFixture<AssignmentView>;
@@ -65,20 +64,20 @@ describe('Assignment View Component (external template)', () => {
     fixture.detectChanges();
     expect(assignmentContainer.query(By.css(".no-assignments"))).toBeNull();
     expect(comp.assignmentData.length).toEqual(1);
-    expect(assignmentContainer.queryAll(By.css(".assignment-item")).length).toEqual(comp.assignmentData.length);
+    expect(assignmentContainer.queryAll(By.css(".assignment-group")).length).toEqual(comp.assignmentData.length);
 
     click(createButton);
     fixture.detectChanges();
-    expect(assignmentContainer.queryAll(By.css(".assignment-item")).length).toEqual(comp.assignmentData.length);
+    expect(assignmentContainer.queryAll(By.css(".assignment-group")).length).toEqual(comp.assignmentData.length);
   });
   //
   it('Verify Assignment Group removed from list when close button is clicked', () => {
     click(createButton);
     fixture.detectChanges();
 
-    let assignmentItems: DebugElement[] = assignmentContainer.queryAll(By.css(".assignment-item"));
-    expect(assignmentItems.length).toEqual(1);
-    let closeButton = assignmentItems[0].query(By.css(".close-icon"));
+    let assignmentGroups: DebugElement[] = assignmentContainer.queryAll(By.css(".assignment-group"));
+    expect(assignmentGroups.length).toEqual(1);
+    let closeButton = assignmentGroups[0].query(By.css(".close-icon"));
     click(closeButton);
     fixture.detectChanges();
 
@@ -88,13 +87,12 @@ describe('Assignment View Component (external template)', () => {
     fixture.detectChanges();
 
     expect(assignmentContainer.query(By.css(".no-assignments"))).toBeNull();
-    assignmentItems = assignmentContainer.queryAll(By.css(".assignment-item"));
-    closeButton = assignmentItems[1].query(By.css(".close-icon"));
+    assignmentGroups = assignmentContainer.queryAll(By.css(".assignment-group"));
+    closeButton = assignmentGroups[1].query(By.css(".close-icon"));
     click(closeButton);
     fixture.detectChanges();
 
-    expect(comp.assignmentData.length < assignmentItems.length).toBeTrue();
-    expect(comp.assignmentData[0].title.search("1") !== -1).toBeTrue();
+    expect(comp.assignmentData.length < assignmentGroups.length).toBeTrue();
     closeButton = assignmentContainer.query(By.css(".close-icon"));
     click(closeButton);
     fixture.detectChanges();
@@ -108,11 +106,20 @@ describe('Assignment View Component (external template)', () => {
     fixture.detectChanges();
 
     expect(fixture.debugElement.query(By.css(".weight-warning")).nativeElement).toBeDefined();
+    expect(fixture.debugElement.query(By.css(".weight-warning")).nativeElement.hidden).toBeFalse();
 
     click(assignmentContainer.query(By.css(".close-icon")));
     click(createButton);
     fixture.detectChanges();
 
     expect(fixture.debugElement.query(By.css(".weight-warning")).nativeElement.hidden).toBeTrue();
+  });
+  //
+  it("Verify that inputs are useable", () => {
+    click(createButton);
+    fixture.detectChanges();
+
+    expect(assignmentContainer.query(By.css('[name="title"]')).nativeElement).toBeDefined();
+    expect(assignmentContainer.query(By.css('[name="weight"]')).nativeElement).toBeDefined();
   });
 });
