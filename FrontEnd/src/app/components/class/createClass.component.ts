@@ -10,6 +10,7 @@ import { ClassesService } from "../../services/classes.service";
 // import {Class} from "../../interfaces";
 
 import { StudentsView } from "../students/studentsView.component";
+import { AssignmentView } from "../assignments/assignmentView.component";
 
 @Component({
   selector: 'create-class',
@@ -43,6 +44,7 @@ import { StudentsView } from "../students/studentsView.component";
 
 export class CreateClass {
   @ViewChild('classRoster') public classRoster: StudentsView;
+  @ViewChild('assignments') public assignments: AssignmentView;
   public classData: ClassModel;
   public icons: string[] = classIcons;
   constructor(
@@ -76,6 +78,9 @@ export class CreateClass {
           // Enroll Students
           this.classRoster.updateStudents(response.classId).subscribe((rosterResponse) => {
             console.log(rosterResponse);
+          });
+          this.assignments.saveAssignments(response.classId).subscribe((assignmentResponse) => {
+            console.log(assignmentResponse);
           });
           // Route to the class
           this.router.navigate(["/home"]);

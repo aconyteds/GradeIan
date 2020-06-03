@@ -24,6 +24,7 @@ import { UserDashboard } from "../components/dashboard.component";
 import { StudentsView } from "../components/students/studentsView.component";
 import { AddStudent } from "../components/students/addStudent.component";
 import { AssignmentView } from "../components/assignments/assignmentView.component";
+import { AssignmentList } from "../components/assignments/assignmentList.component";
 
 // Directives
 
@@ -46,7 +47,8 @@ import { AssignmentView } from "../components/assignments/assignmentView.compone
     CreateStudents,
     AddStudent,
     StudentsView,
-    AssignmentView
+    AssignmentView,
+    AssignmentList
   ],
   providers: [
     AccountService,

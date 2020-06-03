@@ -110,7 +110,7 @@ describe('Create Students Component (external template)', () => {
     expect(comp.students.length).toEqual(0);
   });
 
-  it("Not able to add duplicate Emails", () => {
+  it("Not able to add duplicate Emails", (done: any) => {
     // Add a student to the student service
     studentService.createStudents([{
       name: "bill Snith",
@@ -131,10 +131,11 @@ describe('Create Students Component (external template)', () => {
     // Need to wait until the observable is completed to check the value
     fixture.whenStable().then(() => {
       expect(comp.invalidEmail).toBeTruthy();
+      done();
     });
   });
 
-  it("Form creates students and resets properly", (done) => {
+  it("Form creates students and resets properly", (done: any) => {
     // Send some dummy
     comp.students = [{
       name: "jimmy",

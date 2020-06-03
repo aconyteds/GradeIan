@@ -3,7 +3,7 @@ import { AssignmentItem, AssignmentGroup, Response } from '../interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Authentication } from "./authentication";
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable()
@@ -14,13 +14,18 @@ export class AssignmentService extends Authentication {
     super(http);
   }
   // Create a new account
-  public createAssignment(assignment: AssignmentGroup): Observable<Response> {
-    return this.http.post<any>(this.urls.createAssignment, JSON.stringify(assignment))
-                    .pipe(catchError(this.authenticateValidation('createAssignment')));
-  }
+  public createAssignment(assignmentData: AssignmentGroup[], assignmentItems: AssignmentItem [][]): Observable<Response> {
+    const data = {
+      token: window.sessionStorage.getItem("token"),
+      assignments: assignmentData.map((item, indx) => {
+        return {
+          assignment: item,
+          assignmentItems: assignmentItems[indx]
+        };
+      })
+    };
 
-  public createAssignmentItem(assignmentItem: AssignmentItem): Observable<Response> {
-    return this.http.post<any>(this.urls.createAssignmentItem, JSON.stringify(assignmentItem))
-                    .pipe(catchError(this.authenticateValidation('createAssignmentItem')));
+    return this.http.post<any>(this.urls.createAssignment, JSON.stringify(data))
+                    .pipe(catchError(this.authenticateValidation('createAssignment')));
   }
 }

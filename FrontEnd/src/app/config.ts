@@ -28,6 +28,7 @@ export class StudentUrls {
 
 export class AssignmentUrls {
   public createAssignment: string = baseUrl + "/assignments/create.php";
+  public createAssignmentGroup: string = baseUrl + "/assignments/createAssignmentGroup.php";
   public createAssignmentItem: string = baseUrl + "/assignments/createItem.php";
 }
 

@@ -55,8 +55,8 @@ export interface AssignmentItem {
   ID?: number;
   assignmentId?: number;
   label: string;
-  questions: number;
   weight: number;
+  questions?: number;
 }
 
 export interface Response {

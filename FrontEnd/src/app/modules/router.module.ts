@@ -3,13 +3,13 @@ import { RouterModule, Routes } from "@angular/router";
 
 import { CreateAccount } from "../components/createAccount/createAccount.component";
 import { CreateClass } from "../components/class/createClass.component";
-import { CreateStudents } from "../components/students/createStudent.component";
+// import { CreateStudents } from "../components/students/createStudent.component";
 // import { LoginForm } from "../components/login/login.component";
 import { MainLogin } from "../components/login/mainLogin.component";
 import { UserDashboard } from "../components/dashboard.component";
-import { StudentsView } from "../components/students/studentsView.component";
+// import { StudentsView } from "../components/students/studentsView.component";
 import { ViewClass } from "../components/class/viewClass.component";
-import { AssignmentView } from "../components/assignments/assignmentView.component";
+// import { AssignmentView } from "../components/assignments/assignmentView.component";
 
 const appRoutes: Routes = [
   {
@@ -28,22 +28,22 @@ const appRoutes: Routes = [
     path: "newClass",
     pathMatch: "full",
     component: CreateClass
-  }, {
+  }, /* {
     path: "newStudent",
     pathMatch: "full",
     component: CreateStudents
-  }, {
+  }, */ {
     path: "class/:id",
     pathMatch: "full",
     component: ViewClass
-  }, {
+  }, /* {
     path: "addStudent",
     pathMatch: "full",
     component: StudentsView
-  }, {
+  }, *//* {
     path: "assignment",
     component: AssignmentView
-  }, {
+  }, */ {
     path: "**",
     redirectTo: ""
   }, {

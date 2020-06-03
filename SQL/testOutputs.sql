@@ -9,3 +9,7 @@ select * from passwords;
 select * from classes;
 
 select * from students;
+
+select * from assignments;
+
+select * from items;
