@@ -4,6 +4,7 @@ import { DebugElement } from '@angular/core';
 import { click } from "../../test/utilities";
 
 // Imports for dependencies
+import { FormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
 import { UserDashboard } from '../dashboard.component';
 import { ClassesService } from "../../services/classes.service";
@@ -18,8 +19,8 @@ describe('User Dashboard (external template)', () => {
     teacherId: 1,
     classTitle: "Bio 101",
     classIcon: "fa fa-book",
-    startDate: new Date().toDateString(),
-    endDate: new Date().toDateString(),
+    startDate: new Date( new Date().getMilliseconds() - 20000).toDateString(),
+    endDate: new Date( new Date().getMilliseconds() + 20000).toDateString(),
     students: 20,
     classAverage: 90,
     classProgress: 20
@@ -27,8 +28,8 @@ describe('User Dashboard (external template)', () => {
     teacherId: 1,
     classTitle: "Anatomy 101",
     classIcon: "fa fa-check",
-    startDate: new Date().toDateString(),
-    endDate: new Date().toDateString(),
+    startDate: new Date( new Date().getMilliseconds() - 20000).toDateString(),
+    endDate: new Date( new Date().getMilliseconds() + 20000).toDateString(),
     students: 15,
     classAverage: 85,
     classProgress: 35
@@ -44,7 +45,7 @@ describe('User Dashboard (external template)', () => {
     TestBed.configureTestingModule({
       declarations: [UserDashboard], // declare the test component
       // import dependency modules
-      imports: [],
+      imports: [FormsModule],
       providers: [
         { provide: ClassesService, useClass: ClassesServiceStub },
         {
@@ -61,31 +62,34 @@ describe('User Dashboard (external template)', () => {
   // // synchronous beforeEach
   beforeEach(() => {
     // Reset our test data
-    fixture = TestBed.createComponent(UserDashboard);
-
-    comp = fixture.componentInstance; // UserDashboard test instance
     classService = TestBed.get(ClassesService);
     testData.forEach((classData) => {
       classService.createClass(classData);
     });
     router = TestBed.get(Router);
 
+    // Create the Component
+    fixture = TestBed.createComponent(UserDashboard);
+    comp = fixture.componentInstance; // UserDashboard test instance
+    comp.changeClassVisibility("all"); // Needs to show all data
+
     // query for the title <h1> by CSS element selector
     cc = fixture.debugElement.query(By.css('.class-container'));
   });
 
-  it("Classes added appropriately", () => {
+  it("Classes added appropriately", (done: any) => {
     comp.getClasses();
 
     fixture.whenStable().then(() => {
-      expect(comp.classes.length).toEqual(2);
+      expect(comp.allClasses.length).toEqual(2);
       fixture.detectChanges();
       const classElement: DebugElement = cc.query(By.css('.class-item'));
       expect(classElement.nativeElement).toBeDefined();
+      done();
     });
   });
 
-  it("Classes show all properties properly", () => {
+  it("Classes show all properties properly", (done: any) => {
     comp.getClasses();
 
     fixture.whenStable().then(() => {
@@ -96,10 +100,11 @@ describe('User Dashboard (external template)', () => {
       expect(classElement.query(By.css(".student-count")).nativeElement).toBeDefined();
       expect(classElement.query(By.css(".class-average")).nativeElement).toBeDefined();
       expect(classElement.query(By.css(".class-progress")).nativeElement).toBeDefined();
+      done();
     });
   });
 
-  it("Clicking on a Class Navigates properly", () => {
+  it("Clicking on a Class Navigates properly", (done: any) => {
     comp.getClasses();
 
     fixture.whenStable().then(() => {
@@ -107,6 +112,7 @@ describe('User Dashboard (external template)', () => {
       const classElement: DebugElement = cc.query(By.css('.class-item'));
       click(classElement);
       expect(router.lastClicked).toMatch("/class/1");
+      done();
     });
   });
 

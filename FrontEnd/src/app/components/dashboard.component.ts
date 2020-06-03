@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgClass } from "@angular/common";
+import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 
 import { ClassesService } from "../services/classes.service";
@@ -35,12 +36,18 @@ import * as helpers from "../utilities/helpers";
 
 export class UserDashboard implements OnInit {
   public classes: Class[] = [];
+  public allClasses: Class[] = [];
+  public defaultView = "current";
+  public filterTypes = ["current", "past", "future", "all"];
   constructor(
     private ClassService: ClassesService,
     private router: Router
   ) { }
 
   public ngOnInit() {
+    if (!window.localStorage.getItem("class-view")) {
+      window.localStorage.setItem("class-view", this.defaultView);
+    }
     this.getClasses();
   }
 
@@ -49,9 +56,8 @@ export class UserDashboard implements OnInit {
       if (helpers.validateToken(response.token)) {
         this.getClasses();
       } else if (response.classes) {
-        this.classes = response.classes;
-      } else {
-        this.router.navigate(["/login", {}]);
+        this.allClasses = response.classes;
+        this.changeClassVisibility(window.localStorage.getItem("class-view") || this.defaultView);
       }
     });
   }
@@ -59,6 +65,23 @@ export class UserDashboard implements OnInit {
   // Open the Class for the provided ID
   public openClass(classId: number): void {
     this.router.navigate(["/class/" + classId]);
+  }
+
+  public getHeaderColor(classDetails: Class): string {
+    const now = new Date();
+    const startDate = new Date(classDetails.startDate);
+    const endDate = new Date(classDetails.endDate);
+
+    if (endDate < now) {
+      // Past
+      return "bg-info";
+    } else if (startDate < now && endDate > now) {
+      // Current
+      return "bg-primary";
+    } else {
+      // Future
+      return "bg-secondary";
+    }
   }
 
   public getGradeColoration(average: number): string {
@@ -71,5 +94,46 @@ export class UserDashboard implements OnInit {
     } else {
       return "bg-success";
     }
+  }
+
+  public changeClassVisibility(value: string) {
+    if (!!value) {
+      window.localStorage.setItem("class-view", value);
+      const now = new Date();
+
+      this.classes = this.allClasses.filter((classItem) => {
+        const startDate = new Date(classItem.startDate);
+        const endDate = new Date(classItem.endDate);
+        switch (value) {
+          case "current":
+            return startDate < now && endDate > now;
+          case "future":
+            return startDate > now;
+          case "past":
+            return endDate < now;
+          case "all":
+          default:
+            return true;
+        }
+      });
+    }
+  }
+
+  public getFilterButtonColor(filter: string) {
+    switch (filter) {
+      case "current":
+        return "btn-primary";
+      case "future":
+        return "btn-secondary";
+      case "past":
+        return "btn-info";
+      case "all":
+      default:
+        return "btn-warning";
+    }
+  }
+
+  public checkView(view: string): boolean {
+    return (view === window.localStorage.getItem("class-view"));
   }
 }
