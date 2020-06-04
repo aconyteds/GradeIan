@@ -22,16 +22,6 @@ import { AssignmentService } from "../../services/assignment.service";
       margin-bottom:0;
     }
 
-    .assignment-item{
-      font-size:14px;
-      position:relative;
-      border-left:3px solid #ccc;
-    }
-
-    .assignment-item:hover{
-      border-left-color:blue;
-    }
-
     .close-icon{
       position:absolute;
       left:100%;

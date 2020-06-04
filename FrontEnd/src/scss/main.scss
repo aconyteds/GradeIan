@@ -153,3 +153,13 @@ meter {
 .btn:disabled{
   cursor:not-allowed;
 }
+
+.assignment-item{
+  font-size:14px;
+  position:relative;
+  border-left:3px solid $secondary;
+
+  &:hover{
+    border-left-color:$primary;
+  }
+}
