@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NgClass } from "@angular/common";
 import { NgForm, PatternValidator, EmailValidator } from "@angular/forms";
 import { Router } from "@angular/router";
+import { forkJoin, Observable } from "rxjs";
 
 import { ClassModel } from "./classModel";
 import { classIcons } from "../../config";
@@ -75,15 +76,16 @@ export class CreateClass {
           this.createClass();
         } else if (!!response.classId) {
           // Class Created
-          // Enroll Students
-          this.classRoster.updateStudents(response.classId).subscribe((rosterResponse) => {
-            console.log(rosterResponse);
+          forkJoin({
+            // Enroll Students
+            students: this.classRoster.enrollStudents(response.classId),
+            // Create Assignments
+            assignments: this.assignments.saveAssignments(response.classId)
+          }).subscribe((responses) => {
+            // console.log(responses);
+            // Route to the class
+            this.router.navigate(["/home"]);
           });
-          this.assignments.saveAssignments(response.classId).subscribe((assignmentResponse) => {
-            console.log(assignmentResponse);
-          });
-          // Route to the class
-          this.router.navigate(["/home"]);
         } else {
           // Failure
         }
