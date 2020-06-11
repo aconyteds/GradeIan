@@ -29,7 +29,7 @@ call createStudent(1, "Jane Doe", "jane@mail.com");
 
 call checkStudentEmail("mail@mail.com");
 
-call getClasses(1);
+call getClasses(3);
 
 call getStudentCount(3);
 
@@ -45,9 +45,20 @@ call withdrawStudent(3, 1);
 call createAssignment(1, "Title", 20);
 
 call createAssignmentItem(1, "Title 1", 20, 20);
-
+-- Unlocks the account for the provided ID
 call unlockAccount(3);
-
+-- Get the Class details for the classId provided (classId)
+call getClass(31);
+-- Gets the assignment details for the given classId (classId)
+call getAssignments(33);
+-- get the grade for a student for a particular assignment (studentId, assignmentId)
+call getGrade(1, 1);
+-- get the grades for a particular assignment (assignmentId)
+call getAssignmentGrades(1);
+-- get the grades for a particular student (studentId)
+call getStudentGrades(1);
+-- save a grade (assignmentId, studentId, grade, questionsCorrect)
+call setGrade(3, 1, 100, 10);
 
 
 

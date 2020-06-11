@@ -13,3 +13,5 @@ select * from students;
 select * from assignments;
 
 select * from items;
+
+select * from grades;
