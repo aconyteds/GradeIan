@@ -17,6 +17,7 @@ import { RouteModule } from "./router.module";
 import { CreateAccount } from "../components/createAccount/createAccount.component";
 import { CreateClass } from "../components/class/createClass.component";
 import { ViewClass } from "../components/class/viewClass.component";
+import { ClassGrades } from "../components/class/classGrades.component";
 import { CreateStudents } from "../components/students/createStudent.component";
 import { LoginForm } from "../components/login/login.component";
 import { MainLogin } from "../components/login/mainLogin.component";
@@ -40,6 +41,7 @@ import { AssignmentList } from "../components/assignments/assignmentList.compone
     CreateAccount,
     CreateClass,
     ViewClass,
+    ClassGrades,
     ContentComponent,
     MainLogin,
     LoginForm,

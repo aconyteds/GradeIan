@@ -1,12 +1,34 @@
-import {Class} from "../../interfaces";
+import { Class, ClassDetails, Student, AssignmentItem, Grade } from "../../interfaces";
 
-export class ClassModel implements Class{
+export class ClassModel implements Class {
   constructor(
-    public classTitle:string,
-    public classIcon:string,
-    public startDate:string,
-    public endDate:string,
-    public token:string
-  ){
+    public classTitle: string,
+    public classIcon: string,
+    public startDate: string,
+    public endDate: string,
+    public token: string
+  ) {
   }
+}
+
+export class ClassDetailModel implements ClassDetails {
+  public response: boolean;
+  constructor(
+    public ID: number,
+    public classData: Class,
+    public roster: Student[],
+    public assignments: AssignmentItem[],
+    public grades: Grade[]
+  ) { }
+}
+
+export class GradeModel implements Grade {
+  constructor(
+    public gradeId: string,
+    public studentId: number,
+    public assignmentId: number,
+    public grade: number,
+    public questionsCorrect?: number,
+    public status?: string
+  ) { }
 }

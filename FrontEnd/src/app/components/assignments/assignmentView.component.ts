@@ -60,7 +60,6 @@ export class AssignmentView {
   public saveAssignments(classId: number): Observable<any> {
     // Method called by parent to create assignments
     const assignments = this.assignmentItems.toArray();
-    console.log(assignments);
     // Iterate through the child assignments to get the items
     const assignmentItems = this.assignmentData.map((item, indx) => {
       // Set the Class ID for the current Assignment Group Item
@@ -81,13 +80,7 @@ export class AssignmentView {
       return currItem.assignmentData;
     });
 
-    const currRequest = this.assignmentService.createAssignment(this.assignmentData, assignmentItems);
-    currRequest.subscribe((response) => {
-      console.log(response);
-      // return assignmentItems[indx].saveAssignmentItems(response.response);
-    });
-
-    return currRequest;
+    return this.assignmentService.createAssignment(this.assignmentData, assignmentItems);
   }
 
   public removeAssignment(assignment: AssignmentGroupModel) {

@@ -13,7 +13,7 @@
                     <div class="input-group-prepend">
                       <label class="input-group-text" for="assignment_title_{{indx}}">Name</label>
                     </div>
-                    <input class="form-control" type="text" id="assignment_title_{{indx}}" aria-label="Assignment Title" placeholder="Homework" [(ngModel)]="assignment.title" required name="title" #assignmentTitle="ngModel" maxlength="50">
+                    <input class="form-control" type="text" id="assignment_title_{{indx}}" aria-label="Assignment Title" placeholder="Homework" [(ngModel)]="assignment.title" required name="title" #assignmentTitle="ngModel" maxlength="25">
                   </div>
                   <div [hidden]="assignmentTitle.valid || assignmentTitle.pristine" class="alert alert-danger">Assignment title is required</div>
                 </div>

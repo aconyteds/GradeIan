@@ -57,6 +57,33 @@ export interface AssignmentItem {
   label: string;
   weight: number;
   questions?: number;
+  overallWeight?: number;
+  groupWeight?: number;
+  groupTitle?: string;
+  average?: number;
+}
+
+export interface Grade {
+  gradeId: string;
+  studentId: number;
+  assignmentId: number;
+  grade: number;
+  questionsCorrect?: number;
+  status?: string;
+}
+
+export interface GradeBookItem {
+  studentDetails: Student;
+  average: number;
+  grades: Grade[];
+}
+
+export interface ClassDetails {
+  ID: number;
+  classData: Class;
+  roster: Student[];
+  assignments: AssignmentItem[];
+  grades: Grade[];
 }
 
 export interface Response {

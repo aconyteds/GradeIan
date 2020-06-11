@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, forkJoin } from "rxjs";
+import { Observable, forkJoin, of } from "rxjs";
 import { NgClass } from "@angular/common";
 import { NgForm, PatternValidator, EmailValidator } from "@angular/forms";
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
@@ -104,21 +104,21 @@ export class StudentsView implements OnInit {
     return forkJoin(this.enrollStudents(classIdentifier), this.withdrawStudents(classIdentifier));
   }
 
-  private enrollStudents(classIdentifier: number): Observable<any> {
+  public enrollStudents(classIdentifier: number): Observable<any> {
     // Enrolls students in the current class
     if (classIdentifier !== null && this.enrollableStudents.length > 0) {
       return this.studentService.enrollStudents(classIdentifier, this.enrollableStudents);
     } else {
-      return new Observable();
+      return of({});
     }
   }
 
-  private withdrawStudents(classIdentifier: number): Observable<any> {
+  public withdrawStudents(classIdentifier: number): Observable<any> {
     // Withdraws students in the current class
     if (classIdentifier !== null && this.withdrawableStudents.length > 0) {
       return this.studentService.withdrawStudents(classIdentifier, this.withdrawableStudents);
     } else {
-      return new Observable();
+      return of({});
     }
   }
 }

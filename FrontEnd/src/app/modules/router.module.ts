@@ -36,6 +36,10 @@ const appRoutes: Routes = [
     path: "class/:id",
     pathMatch: "full",
     component: ViewClass
+  }, {
+    path: "editClass/:id",
+    pathMatch: "full",
+    component: CreateClass
   }, /* {
     path: "addStudent",
     pathMatch: "full",

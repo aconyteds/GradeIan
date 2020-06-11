@@ -16,6 +16,8 @@ export class AuthenticationUrls {
 export class ClassesUrls {
   public createClass: string = baseUrl + "/classes/create.php";
   public getClass: string = baseUrl + "/classes/get.php";
+  public getAssignmentGrades: string = baseUrl + "/classes/getAssignmentGrades.php";
+  public setGrade: string = baseUrl + "/classes/setGrade.php";
 }
 
 export class StudentUrls {
@@ -77,5 +79,6 @@ export const classIcons: string[] = [
   "fa fa-transgender",
   "fa fa-trash",
   "fa fa-tree",
-  "fa fa-trophy"
+  "fa fa-trophy",
+  "fas fa-tooth"
 ];
