@@ -90,7 +90,7 @@ export class UserDashboard implements OnInit {
     } else if (average < 80) {
       return "bg-warning";
     } else if (average < 90) {
-      return "bg-secondary";
+      return "bg-info";
     } else {
       return "bg-success";
     }
@@ -129,11 +129,15 @@ export class UserDashboard implements OnInit {
         return "btn-info";
       case "all":
       default:
-        return "btn-warning";
+        return "btn-dark";
     }
   }
 
   public checkView(view: string): boolean {
     return (view === window.localStorage.getItem("class-view"));
+  }
+
+  public getDateDisplay(startDate: string, endDate: string): string {
+    return helpers.getContextualDateInformation(startDate, endDate);
   }
 }

@@ -31,24 +31,23 @@
               <div class="col">
                 <ul class="class-data ">
                   <li class=" row">
-                    <label class="col-8">Students</label>
-                    <span class="student-count col-4 text-center">{{classData.students}}</span>
+                    <label class="col-7">Students</label>
+                    <span class="student-count col-5 text-center">{{classData.students}}</span>
                   </li >
                   <li class="row">
-                    <label class="col-8">Progress</label>
-                    <span class="class-progress col-4 text-center">{{classData.classProgress}}%</span>
+                    <label class="col-7">Progress</label>
+                    <span class="class-progress col-5 text-center">{{classData.classProgress}}%</span>
                   </li>
                   <li class="row text-white" [ngClass]="getGradeColoration(classData.classAverage)">
-                    <label class="col-8">Average</label>
-                    <span class="class-average col-4 text-center">{{classData.classAverage}}%</span>
+                    <label class="col-7">Average</label>
+                    <span class="class-average col-5 text-center">{{classData.classAverage}}%</span>
                   </li>
                 </ul>
               </div>
-              <!-- Add Date Information (like X days till class starts/ends)
               <div class="w-100"></div>
               <div class="col">
-                {{classData.startDate}} - {{classData.endDate}}
-              </div> -->
+                {{getDateDisplay(classData.startDate, classData.endDate)}}
+              </div>
             </div>
           </div>
         </div>
