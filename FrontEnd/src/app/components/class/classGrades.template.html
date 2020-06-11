@@ -1,0 +1,187 @@
+<div style="width:100%; padding:0 20px;">
+  <section class="actions-container row justify-content-center align-items-center border-bottom pb-2">
+    <div class="col col-md-auto">
+      Edit Mode:
+    </div>
+    <div class="col col-md-auto">
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label *ngFor="let mode of editModes;" class="btn btn-secondary" [ngClass]="mode === editMode? 'active' : ''">
+          <input type="radio" name="editMode" id="edit_mode_{{mode}}" [checked]="mode === editMode" (click)="changeEditMode(mode)"> {{mode.charAt(0).toUpperCase() + mode.slice(1)}}
+        </label>
+      </div>
+    </div>
+  </section>
+  <section class="d-none d-md-block grade-grid-section mt-3 pb-2 border-bottom">
+    <table class="table table-bordered grade-grid" [ngClass]="editMode">
+      <thead>
+        <tr>
+          <th scope="col" style="z-index: {{assignments.length + 2}};">
+            <span class="assignment-header">Name</span>
+          </th>
+          <th scope="col" *ngFor="let assignment of assignments; index as indx;" [ngStyle]="{'z-index':(assignments.length + 1) - indx}">
+            <span class="assignment-header">{{assignment.label}}</span>
+          </th>
+          <th scope="col" style="z-index: 1;">
+            <span class="assignment-header">Average</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of gradeBook; index as studentIndx">
+          <th scope="row" class="bg-primary text-white">{{student.studentDetails.name}}</th>
+          <td *ngFor="let grade of student.grades; index as indx;" [ngClass]="grade.status !== 'empty' ?getGradeColor(grade.grade): ''">
+            <input *ngIf="editMode === 'grade'" class="form-control" type="number" id="{{grade.gradeId}}_grade" aria-label="Assignment Grade" placeholder="100" [(ngModel)]="grade.grade" required name="grade" #gradeGrade="ngModel" min="0" max="100"
+              (change)="saveGrade(grade)" tabindex="{{(studentIndx + (gradeBook.length * indx) + indx) + 1}}">
+            <div *ngIf="editMode === 'questions'">
+              <div *ngIf="assignments[indx].questions > 0" class="input-group">
+                <input class="form-control" type="number" id="{{grade.gradeId}}_questionsCorrect" aria-label="Assignment Questions Correct" [(ngModel)]="grade.questionsCorrect" name="questionsCorrect" #questionsCorrect="ngModel" min="0" max="100"
+                  (change)="saveGrade(grade)" tabindex="{{(studentIndx + (gradeBook.length * indx) + indx) + 1}}">
+                <div class="input-group-append">
+                  <span class="input-group-text">of {{assignments[indx].questions}}</span>
+                </div>
+              </div>
+              <div *ngIf="assignments[indx].questions < 1" [ngClass]="grade.status !== 'empty' ?'text-white': ''">
+                No Question Data
+              </div>
+            </div>
+          </td>
+          <td [ngClass]="getGradeColor(student.average)" class="text-center align-middle text-white">{{student.average.toFixed(2)}}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr class="text-center align-items-center">
+          <th scope="row" class="bg-secondary text-white">Average</th>
+          <td *ngFor="let average of assignmentAverages;" class="text-white" [ngClass]="getGradeColor(average)">
+            {{average.toFixed(2)}}
+          </td>
+          <td [ngClass]="getGradeColor(classAverage)" class="text-white" style="font-weight:bold;">{{classAverage.toFixed(2)}}</td>
+        </tr>
+      </tfoot>
+    </table>
+  </section>
+  <section class="d-md-none mt-3 border-bottom">
+    <div class="row justify-content-center pb-2">
+      <div class="col-auto">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Class Average</div>
+          </div>
+          <div class="input-group-append">
+            <div class="input-group-text text-white" [ngClass]="getGradeColor(classAverage)">{{classAverage.toFixed(2)}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nav nav-pills nav-fill pb-2 border-bottom" role="tablist">
+      <a class="nav-item nav-link active" data-toggle="tab" href="#student_pane">Student View</a>
+      <a class="nav-item nav-link" data-toggle="tab" href="#assignment_pane">Assignment View</a>
+    </div>
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="student_pane" role="tabpanel" aria-labelledby="student-tab">
+        <div class="input-group mt-2 mb-2">
+          <div class="input-group-prepend">
+            <label class="input-group-text">Student</label>
+          </div>
+          <select class="form-control form-control-lg" [ngModel]="selectedStudent" (ngModelChange)="selectStudent($event)">
+            <option disabled="true" selected>Select a Student</option>
+            <option *ngFor="let student of gradeBook" [ngValue]="student">{{student.studentDetails.name}}</option>
+          </select>
+        </div>
+        <table class="table table-striped" *ngIf="selectedStudent">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Assignment</th>
+              <th scope="col" class="text-center">{{editMode.charAt(0).toUpperCase() + editMode.slice(1)}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let assignment of assignments; index as indx">
+              <th scope="row" class="align-middle">{{assignment.label}}</th>
+              <td *ngIf="selectedStudent.grades[indx] as grade" [ngClass]="grade.status !== 'empty' ?getGradeColor(grade.grade): ''">
+                <input *ngIf="editMode === 'grade'" class="form-control" type="number" id="mobile_student_{{grade.gradeId}}_grade" aria-label="Assignment Grade" placeholder="100" [(ngModel)]="grade.grade" required name="grade"
+                  #mobileGradeGrade="ngModel" min="0" max="100" (change)="saveGrade(grade)">
+                <div *ngIf="editMode === 'questions'">
+                  <div *ngIf="assignment.questions > 0" class="input-group">
+                    <input class="form-control" type="number" id="mobile_student_{{grade.gradeId}}_questionsCorrect" aria-label="Assignment Questions Correct" [(ngModel)]="grade.questionsCorrect" name="questionsCorrect"
+                      #mobileQuestionsCorrect="ngModel" min="0" max="100" (change)="saveGrade(grade)">
+                    <div class="input-group-append">
+                      <span class="input-group-text">of {{assignment.questions}}</span>
+                    </div>
+                  </div>
+                  <div *ngIf="assignment.questions < 1" [ngClass]="grade.status !== 'empty' ?'text-white': ''">
+                    No Question data
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th scope="row" class="align-middle">Student Average</th>
+              <td class="text-white text-center align-middle" style="font-weight: bold;" [ngClass]="getGradeColor(selectedStudent.average)">{{selectedStudent.average.toFixed(2)}}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="tab-pane fade" id="assignment_pane" role="tabpanel" aria-labelledby="assignment-tab">
+        <div class="input-group mt-2 mb-2">
+          <div class="input-group-prepend">
+            <label class="input-group-text">Assignment</label>
+          </div>
+          <select class="form-control form-control-lg" [ngModel]="selectedAssignment" (ngModelChange)="selectAssignment($event)">
+            <option disabled="true" selected>Select an Assignment</option>
+            <option *ngFor="let assignment of assignments" [ngValue]="assignment">{{assignment.label}}</option>
+          </select>
+        </div>
+        <table class="table table-striped" *ngIf="selectedAssignment">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Student</th>
+              <th scope="col" class="text-center">{{editMode.charAt(0).toUpperCase() + editMode.slice(1)}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of gradeBook;">
+              <th scope="row" class="align-middle">{{student.studentDetails.name}}</th>
+              <td *ngIf="getGrade(student.studentDetails.ID, selectedAssignment.ID) as grade" [ngClass]="grade.status !== 'empty' ?getGradeColor(grade.grade): ''">
+                <input *ngIf="editMode === 'grade'" class="form-control" type="number" id="mobile_assignment_{{grade.gradeId}}_grade" aria-label="Assignment Grade" placeholder="100" [(ngModel)]="grade.grade" required name="grade"
+                  #mobileAssignmentGradeGrade="ngModel" min="0" max="100" (change)="saveGrade(grade)">
+                <div *ngIf="editMode === 'questions'">
+                  <div *ngIf="selectedAssignment.questions > 0" class="input-group">
+                    <input class="form-control" type="number" id="mobile_assignment_{{grade.gradeId}}_questionsCorrect" aria-label="Assignment Questions Correct" [(ngModel)]="grade.questionsCorrect" name="questionsCorrect"
+                      #mobileAssignmentQuestionsCorrect="ngModel" min="0" max="100" (change)="saveGrade(grade)">
+                    <div class="input-group-append">
+                      <span class="input-group-text">of {{selectedAssignment.questions}}</span>
+                    </div>
+                  </div>
+                  <div *ngIf="selectedAssignment.questions < 1" [ngClass]="grade.status !== 'empty' ?'text-white': ''">
+                    No Question Data
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th scope="row" class="align-middle">Assignment Average</th>
+              <td class="text-white text-center align-middle" style="font-weight: bold;" [ngClass]="getGradeColor(selectedAssignment.average)">{{selectedAssignment.average.toFixed(2)}}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section class="mt-3 mb-3">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-auto">
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="autoSaveSwitch" (change)="toggleAutoSave()" [checked]="autoSave">
+          <label class="custom-control-label" for="autoSaveSwitch">Auto Save</label>
+        </div>
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-success" [disabled]="!pendingChanges" (click)="saveGrades()"><i class="fas fa-save"></i> Save Changes</button>
+      </div>
+    </div>
+  </section>
+</div>
