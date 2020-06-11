@@ -1,14 +1,29 @@
 <div class="col-12">
-  <div class="row">
-    <div class="col-10"><i>Class Icon</i>Class Title</div>
-    <div class="col-2">
-      <button class="btn btn-primary"><i class="fa fa-edit"> </i>Edit Class</button>
+  <div *ngIf="!!classDetails">
+    <div class="row class-header align-items-center p-2" [ngClass]="getHeaderColor()">
+      <div class="col-12 col-md-6 class-title">
+        <h3 class="text-white d-inline">
+          <i class="{{classDetails.classData.classIcon}} icon-class"></i>
+          {{classDetails.classData.classTitle}}
+        </h3>
+      </div>
+      <div class="col-12 col-md-6 class-date text-md-right text-left">
+        <span class="text-white">{{formatDate(classDetails.classData.startDate, classDetails.classData.endDate)}} </span>
+        <button class="btn btn-dark float-right float-md-none" (click)="editClass()">
+          <i class="fa fa-edit"></i>&nbsp;
+          <span class="d-none d-md-inline">Edit Class</span>
+        </button>
+      </div>
+
     </div>
+    <div class="row mt-2">
+      <class-grades class="class-grade-container" [roster]="classDetails.roster" [assignments]="classDetails.assignments"></class-grades>
+    </div>
+    <!-- <div class="row">
+      <div>Location for the assignment charting stuff</div>
+    </div> -->
   </div>
-  <div class="row">
-    <div>Location for the Grade table</div>
-  </div>
-  <div class="row">
-    <div>Location for the assignment charting stuff</div>
+  <div *ngIf="!classDetails" class="no-data-found mt-2">
+    No class Data Found!
   </div>
 </div>

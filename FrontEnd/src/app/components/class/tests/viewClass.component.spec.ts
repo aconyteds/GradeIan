@@ -4,56 +4,79 @@ import { DebugElement } from '@angular/core';
 import { click } from "../../../test/utilities";
 
 // Imports for dependencies
-import { FormsModule } from "@angular/forms";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { ViewClass } from '../ViewClass.component';
 import { ClassesService } from "../../../services/classes.service";
-import { Class } from "../../../interfaces";
 
 // Import Test info
 import { ClassesServiceStub } from "./classes.data";
 
 describe('ViewClassComponent (external template)', () => {
   // //Default Test data
-  // let testData:Class[];
   // //
-  // let comp: CreateClass;
-  // let fixture: ComponentFixture<CreateClass>;
-  // let de: DebugElement;
-  // let classService:any;
-  // //
-  // beforeEach(async() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [ CreateClass ], // declare the test component
-  //     //import dependency modules
-  //     imports:[FormsModule],
-  //     providers:[
-  //       {provide:ClassesService, useClass:ClassesServiceStub},
-  //       {
-  //         provide:Router,
-  //         useValue:{
-  //           navigate(url:string){return url;}
-  //         }
-  //       }]
-  //   })
-  //   .compileComponents();
-  // });
+  let comp: ViewClass;
+  let fixture: ComponentFixture<ViewClass>;
+  let classService: any;
+  let classHeader: DebugElement;
+  //
+  beforeEach(async () => {
+    TestBed.configureTestingModule({
+      declarations: [ViewClass], // declare the test component
+      // import dependency modules
+      imports: [],
+      providers: [
+        { provide: ClassesService, useClass: ClassesServiceStub },
+        {
+          provide: Router,
+          useValue: {
+            navigate(url: string) { return url; }
+          }
+        }, { provide: ActivatedRoute, useValue: {
+          snapshot: {
+            paramMap: {
+              get: (key: string) => {
+                switch (key) {
+                  case 'id':
+                    return 2;
+                }
+              }
+            }
+          }
+        }
+      }]
+    })
+      .compileComponents();
+  });
   // //
   // // // synchronous beforeEach
-  // beforeEach(() => {
-  //   //Reset our test data
-  //   fixture = TestBed.createComponent(CreateClass);
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ViewClass);
+
+    comp = fixture.componentInstance; // BannerComponent test instance
+    classService = TestBed.get(ClassesService);
+    comp.getClassDetails(1);
+    fixture.detectChanges();
+
+    //
+    classHeader = fixture.debugElement.query(By.css(".class-header"));
+  });
   //
-  //   comp = fixture.componentInstance; // BannerComponent test instance
-  //   classService = TestBed.get(ClassesService);
+  it('Check that no class data message is shown', () => {
+    comp.getClassDetails(-1);
+    fixture.detectChanges();
+    const noDataMessage = fixture.debugElement.query(By.css(".no-data-found"));
+    expect(noDataMessage).toBeDefined();
+  });
   //
-  //   // query for the title <h1> by CSS element selector
-  //   de = fixture.debugElement.query(By.css('form'));
-  // });
-  //
-  // it('Check Component has required attributes', () => {
-  //   expect(de.query(By.css('[name="classTitle"]')).nativeElement.required).toBeTruthy();
-  // });
+  it('Header Displays Title and Icon', () => {
+    expect(classHeader).toBeDefined();
+    const titleContainer = classHeader.query(By.css(".class-title"));
+    const classIcon = classHeader.query(By.css(".icon-class"));
+    const classDate = classHeader.query(By.css(".class-date"));
+    expect(titleContainer).toBeDefined();
+    expect(classIcon).toBeDefined();
+    expect(classDate).toBeDefined();
+  });
   //
   // it('Verify class inputs exist', () =>{
   //   let requiredInputs = ["classTitle", "classIcon", "startDate", "endDate"];
