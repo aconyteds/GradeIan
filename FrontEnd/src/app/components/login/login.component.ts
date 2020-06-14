@@ -46,13 +46,15 @@ export class LoginForm {
   }
 
   public login(): void {
+    console.log("login");
+    window.sessionStorage.setItem("token", null);
     // Call the login service
     if (!this.credentials.userName && !this.credentials.password) { return; }
     // This is where we obfuscate the password
-    // Before we send the Password, we need to obfuscate it
-    const tempPW = this.credentials.password;
-    this.credentials.password = this.passwordService.obfuscatePassword(this.credentials.password);
-    this.accountService.login(this.credentials)
+    this.accountService.login({
+      userName: this.credentials.userName,
+      password: this.passwordService.obfuscatePassword(this.credentials.password)
+    })
       .subscribe((response) => {
         const token: string = response.token;
         // Token will either come back with a valid token, or a number signifying the error code
@@ -70,7 +72,6 @@ export class LoginForm {
           }
         } else {
           // Reset the password back to the original so the form looks right
-          this.credentials.password = tempPW;
           if (response.token === "-2") {
             this.response = "locked";
           } else {

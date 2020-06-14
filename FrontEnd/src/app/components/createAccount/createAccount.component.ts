@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {NgForm, PatternValidator, EmailValidator} from "@angular/forms";
-import {Router} from "@angular/router";
-import {UserModel} from "./userModel";
+import { NgForm, PatternValidator, EmailValidator } from "@angular/forms";
+import { Router } from "@angular/router";
+import { UserModel } from "./userModel";
 
-import {AccountService} from "../../services/account.service";
-import {User, SecurityQuestion, Login} from "../../interfaces";
+import { AccountService } from "../../services/account.service";
+import { User, SecurityQuestion, Login } from "../../interfaces";
 
-import {PasswordService} from "../../utilities/passwords";
-
+import { PasswordService } from "../../utilities/passwords";
 
 @Component({
   selector: 'create-account',
-  styles:[`
+  styles: [`
       .ng-valid[required], .ng-valid.required  {
         border-left: 5px solid #42A948; /* green */
       }
@@ -27,78 +26,81 @@ import {PasswordService} from "../../utilities/passwords";
 })
 
 export class CreateAccount implements OnInit {
-  public user:User;
-  private invalid:boolean = true;
-  public emailInUse:boolean = false;
-  public userNameInUse:boolean = false;
-  public confirmPassword:string = "";
-  public passwordStrength:number = 0;
-  private passwordService:PasswordService = new PasswordService();
-  public questions:SecurityQuestion[];
+  public user: User;
+  public emailInUse = false;
+  public userNameInUse = false;
+  public confirmPassword = "";
+  public passwordStrength = 0;
+  private passwordService: PasswordService = new PasswordService();
+  public questions: SecurityQuestion[];
   constructor(
-    private accountService:AccountService,
-    private router:Router
-  ){
-    this.user = new UserModel("", "", "", 1, "", "", "");
+    private accountService: AccountService,
+    private router: Router
+  ) {
+    this.user = new UserModel("", "", "", 1, "", "", "", "");
   }
 
-  ngOnInit(){
+  public ngOnInit() {
     this.getSecurityQuestions();
   }
 
-  getSecurityQuestions(): void {
+  public getSecurityQuestions(): void {
     this.accountService.getSecurityQuestions()
-      .subscribe(response=>this.questions = response);
+      .subscribe((response) => this.questions = response);
   }
 
-  onSubmit(user:User):void{
-    //Not everything is filled out yet
-    if(!user.firstName || !user.lastName || !user.email || !user.userName || !user.email || this.emailInUse || this.userNameInUse){return;}
-
-    //Enforce upper case on first characters of names
-    user.firstName = user.firstName.charAt(0).toUpperCase() + user.firstName.substr(1);
-    user.lastName = user.lastName.charAt(0).toUpperCase() + user.lastName.substr(1);
-
-    //Before we send the Password, we need to obfuscate it
-    var tempPW = user.password;
-    user.password = this.passwordService.obfuscatePassword(user.password);
-    this.accountService.create(user)
-      .subscribe(response=>{
-        //{newUserID: "4"}
-        if(parseInt(response.newUserID)>0){
-        //We want to log in for the user immediately because we're nice
-          var credential:Login = {
-            userName: user.userName,
-            password: user.password
+  public onSubmit(user: User): void {
+    // Not everything is filled out yet
+    if (!user.firstName || !user.lastName || !user.email || !user.userName ||
+      !user.email || this.emailInUse || this.userNameInUse || !user.licenseKey) {
+      return;
+    }
+    const newAccount = new UserModel(
+      user.firstName.charAt(0).toUpperCase() + user.firstName.substr(1),
+      user.lastName.charAt(0).toUpperCase() + user.lastName.substr(1),
+      user.email,
+      user.securityQuestion,
+      user.securityAnswer,
+      user.userName,
+      user.licenseKey,
+      this.passwordService.obfuscatePassword(user.password)
+    );
+    this.accountService.create(newAccount)
+      .subscribe((response) => {
+        // {newUserID: "4"}
+        if (parseInt(response.response, 10) > 0) {
+          // We want to log in for the user immediately because we're nice
+          const credential: Login = {
+            userName: newAccount.userName,
+            password: newAccount.password
           };
-          //Call the login service
+          // Call the login service
           this.accountService.login(credential)
-          .subscribe(response=>{
-            //Store the session credentials for the user
-            window.sessionStorage.setItem("token", response.token);
-            //Go to the user's homepage :)
-            this.router.navigate(["/home"]);
-          });
-        }
-        else{
-          //something went wrong, sorry gov'na
-          //Reset the user's PW back to it's original state so they can re-submit correctly
-          user.password=tempPW;
+            .subscribe((loginResponse) => {
+              // Store the session credentials for the user
+              window.sessionStorage.setItem("token", loginResponse.token);
+              // Go to the user's homepage :)
+              this.router.navigate(["/home"]);
+            });
+        } else {
+          // something went wrong, sorry gov'na
+          // Reset the user's PW back to it's original state so they can re-submit correctly
+          alert(response.response);
         }
       });
   }
 
-  checkEmail(email:string):void{
+  public checkEmail(email: string): void {
     this.accountService.checkEmail(email)
-      .subscribe(response => this.emailInUse =  !!parseInt(response["response"]));
+      .subscribe((response) => this.emailInUse = !!parseInt(response.response, 10));
   }
 
-  checkUserName(userName:string):void{
+  public checkUserName(userName: string): void {
     this.accountService.checkUserName(userName)
-      .subscribe(response=>this.userNameInUse = !!parseInt(response["response"]));
+      .subscribe((response) => this.userNameInUse = !!parseInt(response.response, 10));
   }
 
-  checkPasswordStrength(password:string):void{
+  public checkPasswordStrength(password: string): void {
     this.passwordStrength = this.passwordService.checkPasswordStrength(password);
   }
- }
+}

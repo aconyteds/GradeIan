@@ -17,7 +17,7 @@ export class PasswordService {
   // Checks if the given password matches a set of common password
   //
   public isPasswordCommon(password: string): boolean {
-    return this.commonPasswordPatterns.test(password);
+    return this.commonPasswordPatterns.test(password.toLowerCase());
   }
 
   //

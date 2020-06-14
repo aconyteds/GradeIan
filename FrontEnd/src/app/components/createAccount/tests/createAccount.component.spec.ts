@@ -54,7 +54,7 @@ describe('CreateAccountComponent (external template)', () => {
   });
 
   it('Check Required Inputs have Required Attribute', () => {
-    const requiredInputs = ["firstName", "lastName", "email", "password", "securityAnswer", "userName"];
+    const requiredInputs = ["firstName", "lastName", "email", "password", "securityAnswer", "userName", "licenseKey"];
     requiredInputs.forEach((input) => {
       const currInput: DebugElement = de.query(By.css('[name="' + input + '"]'));
       expect(currInput.nativeElement.required).toBeTruthy();

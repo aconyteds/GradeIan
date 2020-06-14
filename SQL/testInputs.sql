@@ -1,7 +1,12 @@
 use gradeIan;
 
-call createAccount('Ian', 'Wilson', 'ianwilson1337@gmail.com', 'answer', 1, 'iwilson', 'password');
-call createAccount('Clarice', 'Hannibal', 'c@FBI.gov', 'answer', 2, 'cHanny', 'password');
+--
+call createLicense(1);
+--
+call checkToken('GU3OWEWYJEWMZI2');
+
+call createAccount('Ian', 'Wilson', 'ianwilson1337@gmail.com', 'answer', 1, 'iwilson', 'password', 'WY0YJK2OWU1YMFI');
+call createAccount('Clarice', 'Hannibal', 'c@FBI.gov', 'answer', 2, 'cHanny', 'password', 'TM1OTQ5NGVLY2JJ');
 
 --
 call login('iwilson','');
@@ -10,9 +15,9 @@ call login('iwilson', 'password');
 -- Failed Login
 call login('iwilson', "abFFF");
 
-call login('user', "e9b3c904a0b80fcf5674061e57f1c7d6539c9393ec7b404b136a0b216a67d037");
+call login('user', 'e9b3c904a0b80fcf5674061e57f1c7d6539c9393ec7b404b136a0b216a67d037');
 
-call generateToken(1);
+call generateToken(6);
 
 call checkEmail("ianwilson1337@gmail.com");
 
@@ -46,7 +51,7 @@ call createAssignment(1, "Title", 20);
 
 call createAssignmentItem(1, "Title 1", 20, 20);
 -- Unlocks the account for the provided ID
-call unlockAccount(3);
+call unlockAccount(7);
 -- Get the Class details for the classId provided (classId)
 call getClass(31);
 -- Gets the assignment details for the given classId (classId)

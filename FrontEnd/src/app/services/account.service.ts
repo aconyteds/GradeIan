@@ -1,5 +1,5 @@
 import { AccountUrls } from "../config";
-import { User, SecurityQuestion, Login, Credential, NewAccount } from '../interfaces';
+import { User, SecurityQuestion, Login, Credential, NewAccount, Response } from '../interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Authentication } from "./authentication";
@@ -14,20 +14,20 @@ export class AccountService extends Authentication {
     super(http);
   }
   // Checks whether a user name is in use or not
-  public checkUserName(userName: string): Observable<boolean> {
-    return this.http.get<boolean>(this.urls.checkUserName + `?userName=${userName}`);
+  public checkUserName(userName: string): Observable<Response> {
+    return this.http.get<Response>(this.urls.checkUserName + `?userName=${userName}`);
   }
   // Checks if an email is in user or not
-  public checkEmail(email: string): Observable<boolean> {
-    return this.http.get<boolean>(this.urls.checkEmail + `?email=${email}`);
+  public checkEmail(email: string): Observable<Response> {
+    return this.http.get<Response>(this.urls.checkEmail + `?email=${email}`);
   }
   // Gets the security questions from the database
   public getSecurityQuestions(): Observable<SecurityQuestion[]> {
     return this.http.get<SecurityQuestion[]>(this.urls.getSecurityQuestions);
   }
   // Create a new account
-  public create(user: User): Observable<NewAccount> {
-    return this.http.post<NewAccount>(this.urls.createAccount, JSON.stringify(user));
+  public create(user: User): Observable<Response> {
+    return this.http.post<Response>(this.urls.createAccount, JSON.stringify(user));
   }
   public getUserDetails(token: string): Observable<any> {
     return this.http.post<any>(this.urls.getUserDetails, JSON.stringify({ "token": token }))

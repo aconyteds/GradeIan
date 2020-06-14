@@ -88,9 +88,18 @@
           </div>
         </div>
       </div>
+      <div class="col">
+        <div class="col">
+          <div class="form-group">
+            <label class=" control-label" for="licenseKey">License:</label>
+            <input class="form-control" type="text" id="licenseKey" placeholder="License Key" [(ngModel)]="user.licenseKey"  name="licenseKey" required #licenseKey="ngModel" maxlength="25">
+            <div [hidden]="licenseKey.valid || licenseKey.pristine" class="alert alert-danger">A License Key is required to create an account, please input the key provided to you.</div>
+          </div>
+        </div>
+      </div>
 
       <div class="col text-center">
-        <button class="btn btn-success" [disabled]="!createAccountForm.form.valid" (click)="onSubmit(user)"><i class="fa fa-plus"></i> Submit</button>
+        <button type="submit" class="btn btn-success" [disabled]="!createAccountForm.form.valid" (click)="onSubmit(user)"><i class="fa fa-plus"></i> Submit</button>
       </div>
     </form>
   </div>

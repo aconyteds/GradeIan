@@ -15,3 +15,7 @@ select * from assignments;
 select * from items;
 
 select * from grades;
+
+select * from License;
+
+select * from AccessLevels;

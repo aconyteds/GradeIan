@@ -5,6 +5,7 @@ export interface User {
   securityQuestion: number;
   securityAnswer: string;
   userName: string;
+  licenseKey?: string;
   password?: string;
 }
 

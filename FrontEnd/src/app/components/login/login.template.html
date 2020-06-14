@@ -9,7 +9,7 @@
   <div class="form-group row">
     <label class="col-form-label col-12 col-sm-3 text-sm-right" for="password">Password:</label>
     <div class=" col-12 col-sm-9">
-      <input class="form-control" type="password" id="password" [(ngModel)]="credentials.password" required name="password" (keyup.enter)="login()">
+      <input class="form-control" type="password" id="password" [(ngModel)]="credentials.password" required name="password">
     </div>
   </div>
   <div class="col">
@@ -18,7 +18,7 @@
   </div>
   <div class="row">
     <div class="col text-right">
-      <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid" (click)="login()"><i class="fas fa-sign-in-alt"></i> Login</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid"><i class="fas fa-sign-in-alt"></i> Login</button>
     </div>
     <div class="col">
       <button class="btn btn-success" (click)="register()"><i class="fa fa-user-plus"></i> Create Account</button>
