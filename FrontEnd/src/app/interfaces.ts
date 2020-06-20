@@ -50,6 +50,7 @@ export interface AssignmentGroup {
   classId: number;
   title: string;
   weight: number;
+  token?: string;
 }
 
 export interface AssignmentItem {
@@ -62,6 +63,7 @@ export interface AssignmentItem {
   groupWeight?: number;
   groupTitle?: string;
   average?: number;
+  token?: string;
 }
 
 export interface Grade {

@@ -3,16 +3,24 @@
   if(!!$userId){
     require_once "../dbConnect.php";
     require_once "../getParameters.php";
-    $inputs = getParameters(["assignmentId", "label", "questions", "weight"]);
-    $assignmentId = $inputs->assignmentId;
-    $label = $inputs->label;
-    $questions = $inputs->questions;
-    $weight = $inputs->weight;
+    $assignments = getParameters(["assignments"])->assignments;
     try{
-      //Create a new assignment item with all details
-      $assignmentId = $conn->query("call createAssignmentItem($assignmentId, '$label', '$questions', $weight)")->fetch(PDO::FETCH_OBJ);
+      $currResponse = new stdClass();
+      $currResponse->itemIds = [];
+      if(count($assignments) > 0){
 
-      echo json_encode($assignmentId);
+        foreach($assignments as $assignment){
+          $assignmentId = $assignment->assignmentId;
+          $label = $assignment->label;
+          $questions = $assignment->questions;
+          $weight = $assignment->weight;
+          //Create a new assignment item with all details
+          $itemId = $conn->query("call createAssignmentItem($assignmentId, '$label', $questions, $weight)")->fetch(PDO::FETCH_OBJ);
+
+          array_push($currResponse->itemIds, $itemId);
+        }
+      }
+      echo json_encode($currResponse);
     }catch(PDOException $err){
       echo $err;
     }

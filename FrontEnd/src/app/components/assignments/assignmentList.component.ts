@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgClass } from "@angular/common";
 import { NgForm, PatternValidator } from "@angular/forms";
 import { Observable } from "rxjs";
@@ -33,15 +33,41 @@ import { AssignmentService } from "../../services/assignment.service";
   templateUrl: "./assignmentList.template.html"
 })
 
-export class AssignmentList {
+export class AssignmentList implements OnInit {
   @Input()
   public defaultName = "Assignment";
-
+  @Input()
   public assignmentData: AssignmentItemModel[] = [];
+  @Input()
+  public assignmentId: number = null;
+  @Input()
+  public classId: number = null;
   public totalWeight = 0;
   constructor(
     private assignmentService: AssignmentService
   ) {
+  }
+
+  public ngOnInit() {
+    this.getAssignmentItems();
+  }
+
+  public getAssignmentItems() {
+    if (!!this.assignmentId) {
+      this.assignmentService.getAssignmentItems(this.assignmentId).subscribe((response: any[]) => {
+        if (response.length > 0) {
+          this.assignmentData = response.map((item: any) => {
+            return new AssignmentItemModel(item.label,
+              parseFloat(item.weight),
+              parseInt(item.questions, 10),
+              parseInt(item.ID, 10),
+              parseInt(item.assignmentId, 10)
+            );
+          });
+          this.calculateTotalWeight();
+        }
+      });
+    }
   }
 
   public addAssignmentItem() {
@@ -49,7 +75,9 @@ export class AssignmentList {
     this.assignmentData.push(new AssignmentItemModel(
       (this.defaultName + " " + (this.assignmentData.length + 1).toString()),
       tempWeight,
-      10));
+      10,
+      null,
+      this.assignmentId));
     this.calculateTotalWeight();
   }
 

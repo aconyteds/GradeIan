@@ -94,7 +94,9 @@ export class ClassGrades implements OnInit {
   ) { }
 
   public ngOnInit() {
-    this.getGrades();
+    if (this.assignments.length > 0 && this.roster.length > 0) {
+      this.getGrades();
+    }
   }
 
   public getGrades() {

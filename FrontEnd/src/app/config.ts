@@ -18,6 +18,7 @@ export class ClassesUrls {
   public getClass: string = baseUrl + "/classes/get.php";
   public getAssignmentGrades: string = baseUrl + "/classes/getAssignmentGrades.php";
   public setGrade: string = baseUrl + "/classes/setGrade.php";
+  public updateClass: string = baseUrl + "/classes/update.php";
 }
 
 export class StudentUrls {
@@ -32,6 +33,12 @@ export class AssignmentUrls {
   public createAssignment: string = baseUrl + "/assignments/create.php";
   public createAssignmentGroup: string = baseUrl + "/assignments/createAssignmentGroup.php";
   public createAssignmentItem: string = baseUrl + "/assignments/createItem.php";
+  public getAssignments: string = baseUrl + "/assignments/get.php";
+  public getAssignmentItems: string = baseUrl + "/assignments/getAssignmentItems.php";
+  public updateAssignmentGroup: string = baseUrl + "/assignments/updateAssignmentGroup.php";
+  public updateAssignmentItem: string = baseUrl + "/assignments/updateAssignmentItem.php";
+  public deleteAssignmentGroup: string = baseUrl + "/assignments/deleteAssignmentGroup.php";
+  public deleteAssignmentItem: string = baseUrl + "/assignments/deleteAssignmentItem.php";
 }
 
 // Icons available for selection for classes

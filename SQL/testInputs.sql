@@ -26,6 +26,7 @@ call checkUserName("iwilson");
 call authenticate((select token from Tokens where user_id=2));
 
 call createClass("Title", "fa", 1, DATE(NOW()), DATE_ADD(NOW(), INTERVAL 2 MONTH));
+call updateClass(1, "Title updated", "fa", DATE(NOW()), DATE_ADD(NOW(), INTERVAL 2 MONTH));
 
 Update Tokens set ExpirationDate = NOW() where user_id = 1;
 
@@ -47,23 +48,35 @@ call enrollStudent(3,2);
 
 call withdrawStudent(3, 1);
 
+-- create an assignment group (classId, title, weight)
 call createAssignment(1, "Title", 20);
-
+-- update the details for an assignment group (groupId, Title, weight)
+call updateAssignmentGroup(1, "Updated Title", 20);
+-- delete the assignment group, items, and grades for the provided (groupId)
+call deleteAssignmentGroup(1);
+-- create an assignment item (groupId, label, weight, questions)
 call createAssignmentItem(1, "Title 1", 20, 20);
+-- updates the detaisl for the assignment item (itemId, label, weight, questions)
+call updateAssignmentItem(1, "Updated Title 1", 20, 15);
+-- delete the assignment item and all grades for the given (itemId)
+call deleteAssignmentItem(1);
+
 -- Unlocks the account for the provided ID
-call unlockAccount(7);
+call unlockAccount(3);
 -- Get the Class details for the classId provided (classId)
 call getClass(31);
 -- Gets the assignment details for the given classId (classId)
 call getAssignments(33);
+-- Gets the assignment items for a given assignment ID (groupId)
+call getAssignmentItems(33);
 -- get the grade for a student for a particular assignment (studentId, assignmentId)
-call getGrade(1, 1);
+call getGrade(1, 102);
 -- get the grades for a particular assignment (assignmentId)
 call getAssignmentGrades(1);
 -- get the grades for a particular student (studentId)
 call getStudentGrades(1);
--- save a grade (assignmentId, studentId, grade, questionsCorrect)
-call setGrade(3, 1, 100, 10);
+-- save a grade (studentId, assignmentId, grade, questionsCorrect)
+call setGrade(1, 102, 100, 10);
 
 
 

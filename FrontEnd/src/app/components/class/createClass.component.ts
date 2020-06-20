@@ -1,10 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgClass } from "@angular/common";
 import { NgForm, PatternValidator, EmailValidator } from "@angular/forms";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { forkJoin, Observable } from "rxjs";
 
-import { ClassModel } from "./classModel";
+import { ClassModel, ClassDetailModel } from "./classModel";
 import { classIcons } from "../../config";
 
 import { ClassesService } from "../../services/classes.service";
@@ -43,16 +43,73 @@ import { AssignmentView } from "../assignments/assignmentView.component";
   templateUrl: "./createClass.template.html"
 })
 
-export class CreateClass {
+export class CreateClass implements OnInit {
   @ViewChild('classRoster') public classRoster: StudentsView;
   @ViewChild('assignments') public assignments: AssignmentView;
   public classData: ClassModel;
   public icons: string[] = classIcons;
+  public classId: number;
+  public classDetails: ClassDetailModel;
   constructor(
-    private ClassService: ClassesService,
-    private router: Router
+    private classesService: ClassesService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.classData = new ClassModel("", this.icons[0], this.now(), this.now(), window.sessionStorage.getItem("token"));
+  }
+
+  public ngOnInit() {
+    const id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
+    this.classId = id;
+
+    if (!!this.classId) {
+      this.getClassDetails(this.classId);
+    }
+  }
+
+  public getClassDetails(id: number) {
+    this.classesService.getClass(id).subscribe((classDetails) => {
+      if (!!classDetails.response) {
+        const responseObject = new ClassDetailModel(parseInt(classDetails.ID, 10),
+          {
+            classTitle: classDetails.classData.classTitle,
+            classIcon: classDetails.classData.classIcon,
+            startDate: classDetails.classData.startDate,
+            endDate: classDetails.classData.endDate
+          },
+          classDetails.roster.map((student: any) => {
+            return {
+              ID: parseInt(student.ID, 10),
+              name: student.name,
+              email: student.email
+            };
+          }),
+          classDetails.assignments.map((assignment: any) => {
+            return{
+              ID: parseInt(assignment.ID, 10),
+              assignmentId: parseInt(assignment.groupId, 10),
+              label: assignment.label,
+              weight: parseFloat(assignment.weight),
+              questions: parseInt(assignment.questions, 10),
+              overallWeight: parseFloat(assignment.overallWeight)
+            };
+          }),
+           classDetails.grades.map((grade: any) => {
+            return {
+              gradeId: grade.gradeId,
+              studentId: parseInt(grade.studentId, 10),
+              assignmentId: parseInt(grade.assignmentId, 10),
+              grade: parseFloat(grade.grade),
+              questionsCorrect: parseInt(grade.questionsCorrect, 10)
+            };
+          }));
+        this.classDetails = responseObject;
+        this.classData = this.classDetails.classData;
+        this.classData.classId = classDetails.ID;
+      } else {
+        this.classDetails = null;
+      }
+    });
   }
 
   public now(): string {
@@ -69,7 +126,7 @@ export class CreateClass {
   }
 
   public createClass() {
-    this.ClassService.createClass(this.classData)
+    this.classesService.createClass(this.classData)
       .subscribe((response: any) => {
         if (!!response.token) {
           // Had to log in again, token expired
@@ -90,5 +147,27 @@ export class CreateClass {
           // Failure
         }
       });
+  }
+
+  public updateClass() {
+    this.classesService.updateClass(this.classData)
+      .subscribe((response: Response) => {
+        if (response) {
+          forkJoin({
+            students: this.classRoster.updateStudents(),
+            // Save assignment Changes
+            assignments: this.assignments.updateAssignments()
+          }).subscribe((responses) => {
+            // console.log(responses);
+            this.router.navigate(["/class/" + this.classData.classId]);
+          });
+        }
+      });
+  }
+
+  public returnToClass() {
+    if (this.classId) {
+      this.router.navigate(["/class/" + this.classData.classId]);
+    }
   }
 }

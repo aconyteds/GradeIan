@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable, forkJoin, of } from "rxjs";
 import { NgClass } from "@angular/common";
 import { NgForm, PatternValidator, EmailValidator } from "@angular/forms";
@@ -39,6 +39,8 @@ import { StudentModel } from "./studentModel";
 })
 
 export class StudentsView implements OnInit {
+  @Input()
+  public classId: number;
   public students: StudentModel[] = [];
   private enrollableStudents: StudentModel[] = [];
   private withdrawableStudents: StudentModel[] = [];
@@ -62,9 +64,17 @@ export class StudentsView implements OnInit {
 
   public ngOnInit(): void {
     // FUTURE:: Get Students for a class
+    if (!!this.classId) {
+      this.getStudents();
+    }
+  }
 
-    // Setup the handler for adding students to the classes array
-    this.classRoster = this.students.slice();
+  public getStudents() {
+    this.studentService.getRoster(this.classId).subscribe((response) => {
+      this.students = response;
+      // Setup the handler for adding students to the classes array
+      this.classRoster = this.students.slice();
+    });
   }
 
   public removeStudent(student: StudentModel): void {
@@ -100,8 +110,8 @@ export class StudentsView implements OnInit {
     this.withdrawableStudents = this.withdrawableStudents.filter((withdrawableStudent) => student.ID !== withdrawableStudent.ID);
   }
 
-  public updateStudents(classIdentifier: number): Observable<any> {
-    return forkJoin(this.enrollStudents(classIdentifier), this.withdrawStudents(classIdentifier));
+  public updateStudents(): Observable<any> {
+    return forkJoin(this.enrollStudents(this.classId), this.withdrawStudents(this.classId));
   }
 
   public enrollStudents(classIdentifier: number): Observable<any> {

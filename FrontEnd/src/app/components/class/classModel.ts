@@ -6,7 +6,8 @@ export class ClassModel implements Class {
     public classIcon: string,
     public startDate: string,
     public endDate: string,
-    public token: string
+    public token?: string,
+    public classId?: number
   ) {
   }
 }
@@ -15,7 +16,7 @@ export class ClassDetailModel implements ClassDetails {
   public response: boolean;
   constructor(
     public ID: number,
-    public classData: Class,
+    public classData: ClassModel,
     public roster: Student[],
     public assignments: AssignmentItem[],
     public grades: Grade[]

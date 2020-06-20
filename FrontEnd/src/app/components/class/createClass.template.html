@@ -44,7 +44,7 @@
         <div class="title-pane">
           <div class="title-pane-title">Student Details</div>
           <div class="col-12">
-            <students-view #classRoster></students-view>
+            <students-view #classRoster [classId]="classId"></students-view>
           </div>
         </div>
       </div>
@@ -56,7 +56,7 @@
         <div class="title-pane">
           <div class="title-pane-title">Assignments</div>
           <div class="col-12">
-            <assignment-view #assignments></assignment-view>
+            <assignment-view #assignments [classId]="classId"></assignment-view>
           </div>
         </div>
       </div>
@@ -64,7 +64,29 @@
   </div>
   <div class="row">
     <div class="col-12 mb-3 text-center" style="margin-top:10px;">
-      <button class="btn btn-success" type="submit" [disabled]="!createClassForm.form.valid" (click)="createClass()"><i class="fa fa-plus"> </i> Create Class</button>
+      <button *ngIf="!classId" class="btn btn-success" type="submit" [disabled]="!createClassForm.form.valid" (click)="createClass()"><i class="fa fa-plus"> </i> Create Class</button>
+      <button *ngIf="!!classId" class="btn btn-warning mr-3 mb-3" type="button" (click)="returnToClass()"><i class="fas fa-undo"></i> Cancel without Saving</button>
+      <button *ngIf="!!classId" class="btn btn-success" type="submit" [disabled]="!createClassForm.form.valid" data-toggle="modal" data-target="#updateConfirmModal"><i class="fas fa-edit"> </i> Update Class</button>
+    </div>
+  </div>
+</div>
+
+<div id="updateConfirmModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger"><i class="fas fa-exclamation-triangle"></i> Confirm Update</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>You are about to make changes to your class. These changes are permanent and cannot be undone. Do you wish to continue?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-arrow-left"></i> Continue Editing</button>
+        <button type="button" (click)="updateClass()" data-dismiss="modal" class="btn btn-primary"><i class="fas fa-save"></i> Save Changes</button>
+      </div>
     </div>
   </div>
 </div>

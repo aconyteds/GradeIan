@@ -35,8 +35,6 @@ export class ClassesService extends Authentication {
     return this.http.post<ClassDetailModel>(this.urls.getClass, JSON.stringify(data))
       .pipe(catchError(this.authenticateValidation('getClass')));
   }
-  // TODO:: Get all of the students for a given class
-  // TODO:: Get all of the assignments for a given class
   public getAssignmentGrades(assignmentItems: AssignmentItem[]): Observable<any> {
     const data = {
       token: window.sessionStorage.getItem("token"),
@@ -62,5 +60,15 @@ export class ClassesService extends Authentication {
     };
     return this.http.post<Response>(this.urls.setGrade, JSON.stringify(data))
       .pipe(catchError(this.authenticateValidation('saveGrades')));
+  }
+
+  public updateClass(classData: ClassModel): Observable<any> {
+    const data = {
+      token: window.sessionStorage.getItem("token"),
+      classDetails: classData
+    };
+
+    return this.http.post<Response>(this.urls.updateClass, JSON.stringify(data))
+      .pipe(catchError(this.authenticateValidation('updateClass')));
   }
 }

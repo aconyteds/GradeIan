@@ -7,7 +7,7 @@
     $classId = getParameters(["classId"])->classId;
     if(!!$classId){
       //Get the students for a single class
-      $students = $conn->query("call getStudent('$classId')")->fetchAll(PDO::FETCH_OBJ);
+      $students = $conn->query("call getStudents($classId)")->fetchAll(PDO::FETCH_OBJ);
       echo json_encode($students);
     }
     else{

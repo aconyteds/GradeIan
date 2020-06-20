@@ -1,5 +1,5 @@
 <div class="col-12">
-  <div *ngIf="!!classDetails">
+  <div *ngIf="!!classDetails && classDetails.roster.length > 0 && classDetails.assignments.length > 0">
     <div class="row class-header align-items-center p-2" [ngClass]="getHeaderColor()">
       <div class="col-12 col-md-6 class-title">
         <h3 class="text-white d-inline">
@@ -25,5 +25,12 @@
   </div>
   <div *ngIf="!classDetails" class="no-data-found mt-2">
     No class Data Found!
+  </div>
+  <div *ngIf="(classDetails && classDetails.roster.length === 0 )|| (classDetails && classDetails.assignments.length === 0)" class="no-data-found mt-2">
+    No students or assignments found.
+    <button class="btn btn-dark float-right float-md-none" (click)="editClass()">
+      <i class="fa fa-edit"></i>&nbsp;
+      <span class="d-none d-md-inline">Edit Class</span>
+    </button>
   </div>
 </div>

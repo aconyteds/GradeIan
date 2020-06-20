@@ -56,4 +56,14 @@ export class StudentService extends Authentication {
     return this.http.post<any>(this.urls.withdrawStudents, JSON.stringify(data))
       .pipe(catchError(this.authenticateValidation('withdrawSetudents')));
   }
+
+  public getRoster(classIdentifier: number): Observable<any> {
+    const data = {
+      token: window.sessionStorage.getItem("token"),
+      classId: classIdentifier
+    };
+
+    return this.http.post<any>(this.urls.getStudents, JSON.stringify(data))
+      .pipe(catchError(this.authenticateValidation("getRoster")));
+  }
 }

@@ -126,7 +126,7 @@ describe('User Dashboard (external template)', () => {
   it("Color coding for grades returning correctly", () => {
     expect(comp.getGradeColoration(50)).toContain("danger");
     expect(comp.getGradeColoration(75)).toContain("warning");
-    expect(comp.getGradeColoration(83)).toContain("secondary");
+    expect(comp.getGradeColoration(83)).toContain("info");
     expect(comp.getGradeColoration(100)).toContain("success");
   });
 });

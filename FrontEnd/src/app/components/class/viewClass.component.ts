@@ -45,7 +45,6 @@ export class ViewClass implements OnInit {
       if (!!classDetails.response) {
         const responseObject = new ClassDetailModel(parseInt(classDetails.ID, 10),
           {
-            classId: classDetails.classData.classId,
             classTitle: classDetails.classData.classTitle,
             classIcon: classDetails.classData.classIcon,
             startDate: classDetails.classData.startDate,
