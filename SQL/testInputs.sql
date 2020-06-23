@@ -1,4 +1,4 @@
-use gradeIan;
+use gradeian;
 
 --
 call createLicense(1);
@@ -23,7 +23,7 @@ call checkEmail("ianwilson1337@gmail.com");
 
 call checkUserName("iwilson");
 
-call authenticate((select token from Tokens where user_id=2));
+call authenticate((select token from Tokens where user_id=1));
 
 call createClass("Title", "fa", 1, DATE(NOW()), DATE_ADD(NOW(), INTERVAL 2 MONTH));
 call updateClass(1, "Title updated", "fa", DATE(NOW()), DATE_ADD(NOW(), INTERVAL 2 MONTH));

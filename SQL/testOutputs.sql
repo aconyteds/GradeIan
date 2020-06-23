@@ -1,4 +1,6 @@
-use gradeian;
+use GradeIan;
+
+select * from SecurityQuestions;
 
 select * from users;
 
