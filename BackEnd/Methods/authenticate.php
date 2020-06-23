@@ -1,6 +1,6 @@
 <?php
-  require realpath(dirname(__FILE__)."./getParameters.php");
-  require realpath(dirname(__FILE__)."./dbConnect.php");
+  require realpath(__DIR__."./getParameters.php");
+  require realpath(__DIR__."./dbConnect.php");
 
   $token = getParameters(["token"])->token;
   if($token){

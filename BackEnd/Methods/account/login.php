@@ -10,7 +10,7 @@
   }
   else{
     //Success!
-    $token = $conn->query("call generateToken('$state')")->fetch(PDO::FETCH_OBJ);
+    $token = $conn->query("call generateToken($state)")->fetch(PDO::FETCH_OBJ);
 
     echo json_encode(Array("token" => $token->response));
   }

@@ -11,7 +11,7 @@
       $enrollResponses->response = [];
       foreach($students as $id){
         // Send a request for each student to be enrolled in the class
-        $queryResponse = $conn->query("call enrollStudent('$classId','$id')")->fetch(PDO::FETCH_OBJ);
+        $queryResponse = $conn->query("call enrollStudent($classId,$id)")->fetch(PDO::FETCH_OBJ);
         $response = new stdClass();
         $response->successful = $queryResponse->response;
         $response->ID = $id;
