@@ -32,7 +32,7 @@
         }
         $classDetails->totalWeight = $totalWeight;
         foreach($assignments as $assignment){
-          $assignment->overallWeight = round((($assignment->groupWeight/$totalWeight)*($assignment->weight/$totalWeight)) * $totalWeight, 2);
+          $assignment->overallWeight = round((($assignment->groupWeight/$totalWeight)*($assignment->weight/100)) * $totalWeight, 2);
         }
       }
       else{
@@ -83,7 +83,7 @@
                   if($grade->studentId == $student->ID){
                     foreach($assignments as $assignment){
                       if($grade->assignmentId == $assignment->ID){
-                        $assignmentWeight = (($assignment->groupWeight / $totalWeight) * ($assignment->weight / $totalWeight)) ;
+                        $assignmentWeight = (($assignment->groupWeight / $totalWeight) * ($assignment->weight / 100)) ;
                         $studentAverage += $grade->grade * $assignmentWeight;
                         $studentProgress += $assignmentWeight * $totalWeight;
                         break;
@@ -101,7 +101,7 @@
               }
 
               if($totalWeight != 0) {
-                $classes[$i]->classProgress = round(($progress / $totalWeight) * $totalWeight, 0);
+                $classes[$i]->classProgress = round($progress, 0);
               }
 
               //Get the class Average

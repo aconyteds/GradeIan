@@ -93,7 +93,7 @@ export class AssignmentList implements OnInit {
       currWeight += assignment.weight;
     });
 
-    this.totalWeight = currWeight;
+    this.totalWeight = Math.round(currWeight);
   }
 
   public autoAssignWeight(assignment?: AssignmentItemModel) {
