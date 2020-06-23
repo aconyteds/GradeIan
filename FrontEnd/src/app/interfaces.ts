@@ -67,7 +67,7 @@ export interface AssignmentItem {
 }
 
 export interface Grade {
-  gradeId: string;
+  gradeId: number;
   studentId: number;
   assignmentId: number;
   grade: number;

@@ -213,23 +213,25 @@ export class AssignmentView implements OnInit {
           }
         }
       });
-      if (exists === false
-        && deletedAssignmentGroups.filter((group) => group === storedItem.assignmentId).length === 0) {
-        // Items does not belong to a deleted group, so it must be deleted manually
-        deletedAssignmentItems.push(storedItem.ID);
+      if (exists === false) {
+        const deleteGroup = deletedAssignmentGroups.some((group) => group === storedItem.assignmentId);
+        if (!deleteGroup) {
+          // Items does not belong to a deleted group, so it must be deleted manually
+          deletedAssignmentItems.push(storedItem.ID);
+        }
       }
     });
+    // console.log("Create Assignments: ", newAssignmentGroups, newGroupAssignmentItems);
+    // console.log("Create Assignment Items: ", newAssignmentItems);
+    console.log("Delete Assignments: ", deletedAssignmentGroups, deletedAssignmentItems);
+    // console.log("Updated Assignments: ", updatedAssignmentGroups, updatedAssignmentItems);
 
-    // console.log(newAssignmentGroups, newGroupAssignmentItems,
-    //   newAssignmentItems,
-    //   updatedAssignmentItems, updatedAssignmentGroups,
-    //   deletedAssignmentItems, deletedAssignmentGroups);
-    // Update and Delete assignments
+    // CRUD Assignments
     return forkJoin(
       this.assignmentService.createAssignment(newAssignmentGroups, newGroupAssignmentItems),
       this.assignmentService.createAssignmentItems(newAssignmentItems),
       this.assignmentService.deleteAssignmentGroups(deletedAssignmentGroups),
-      this.assignmentService.deleteAssignmentItems(deletedAssignmentGroups),
+      this.assignmentService.deleteAssignmentItems(deletedAssignmentItems),
       this.assignmentService.updateAssignmentGroups(updatedAssignmentGroups),
       this.assignmentService.updateAssignmentItems(updatedAssignmentItems)
     );

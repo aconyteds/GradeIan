@@ -1,4 +1,5 @@
-const baseUrl = "//localhost/gradeIan";
+import { environment } from "../environments/environment";
+const baseUrl = environment.apiUrl;
 
 export class AccountUrls {
   public checkUserName: string = baseUrl + "/account/checkUserName.php";

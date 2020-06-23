@@ -45,6 +45,10 @@ export class UserDashboard implements OnInit {
   ) { }
 
   public ngOnInit() {
+    if (!helpers.validateToken(window.sessionStorage.getItem("token"))) {
+      this.router.navigate(["/login"]);
+      return;
+    }
     if (!window.localStorage.getItem("class-view")) {
       window.localStorage.setItem("class-view", this.defaultView);
     }
@@ -58,6 +62,8 @@ export class UserDashboard implements OnInit {
       } else if (response.classes) {
         this.allClasses = response.classes;
         this.changeClassVisibility(window.localStorage.getItem("class-view") || this.defaultView);
+      } else {
+        this.router.navigate(["/login"]);
       }
     });
   }

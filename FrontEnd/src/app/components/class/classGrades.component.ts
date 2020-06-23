@@ -102,7 +102,7 @@ export class ClassGrades implements OnInit {
   public getGrades() {
     this.classesService.getAssignmentGrades(this.assignments).subscribe((response) => {
       const responseGrades = response.grades.map((gradeItem) => {
-        return new GradeModel(gradeItem.studentId + "_" + gradeItem.assignmentId,
+        return new GradeModel(parseInt(gradeItem.gradeId, 10),
         parseInt(gradeItem.studentId, 10),
         parseInt(gradeItem.assignmentId, 10),
         parseFloat(gradeItem.grade),
@@ -131,7 +131,7 @@ export class ClassGrades implements OnInit {
           }
         });
         if (!exists) {
-          currItem.grades.push(new GradeModel(student.ID + "_" + assignment.ID,
+          currItem.grades.push(new GradeModel(null,
             student.ID,
             assignment.ID,
             0,

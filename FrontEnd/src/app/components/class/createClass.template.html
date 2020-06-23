@@ -66,7 +66,7 @@
     <div class="col-12 mb-3 text-center" style="margin-top:10px;">
       <button *ngIf="!classId" class="btn btn-success" type="submit" [disabled]="!createClassForm.form.valid" (click)="createClass()"><i class="fa fa-plus"> </i> Create Class</button>
       <button *ngIf="!!classId" class="btn btn-warning mr-3 mb-3" type="button" (click)="returnToClass()"><i class="fas fa-undo"></i> Cancel without Saving</button>
-      <button *ngIf="!!classId" class="btn btn-success" type="submit" [disabled]="!createClassForm.form.valid" data-toggle="modal" data-target="#updateConfirmModal"><i class="fas fa-edit"> </i> Update Class</button>
+      <button *ngIf="!!classId" class="btn btn-success mb-3" type="submit" [disabled]="!createClassForm.form.valid" data-toggle="modal" data-target="#updateConfirmModal"><i class="fas fa-edit"> </i> Update Class</button>
     </div>
   </div>
 </div>

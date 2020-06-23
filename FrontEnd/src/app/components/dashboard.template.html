@@ -1,5 +1,5 @@
 <div class="col">
-  <section [hidden]="!classes.length" class="mb-3 display-section row justify-content-center">
+  <section [hidden]="!allClasses.length" class="mb-3 display-section row justify-content-center">
     <form #displayForm="ngForm" (change)="changeClassVisibility($event.target.value)">
       <div *ngFor="let filterType of filterTypes;" class="col-6 col-md-auto d-inline-flex mt-3">
         <div class="form-check form-check-inline">
@@ -21,7 +21,7 @@
   </section>
   <section class="row class-container">
     <div class="col">
-      <div class="row">
+      <div class="card-deck">
         <div *ngFor="let classData of classes" class="col-lg-3 col-md-4 col-sm-6 col-12 class-item " (click)="openClass(classData.classId)">
           <div  class="card mb-3 ">
             <div class="card-header text-white" [ngClass]="getHeaderColor(classData)">

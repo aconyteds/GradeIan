@@ -25,7 +25,7 @@ export class ClassDetailModel implements ClassDetails {
 
 export class GradeModel implements Grade {
   constructor(
-    public gradeId: string,
+    public gradeId: number,
     public studentId: number,
     public assignmentId: number,
     public grade: number,
