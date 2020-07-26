@@ -1,7 +1,7 @@
 use gradeian;
 
---
-call createLicense(1);
+-- Access Level, Group Name
+call createLicense(1, "Test Group");
 --
 call checkToken('GU3OWEWYJEWMZI2');
 
