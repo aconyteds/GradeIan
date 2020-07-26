@@ -1,4 +1,4 @@
-use GradeIan;
+use gradeian;
 
 select * from SecurityQuestions;
 
@@ -21,3 +21,5 @@ select * from grades;
 select * from License;
 
 select * from AccessLevels;
+
+select * from Groups;

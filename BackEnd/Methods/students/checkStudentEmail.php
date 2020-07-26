@@ -6,7 +6,7 @@
     $inputs = getParameters(["email"]);
     $email = $inputs->email;
     try{
-      $response = $conn->query("call checkStudentEmail('$email')")->fetch(PDO::FETCH_OBJ)->response;
+      $response = $conn->query("call checkStudentEmail('$email', $userId)")->fetch(PDO::FETCH_OBJ)->response;
       echo json_encode(array("response"=>(INT)$response));
     }catch(PDOException $err){
       echo $err;

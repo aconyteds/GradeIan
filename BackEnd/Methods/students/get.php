@@ -13,7 +13,7 @@
     else{
       $searchTerm = getParameters(["searchTerm"])->searchTerm;
       //This will be a student Search
-      $students = $conn->query("call getStudent('$searchTerm')")->fetchAll(PDO::FETCH_OBJ);
+      $students = $conn->query("call getStudent('$searchTerm', $userId)")->fetchAll(PDO::FETCH_OBJ);
       if(!$students){
         $students=[];
       }

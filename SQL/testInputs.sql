@@ -76,7 +76,7 @@ call getAssignmentGrades(1);
 -- get the grades for a particular student (studentId)
 call getStudentGrades(1);
 -- save a grade (studentId, assignmentId, grade, questionsCorrect)
-call setGrade(1, 102, 100, 10);
+call setGrade(18, 168, 100, 10);
 
 
 
