@@ -117,4 +117,16 @@ export class AssignmentList implements OnInit {
     });
     this.calculateTotalWeight();
   }
+
+  public validateQuestionsNumber(assignment: AssignmentItemModel) {
+    if (assignment.questions === null || assignment.questions < 0) {
+      assignment.questions = 0;
+    }
+  }
+
+  public validateWeight(assignment: AssignmentItemModel) {
+    if (assignment.weight === null || assignment.weight < 0) {
+      assignment.weight = 1;
+    }
+  }
 }

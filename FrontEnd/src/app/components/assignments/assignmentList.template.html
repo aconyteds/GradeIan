@@ -19,10 +19,10 @@
           <div [hidden]="assignmentItemLabel.valid || assignmentItemLabel.pristine" class="name-warning alert alert-danger">Assignment name is required</div>
         </div>
         <div class="col-6 col-md-3" style="border-right:1px solid #ccc;">
-          <input class="form-control" type="number" id="assignment_item_question_{{indx}}" aria-label="Assignment Question Count" placeholder="#" [(ngModel)]="assignment.questions" name="questions" #assignmentItemQuestions="ngModel" >
+          <input class="form-control" type="number" id="assignment_item_question_{{indx}}" aria-label="Assignment Question Count" placeholder="#" [(ngModel)]="assignment.questions" name="questions" #assignmentItemQuestions="ngModel" min="0" (change)="validateQuestionsNumber(assignment)">
         </div>
         <div class="col-6 col-md-3">
-          <input class="form-control" type="number" id="assignment_item_weight_{{indx}}" aria-label="Assignment Item Weight" placeholder="Weight %" [(ngModel)]="assignment.weight" required name="weight" #assignmentItemWeight="ngModel" min="1" max="100" (keyup)="autoAssignWeight(assignment)">
+          <input class="form-control" type="number" id="assignment_item_weight_{{indx}}" aria-label="Assignment Item Weight" placeholder="Weight %" [(ngModel)]="assignment.weight" required name="weight" #assignmentItemWeight="ngModel" min="1" max="100" (change)="validateWeight(assignment)" (keyup)="autoAssignWeight(assignment)">
           <div [hidden]="(assignmentItemWeight.value > 0 && assignmentItemWeight.value < 101)" class="weight-warning alert alert-danger">Weight is required and must be between 1 and 100</div>
         </div>
         <span class="close-icon btn btn-danger" (click)="removeAssignmentItem(assignment)"><i class="far fa-trash-alt"></i></span>
