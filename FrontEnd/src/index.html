@@ -22,12 +22,23 @@
   </head>
   <!-- 3. Display the application -->
   <body class="gradeian">
-    <div class="header text-center text-md-left">
+    <div class="header navbar navbar-expand-lg navbar-light bg-light" style="border-bottom:1px solid #333;">
       <a href="./home" class="navbar-brand">
         <h1>GradeIan</h1>
       </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarExpandedContent" aria-controls="navbarExpandedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarExpandedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="https://youtu.be/Ev8y-_qyu7w" target="_blank">Demo</a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="body ">
+    <div class="body">
       <content class="fluid-container"></content>
       <loader class="loader"><div><span>Loading...</span></div></loader>
     </div>

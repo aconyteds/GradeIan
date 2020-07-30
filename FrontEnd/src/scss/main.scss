@@ -22,34 +22,11 @@ body.gradeian {
   display: table;
   border-collapse: collapse;
   font-family: "Source Code Pro", monospace;
-
-  .footer,
-  .header {
-    display: table-row;
-    height: 1px;
-  }
-
-  .header {
+  .header{
     border-bottom: 1px solid #333;
-
-    &-content {
-      padding: 13px 22px;
-    }
-
-    .menu-button,
-    main-title {
-      display: inline-block;
-      font-size: 34px;
-    }
-
-    .menu-button {
-      margin-right: 5px;
-      cursor: pointer;
-    }
   }
 
   .body {
-    height: 100%;
     position: relative;
   }
 
