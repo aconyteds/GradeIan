@@ -27,6 +27,7 @@ call authenticate((select token from Tokens where user_id=1));
 
 call createClass("Title", "fa", 1, DATE(NOW()), DATE_ADD(NOW(), INTERVAL 2 MONTH));
 call updateClass(1, "Title updated", "fa", DATE(NOW()), DATE_ADD(NOW(), INTERVAL 2 MONTH));
+call deleteClass(3);
 
 Update Tokens set ExpirationDate = NOW() where user_id = 1;
 
@@ -35,6 +36,7 @@ call createStudent(1, "Jane Doe", "jane@mail.com");
 
 call checkStudentEmail("mail@mail.com");
 
+-- get all classes for given (UserID)
 call getClasses(3);
 
 call getStudentCount(3);

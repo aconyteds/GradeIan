@@ -66,7 +66,9 @@
     <div class="col-12 mb-3 text-center" style="margin-top:10px;">
       <button *ngIf="!classId" class="btn btn-success" type="submit" [disabled]="!createClassForm.form.valid" (click)="createClass()"><i class="fa fa-plus"> </i> Create Class</button>
       <button *ngIf="!!classId" class="btn btn-warning mr-3 mb-3" type="button" (click)="returnToClass()"><i class="fas fa-undo"></i> Cancel without Saving</button>
+      <button *ngIf="!!classId" class="btn btn-danger mr-3 mb-3" type="submit" data-toggle="modal" data-target="#deleteConfirmModal"><i class="fas fa-trash"> </i> Delete Class</button>
       <button *ngIf="!!classId" class="btn btn-success mb-3" type="submit" [disabled]="!createClassForm.form.valid" data-toggle="modal" data-target="#updateConfirmModal"><i class="fas fa-edit"> </i> Update Class</button>
+
     </div>
   </div>
 </div>
@@ -86,6 +88,27 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-arrow-left"></i> Continue Editing</button>
         <button type="button" (click)="updateClass()" data-dismiss="modal" class="btn btn-primary"><i class="fas fa-save"></i> Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="deleteConfirmModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger"><i class="fas fa-exclamation-triangle"></i> Confirm Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>You are attempting to delete you class "{{classData.classTitle}}". Please type in the name of your class below to confirm deletion (this cannot be undone).</p>
+        <input type="text" #deleteClassTitle class="form-control" placeholder="{{classData.classTitle}}" value="" (keyup)="checkDeleteTitle(deleteClassTitle.value)"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal"><i class="fas fa-arrow-left"></i> Cancel Deletion</button>
+        <button type="button" (click)="deleteClass()" [disabled]="!deleteTitleMatch" data-dismiss="modal" class="btn btn-danger"><i class="fas fa-trash"></i> Delete Class</button>
       </div>
     </div>
   </div>

@@ -12,6 +12,8 @@ select * from classes;
 
 select * from students;
 
+select * from roster;
+
 select * from assignments;
 
 select * from items;

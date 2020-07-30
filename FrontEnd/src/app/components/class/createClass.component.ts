@@ -50,6 +50,7 @@ export class CreateClass implements OnInit {
   public icons: string[] = classIcons;
   public classId: number;
   public classDetails: ClassDetailModel;
+  public deleteTitleMatch = false;
   constructor(
     private classesService: ClassesService,
     private router: Router,
@@ -168,6 +169,24 @@ export class CreateClass implements OnInit {
   public returnToClass() {
     if (this.classId) {
       this.router.navigate(["/class/" + this.classData.classId]);
+    }
+  }
+
+  public checkDeleteTitle(deleteTitle: string) {
+    this.deleteTitleMatch = (deleteTitle === this.classData.classTitle);
+  }
+
+  public deleteClass() {
+    // Delete the Class
+    if (!!this.deleteTitleMatch) {
+      this.classesService.deleteClass(this.classId)
+        .subscribe((response: Response) => {
+          if (!!response){
+            this.router.navigate(["/home"]);
+          } else {
+            // There was a problem deleting the class
+          }
+        });
     }
   }
 }

@@ -71,4 +71,14 @@ export class ClassesService extends Authentication {
     return this.http.post<Response>(this.urls.updateClass, JSON.stringify(data))
       .pipe(catchError(this.authenticateValidation('updateClass')));
   }
+
+  public deleteClass(classIdentifier: number): Observable<any> {
+    const data = {
+      token: window.sessionStorage.getItem("token"),
+      classId:classIdentifier
+    };
+
+    return this.http.post<Response>(this.urls.deleteClass, JSON.stringify(data))
+      .pipe(catchError(this.authenticateValidation('deleteClass')));
+  }
 }

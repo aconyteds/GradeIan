@@ -20,6 +20,7 @@ export class ClassesUrls {
   public getAssignmentGrades: string = baseUrl + "/classes/getAssignmentGrades.php";
   public setGrade: string = baseUrl + "/classes/setGrade.php";
   public updateClass: string = baseUrl + "/classes/update.php";
+  public deleteClass: string = baseUrl + "/classes/delete.php";
 }
 
 export class StudentUrls {
