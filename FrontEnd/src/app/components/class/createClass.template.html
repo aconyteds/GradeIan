@@ -103,7 +103,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>You are attempting to delete you class "{{classData.classTitle}}". Please type in the name of your class below to confirm deletion (this cannot be undone).</p>
+        <p>You are attempting to delete your class "{{classData.classTitle}}". Please type in the name of your class below to confirm deletion (this cannot be undone).</p>
         <input type="text" #deleteClassTitle class="form-control" placeholder="{{classData.classTitle}}" value="" (keyup)="checkDeleteTitle(deleteClassTitle.value)"/>
       </div>
       <div class="modal-footer">
