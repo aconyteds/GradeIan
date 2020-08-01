@@ -28,6 +28,13 @@ import { Component } from '@angular/core';
           <div class="card-block">
            <login></login>
          </div>
+         <div class="card-footer">
+          <div class="row justify-content-center">
+            <div class="col-auto">
+              <a class="nav-link" href="https://youtu.be/Ev8y-_qyu7w" target="_blank">View Demo <i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+         </div>
        </div>
      </div>
     </div>
@@ -37,4 +44,4 @@ import { Component } from '@angular/core';
 export class MainLogin {
   constructor() {
   }
-};
+}

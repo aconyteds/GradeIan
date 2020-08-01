@@ -1,14 +1,43 @@
 use gradeian;
 
+-- gets all groups (SiteAdminUserID) - SITE ADMIN ONLY
+call getGroups(4);
+-- gets all users for (SiteAdminUserID, GroupID) - SITE ADMIN ONLY
+call getUsersByGroup(4, 2);
+-- gets all licenses for a group (SiteAdminUserID, GroupID) - SITE ADMIN ONLY
+call getGroupLicenses(1, 2);
+-- gets all users for (AdminID) - Group ADMIN only
+call getGroupUsers(4);
 -- Access Level, Group Name
-call createLicense(1, "Test Group");
---
+call createLicense(3, "Test Group2");
+-- Verifies that a license is legit (License)
 call checkToken('GU3OWEWYJEWMZI2');
 
-call createAccount('Ian', 'Wilson', 'ianwilson1337@gmail.com', 'answer', 1, 'iwilson', 'password', 'WY0YJK2OWU1YMFI');
-call createAccount('Clarice', 'Hannibal', 'c@FBI.gov', 'answer', 2, 'cHanny', 'password', 'TM1OTQ5NGVLY2JJ');
+-- create a new user Account (firstName, lastName, email, securityAnswer, securityQuestion, userName, password, LicenseKey)
+call createAccount('Ian', 'Wilson', 'iw1234@gmail.com', 'answer', 1, 'iwilson', 'password', 'WRHYJVINMFHNDM2');
+call createAccount('Clarice', 'Hannibal', 'c@FBI.gov', 'answer', 2, 'cHanny', 'password', 'WY4MTMXZJKYOWJH');
 
---
+-- Updates a user account (userID, FirstName, LastName, emailAddress, SecurityAnswer, SecurityQuestion)
+call updateAccount(3, "Bruce", "Wayne", "bwayne@wayne.org", "changedAnswer", 2);
+call updateAccount(3, "Ian", "Wilson", "iw1234@gmail.com", "answer", 1);
+-- Updates a user's password (userID, securityAnswer, newPassword)
+call updateUserPassword(3, 'password', 'newPassword');
+call updateUserPassword(3, 'newPassword', 'password');
+-- gets the user's security question (userName, email)
+call getSecurityQuestion("iwilson", null);
+call getSecurityQuestion(null, "iw1234@gmail.com");
+call getSecurityQuestion(null, null);
+-- updates a user's password using (userID, securityAnswer, newPassword) and unlocks the account
+call recoverUserPassword(3, 'answer', 'password');
+call recoverUserPassword(3, 'wrongAnswer', 'apassword');
+-- Unlocks the account for the provided ID
+call unlockAccount(3);
+
+-- Checks whether the user is an admin (TeacherID)
+call checkYourAdminPrivelege(1);
+call checkYourSiteAdminPrivelege(1);
+
+-- login to an account (userName, password)
 call login('iwilson','');
 -- Successfull Login
 call login('iwilson', 'password');
@@ -17,13 +46,17 @@ call login('iwilson', "abFFF");
 
 call login('user', 'e9b3c904a0b80fcf5674061e57f1c7d6539c9393ec7b404b136a0b216a67d037');
 
+-- Generates a new authentication token for a user (userID)
 call generateToken(6);
 
+-- Verifies whether an email is in use (email)
 call checkEmail("ianwilson1337@gmail.com");
-
+-- Verifies whether a userName is in use (userName)
 call checkUserName("iwilson");
 
 call authenticate((select token from Tokens where user_id=1));
+-- gets the account information for a user (userName, password)
+call getAccountDetails('iwilson','password');
 
 call createClass("Title", "fa", 1, DATE(NOW()), DATE_ADD(NOW(), INTERVAL 2 MONTH));
 call updateClass(1, "Title updated", "fa", DATE(NOW()), DATE_ADD(NOW(), INTERVAL 2 MONTH));
@@ -33,16 +66,27 @@ Update Tokens set ExpirationDate = NOW() where user_id = 1;
 
 call createStudent(1, "John Doe", "mail@mail.com");
 call createStudent(1, "Jane Doe", "jane@mail.com");
+-- Updates the details of a student (studentID, studentName, studentEmail, TeacherID)
+call updateStudent(1, "pupil", "email@mail.com", 1);
 
+-- Checks if a student email is in use (email)
 call checkStudentEmail("mail@mail.com");
+-- Changes a student's status (teacherId, studentId, newStatus) 
+call changeStudentStatus(1, 4, 1);
+call changeStudentStatus(3, 1, 0);
 
 -- get all classes for given (UserID)
 call getClasses(3);
+-- get all classes for a given (GroupID)
+call getClassesByGroup(1);
 
 call getStudentCount(3);
+-- Searches for active students based on (searchString, TeacherID) Teacher ID is used to find group
+call getStudent("joh", 1);
+-- gets all the students for a provided (groupID)
+call getStudentsByGroup(1);
 
-call getStudent("joh");
-
+-- gets all students for a provided (classID)
 call getStudents(3);
 
 call enrollStudent(3,1);
@@ -63,8 +107,7 @@ call updateAssignmentItem(1, "Updated Title 1", 20, 15);
 -- delete the assignment item and all grades for the given (itemId)
 call deleteAssignmentItem(1);
 
--- Unlocks the account for the provided ID
-call unlockAccount(3);
+
 -- Get the Class details for the classId provided (classId)
 call getClass(31);
 -- Gets the assignment details for the given classId (classId)
