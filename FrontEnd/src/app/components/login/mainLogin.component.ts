@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'main-login',
@@ -30,6 +31,9 @@ import { Component } from '@angular/core';
          </div>
          <div class="card-footer">
           <div class="row justify-content-center">
+            <div class="col-auto mr-3">
+              <a class="nav-link" href="#" (click)="recoverAccount($event)">Forgot Login</a>
+            </div>
             <div class="col-auto">
               <a class="nav-link" href="https://youtu.be/Ev8y-_qyu7w" target="_blank">View Demo <i class="fas fa-external-link-alt"></i></a>
             </div>
@@ -42,6 +46,13 @@ import { Component } from '@angular/core';
 })
 // TODO:: Add a check to see if the user has a valid token, if so route to the home page instead
 export class MainLogin {
-  constructor() {
+  constructor(
+    public router: Router
+  ) {
+  }
+
+  public recoverAccount(event: Event) {
+    event.preventDefault();
+    this.router.navigate(["/recoverAccount"]);
   }
 }

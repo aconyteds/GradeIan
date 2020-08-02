@@ -181,7 +181,7 @@ export class CreateClass implements OnInit {
     if (!!this.deleteTitleMatch) {
       this.classesService.deleteClass(this.classId)
         .subscribe((response: Response) => {
-          if (!!response){
+          if (!!response) {
             this.router.navigate(["/home"]);
           } else {
             // There was a problem deleting the class

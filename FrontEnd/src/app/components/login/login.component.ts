@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { LoginModel } from "./login.model";
@@ -13,13 +13,15 @@ import { PasswordService } from "../../utilities/passwords";
   templateUrl: "./login.template.html"
 })
 
-export class LoginForm {
+export class LoginForm implements OnInit {
   public credentials: Login;
   private userName = "";
   private password = "";
+  private encryptedPassword = "";
   private token: string;
   public response = "success";
   private passwordService: PasswordService = new PasswordService();
+  public rememberMe = false;
   constructor(
     private accountService: AccountService,
     private router: Router
@@ -30,31 +32,44 @@ export class LoginForm {
     this.credentials = new LoginModel(this.userName, this.password);
   }
 
+  public ngOnInit() {
+    this.rememberMe = window.localStorage.getItem("autoLogin") === "true";
+    if (!!this.encryptedPassword && this.rememberMe) {
+      this.login({
+        userName: this.userName,
+        password: this.encryptedPassword
+      });
+    }
+  }
+
   public getCredentials(): void {
     let type = "";
-    if (window.sessionStorage.getItem("userName")) {
-      type = "sessionStorage";
-    } else if (window.localStorage.getItem("userName")) {
+    if (window.localStorage.getItem("userName")) {
       type = "localStorage";
+    } else if (window.sessionStorage.getItem("userName")) {
+      type = "sessionStorage";
     } else {
       return;
     }
 
     this.userName = window[type].getItem("userName");
-    this.password = window[type].getItem("password");
+    this.encryptedPassword = window[type].getItem("loginCredential");
     this.token = window[type].getItem("token");
   }
 
-  public login(): void {
-    console.log("login");
+  public login(loginObject?: any): void {
     window.sessionStorage.setItem("token", null);
     // Call the login service
     if (!this.credentials.userName && !this.credentials.password) { return; }
     // This is where we obfuscate the password
-    this.accountService.login({
-      userName: this.credentials.userName,
-      password: this.passwordService.obfuscatePassword(this.credentials.password)
-    })
+    if (!loginObject) {
+      loginObject = {
+        userName: this.credentials.userName,
+        password: this.passwordService.obfuscatePassword(this.credentials.password)
+      };
+    }
+
+    this.accountService.login(loginObject)
       .subscribe((response) => {
         const token: string = response.token;
         // Token will either come back with a valid token, or a number signifying the error code
@@ -62,14 +77,19 @@ export class LoginForm {
           // Successful login, yay!
           // Store un and pw for subsequent logins during the users session,
           // later they can provide the option to remember through subsequent logins
-          window.sessionStorage.setItem("userName", this.credentials.userName);
-          window.sessionStorage.setItem("password", this.credentials.password);
+          window.sessionStorage.setItem("userName", loginObject.userName);
+          window.sessionStorage.setItem("loginCredential", loginObject.password);
+          if (!!this.rememberMe) {
+            window.localStorage.setItem("autoLogin", "true");
+            window.localStorage.setItem("userName", loginObject.userName);
+            window.localStorage.setItem("loginCredential", loginObject.password);
+          } else {
+            window.localStorage.setItem("autoLogin", "false");
+          }
           // Store the Token for credentials used for transactions to the server
           window.sessionStorage.setItem("token", token);
-          if (this.router.url === "/") {
-            // Initial login we want to route the user to the home page
-            this.router.navigate([`/home`]);
-          }
+          // Initial login we want to route the user to the home page
+          this.router.navigate([`/home`]);
         } else {
           // Reset the password back to the original so the form looks right
           if (response.token === "-2") {
@@ -77,6 +97,7 @@ export class LoginForm {
           } else {
             this.response = "failed";
           }
+          window.localStorage.setItem("autoLogin", "false");
         }
       });
   }

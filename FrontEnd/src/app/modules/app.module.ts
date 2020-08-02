@@ -11,6 +11,7 @@ import { AccountService } from "../services/account.service";
 import { ClassesService } from "../services/classes.service";
 import { StudentService } from "../services/students.service";
 import { AssignmentService } from "../services/assignment.service";
+import { RecoverAccountService } from "../components/recoverAccount/recoverAccount.services";
 //
 // //Route Components
 import { RouteModule } from "./router.module";
@@ -26,6 +27,7 @@ import { StudentsView } from "../components/students/studentsView.component";
 import { AddStudent } from "../components/students/addStudent.component";
 import { AssignmentView } from "../components/assignments/assignmentView.component";
 import { AssignmentList } from "../components/assignments/assignmentList.component";
+import { RecoverAccountComponent } from "../components/recoverAccount/recoverAccount.component";
 
 // Directives
 
@@ -50,13 +52,15 @@ import { AssignmentList } from "../components/assignments/assignmentList.compone
     AddStudent,
     StudentsView,
     AssignmentView,
-    AssignmentList
+    AssignmentList,
+    RecoverAccountComponent
   ],
   providers: [
     AccountService,
     ClassesService,
     StudentService,
-    AssignmentService
+    AssignmentService,
+    RecoverAccountService
   ],
   bootstrap: [
     // TitleComponent,

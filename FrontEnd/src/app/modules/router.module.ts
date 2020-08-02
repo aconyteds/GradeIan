@@ -10,12 +10,20 @@ import { UserDashboard } from "../components/dashboard.component";
 // import { StudentsView } from "../components/students/studentsView.component";
 import { ViewClass } from "../components/class/viewClass.component";
 // import { AssignmentView } from "../components/assignments/assignmentView.component";
+import { RecoverAccountComponent } from "../components/recoverAccount/recoverAccount.component";
 
 const appRoutes: Routes = [
   {
     path: "",
     pathMatch: "full",
     component: MainLogin
+  }, {
+    path: "login",
+    component: MainLogin
+  }, {
+    path: "recoverAccount",
+    pathMatch: "full",
+    component: RecoverAccountComponent
   }, {
     path: "home",
     pathMatch: "full",
@@ -50,9 +58,6 @@ const appRoutes: Routes = [
   }, */ {
     path: "**",
     redirectTo: ""
-  }, {
-    path: "login",
-    component: MainLogin
   }
 ];
 

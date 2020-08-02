@@ -19,10 +19,10 @@ export class Authentication {
   public authenticateValidation<T>( operation = 'operation') {
     return (error: any) => {
       if (error.status === 401) {
-        if (window.sessionStorage.getItem("userName") && window.sessionStorage.getItem("password")) {
+        if (window.sessionStorage.getItem("userName") && window.sessionStorage.getItem("loginCredential")) {
           const creds: Login = {
             userName: window.sessionStorage.getItem("userName"),
-            password: window.sessionStorage.getItem("password")
+            password: window.sessionStorage.getItem("loginCredential")
           };
           return this.login(creds).pipe(tap((response) => {
             if (helpers.validateToken(response.token)) {

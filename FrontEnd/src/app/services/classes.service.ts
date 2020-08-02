@@ -75,7 +75,7 @@ export class ClassesService extends Authentication {
   public deleteClass(classIdentifier: number): Observable<any> {
     const data = {
       token: window.sessionStorage.getItem("token"),
-      classId:classIdentifier
+      classId: classIdentifier
     };
 
     return this.http.post<Response>(this.urls.deleteClass, JSON.stringify(data))

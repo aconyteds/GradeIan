@@ -6,8 +6,9 @@ export class AccountUrls {
   public checkEmail: string = baseUrl + "/account/checkEmail.php";
   public getSecurityQuestions: string = baseUrl + "/account/getSecurityQuestions.php";
   public createAccount: string = baseUrl + "/account/create.php";
-
   public getUserDetails: string = baseUrl + "/account/getUserDetails.php";
+  public getSecurityQuestion: string = baseUrl + "/account/getSecurityQuestion.php";
+  public recoverAccount: string = baseUrl + "/account/recoverAccount.php";
 }
 
 export class AuthenticationUrls {

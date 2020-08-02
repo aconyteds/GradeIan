@@ -1,0 +1,90 @@
+<div class="recover-account-container">
+  <div class="col col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+    <div class="card mt-3 shadow">
+      <div class="card-header ">
+        <div class="col text-center">
+          <h1>Account Recovery</h1>
+        </div>
+      </div>
+      <div class="card-body">
+        <form class="form-horizontal" #recoverAccountForm="ngForm">
+          <section *ngIf="user.userId === null" class="col">
+            <p>Please provide either your username or the email you used to create your account.</p>
+            <div class="row mt-3">
+              <div class="col">
+                <div class="form-group">
+                  <label class="control-label" for="userName">User Name</label>
+                  <input id="userName" type="text" name="userName" max-length="25" class="form-control" [(ngModel)]="user.userName" (keyup)="providedUserNameorEmail()">
+                </div>
+              </div>
+            </div>
+            <div clas="row mt-3">
+              <div class="col text-center">
+                <h2> - OR - </h2>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col">
+                <div class="form-group">
+                  <label class="control-label" for="userEmail">User email</label>
+                  <input id="userEmail" type="email" name="email" max-length="100" class="form-control" [(ngModel)]="user.userEmail" (keyup)="providedUserNameorEmail()">
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3" *ngIf="!foundAccount">
+              <div class="col">
+                <div class="alert alert-danger">No account was found matching the information above.</div>
+              </div>
+            </div>
+          </section>
+          <section *ngIf="user.userId !== null && !recovered" class="col">
+            <p>You account's user name is <strong>"{{user.userName}}"</strong>.Please provide an answer to the security Question and a new password.</p>
+            <div class="form-group">
+              <label class=" control-label" for="securityAnswer"><h3>{{user.securityQuestion}}</h3></label>
+              <input class="form-control" type="text" id="securityAnswer" placeholder="Answer the question above" [(ngModel)]="user.securityAnswer"  name="securityAnswer" required #securityAnswer="ngModel" maxlength="150" (keyup)="readyToRecover()">
+              <div [hidden]="correctAnswer" class="alert alert-danger">The answer you provided does not match our records, please try again.</div>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="password">Password:</label>
+              <input class="form-control" type="password" id="password" placeholder="Password" (keyup)="checkPasswordStrength(user.password); readyToRecover()"
+               [(ngModel)]="user.password"
+               pattern="(?=^.{8,20}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$"  name="password" required #password="ngModel" maxlength="20">
+               <div [hidden]="user.password != ''" class="alert alert-info">8 to 20 characters; include Upper, Lower, Numeric, and Special characters.</div>
+               <div class="row password-strength" [hidden]="user.password == ''">
+                 <span>Strength</span>
+                 <div class="col-6">
+                   <meter min="0" max="4" [value]="passwordStrength" class="password-meter"></meter>
+                 </div>
+               </div>
+            </div>
+            <div class="form-group">
+              <label class=" control-label" for="confirmPW">Confirm Password:</label>
+              <input class="form-control" type="password" id="confirmPW" placeholder="Confirm Password" [(ngModel)]="confirmPassword" name="confirmPW" pattern="{{user.password}}" required maxlength="20" (keyup)="readyToRecover()">
+            </div>
+          </section>
+          <section *ngIf="!!recovered" class="col">
+            <h2 class="text-center">Congratulations!</h2>
+            <p>You have successfully recovered your account! Click the button below to login using your username and new password.</p>
+          </section>
+        </form>
+      </div>
+      <div class="card-footer">
+        <section *ngIf="user.userId === null"  class="row justify-content-center mt-3">
+          <div class="col-auto">
+            <button class="btn btn-success" (click)="getSecurityQuestion()" [disabled]="!userInputProvided"><i class="fas fa-user-lock"></i> Recover Account</button>
+          </div>
+        </section>
+        <section *ngIf="user.userId !== null && !recovered" class="row justify-content-center">
+          <div class="col-auto">
+            <button class="btn btn-success" [disabled]="!userIsReadyToRecover" (click)="recoverUserAccount()"><i class="fas fa-unlock"></i> Update Password</button>
+          </div>
+        </section>
+        <section *ngIf="!!recovered" class="row justify-content-center">
+          <div class="col-auto">
+            <button class="btn btn-success" (click)="login()"><i class="far fa-hand-point-right"></i> Proceed to login</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
