@@ -12,9 +12,9 @@ export class UpdateUserModel implements User {
 }
 
 export class UpdatePasswordModel implements User {
-  public newPassword!: string;
   constructor(
     public userId: number,
-    public password?: string
+    public password?: string,
+    public newPassword?: string
   ) {}
 }

@@ -21,6 +21,10 @@ import { PasswordService } from "../../utilities/passwords";
       flex-direction: column;
       justify-content: center;
     }
+    .password-strength{
+      margin-top:5px;
+      margin-left:15px;
+    }
     `
   ],
   templateUrl: "./recoverAccount.template.html"

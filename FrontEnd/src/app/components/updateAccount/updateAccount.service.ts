@@ -30,4 +30,9 @@ export class UpdateAccountService extends Authentication {
     return this.http.post<Response>(this.urls.updateUserAccount, JSON.stringify(updatedUserObject))
       .pipe(catchError(this.authenticateValidation('updateUserAccount')));
   }
+
+  public updateUserPassword(updatedUserObject: UpdatePasswordModel): Observable<any> {
+    return this.http.post<Response>(this.urls.updateUserPassword, JSON.stringify(updatedUserObject))
+      .pipe(catchError(this.authenticateValidation('updateUserPassword')));
+  }
 }

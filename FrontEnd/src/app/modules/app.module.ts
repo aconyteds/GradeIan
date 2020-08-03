@@ -30,6 +30,7 @@ import { AssignmentView } from "../components/assignments/assignmentView.compone
 import { AssignmentList } from "../components/assignments/assignmentList.component";
 import { RecoverAccountComponent } from "../components/recoverAccount/recoverAccount.component";
 import { UpdateAccountComponent } from "../components/updateAccount/updateAccount.component";
+import { UpdatePasswordComponent } from "../components/updateAccount/updatePassword.component";
 
 // Directives
 
@@ -56,7 +57,8 @@ import { UpdateAccountComponent } from "../components/updateAccount/updateAccoun
     AssignmentView,
     AssignmentList,
     RecoverAccountComponent,
-    UpdateAccountComponent
+    UpdateAccountComponent,
+    UpdatePasswordComponent
   ],
   providers: [
     AccountService,

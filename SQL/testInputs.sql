@@ -24,7 +24,7 @@ call createAccount('Clarice', 'Hannibal', 'c@FBI.gov', 'answer', 2, 'cHanny', 'p
 -- Updates a user account (userID, FirstName, LastName, emailAddress, SecurityAnswer, SecurityQuestion)
 call updateAccount(3, "Bruce", "Wayne", "bwayne@wayne.org", "changedAnswer", 2);
 call updateAccount(3, "Ian", "Wilson", "iw1234@gmail.com", "answer", 1);
--- Updates a user's password (userID, securityAnswer, newPassword)
+-- Updates a user's password (userID, oldPassword, newPassword)
 call updateUserPassword(3, 'password', 'newPassword');
 call updateUserPassword(3, 'newPassword', 'password');
 -- gets the user's security question (userName, email)
