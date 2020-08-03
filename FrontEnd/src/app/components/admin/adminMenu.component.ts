@@ -11,6 +11,7 @@ import { AdminService } from "./admin.service";
 
 export class AdminMenuComponent implements OnInit {
   public activeNavigation: string;
+  private authFailed = false;
   private userId!: number;
   public fullName = "";
   public isAdmin = false;
@@ -22,25 +23,35 @@ export class AdminMenuComponent implements OnInit {
   ) {}
 
   public ngOnInit() {
+    this.getUserDetails();
     this.updateActiveNavigation(this.router.url);
     this.router.events.subscribe((event: RouterEvent) => {
       if (event instanceof NavigationEnd) {
         this.updateActiveNavigation(event.urlAfterRedirects);
+        if (!this.userId) {
+          this.getUserDetails();
+        }
       }
     });
-    this.getUserDetails();
   }
 
   private getUserDetails() {
-    this.adminService.getUserDetails()
-      .subscribe((response: any) => {
-        if (!!response.userId) {
-          this.userId = parseInt(response.userId, 10);
-          this.fullName = response.firstName + " " + response.lastName;
-        } else {
-          // Authentication Failed
-        }
-      });
+    if (!!window.sessionStorage.getItem("token")) {
+      this.adminService.getUserDetails()
+        .subscribe((response: any) => {
+          if (!!response.userId) {
+            this.userId = parseInt(response.userId, 10);
+            this.fullName = response.firstName + " " + response.lastName;
+          } else {
+            if (this.authFailed) {
+              this.logout();
+            } else {
+              this.authFailed = true;
+              setTimeout(() => { this.getUserDetails(); }, 2500);
+            }
+          }
+        });
+    }
   }
 
   private updateActiveNavigation(navigationString: string) {
@@ -67,5 +78,14 @@ export class AdminMenuComponent implements OnInit {
   public updatePassword(event: Event) {
     event.preventDefault();
     this.router.navigate(["/admin/updatePassword"]);
+  }
+
+  public logout(event?: Event) {
+    if (!!event) {
+      event.preventDefault();
+    }
+    window.sessionStorage.clear();
+    window.localStorage.clear();
+    this.router.navigate(["/login"]);
   }
 }
