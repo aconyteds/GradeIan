@@ -13,6 +13,7 @@ import { StudentService } from "../services/students.service";
 import { AssignmentService } from "../services/assignment.service";
 import { RecoverAccountService } from "../components/recoverAccount/recoverAccount.services";
 import { UpdateAccountService } from "../components/updateAccount/updateAccount.service";
+import { AdminService } from "../components/admin/admin.service";
 //
 // //Route Components
 import { RouteModule } from "./router.module";
@@ -31,6 +32,8 @@ import { AssignmentList } from "../components/assignments/assignmentList.compone
 import { RecoverAccountComponent } from "../components/recoverAccount/recoverAccount.component";
 import { UpdateAccountComponent } from "../components/updateAccount/updateAccount.component";
 import { UpdatePasswordComponent } from "../components/updateAccount/updatePassword.component";
+import { AdminComponent } from "../components/admin/admin.component";
+import { AdminMenuComponent } from "../components/admin/adminMenu.component";
 
 // Directives
 
@@ -58,7 +61,9 @@ import { UpdatePasswordComponent } from "../components/updateAccount/updatePassw
     AssignmentList,
     RecoverAccountComponent,
     UpdateAccountComponent,
-    UpdatePasswordComponent
+    UpdatePasswordComponent,
+    AdminComponent,
+    AdminMenuComponent
   ],
   providers: [
     AccountService,
@@ -66,14 +71,16 @@ import { UpdatePasswordComponent } from "../components/updateAccount/updatePassw
     StudentService,
     AssignmentService,
     RecoverAccountService,
-    UpdateAccountService
+    UpdateAccountService,
+    AdminService
   ],
   bootstrap: [
     // TitleComponent,
     // MenuComponent,
     // SearchComponent,
     // AvatarComponent,
-    ContentComponent
+    ContentComponent,
+    AdminMenuComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

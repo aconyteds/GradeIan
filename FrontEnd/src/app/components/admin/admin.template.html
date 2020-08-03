@@ -1,0 +1,45 @@
+<div class="col">
+  <div class="row justify-content-center">
+    <div class="col col-lg-8">
+      <div class="row">
+        <div class="d-none d-md-block col-4 col-lg-3 text-right border-right">
+          <div class="row">
+            <div class="col pt-2">
+              <h3>Admin Tools</h3>
+            </div>
+          </div>
+          <hr/>
+          <div class="row">
+            <div class="col">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link" [ngClass]="activeNavigation === 'account'? 'active': ''" href="#" (click)="updateAccount($event)">Update Account</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" [ngClass]="activeNavigation === 'password'? 'active': ''" href="#" (click)="updatePassword($event)">Update Password</a>
+                </li>
+                <div *ngIf="isAdmin || isSiteAdmin">
+                  <div class="dropdown-divider"></div>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" href="#">View Users</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" href="#">View Students</a>
+                  </li>
+                </div>
+                <div *ngIf="isSiteAdmin">
+                  <div class="dropdown-divider"></div>
+                  <li *ngIf="isSiteAdmin" class="nav-item">
+                    <a class="nav-link disabled" href="#">License Admin</a>
+                  </li>
+                </div>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col justify-content-center">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+  </div>
+</div>

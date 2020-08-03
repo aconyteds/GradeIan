@@ -59,12 +59,10 @@ export class UpdateAccountComponent implements OnInit {
         } else {
           this.user = null;
         }
-        console.log(response);
       });
   }
 
   public updateUserAccount() {
-    console.log(this.user);
     this.updateAccountService.updateUserAccount(this.user)
       .subscribe((response: any) => {
         if (response.response === "1") {

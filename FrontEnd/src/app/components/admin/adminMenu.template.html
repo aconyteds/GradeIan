@@ -1,0 +1,28 @@
+<div class="col-auto">
+  <div class="row">
+    <div class="col d-none d-lg-flex">
+      <div class="row text-right">
+        <div class="col-12" *ngIf="fullName !== ''">
+          Welcome <strong>{{fullName}}</strong>!
+        </div>
+        <div class="col-12">
+          {{getDateDisplay()}}
+        </div>
+      </div>
+    </div>
+    <div class="col-auto dropdown">
+      <button type="button" class="btn btn-primary dropdown-toggle" id="adminDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Admin Tools
+      </button>
+      <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="adminDropDown">
+        <a class="dropdown-item" [ngClass]="activeNavigation === 'account'? 'active': ''" href="#" (click)="updateAccount($event)">Update Account</a>
+        <a class="dropdown-item" [ngClass]="activeNavigation === 'password'? 'active': ''" href="#" (click)="updatePassword($event)">Update Password</a>
+        <div *ngIf="isAdmin || isSiteAdmin">
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item disabled" href="#">View Users</a>
+          <a class="dropdown-item disabled" href="#">View Students</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

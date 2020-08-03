@@ -13,6 +13,7 @@ import { ViewClass } from "../components/class/viewClass.component";
 import { RecoverAccountComponent } from "../components/recoverAccount/recoverAccount.component";
 import { UpdateAccountComponent } from "../components/updateAccount/updateAccount.component";
 import { UpdatePasswordComponent } from "../components/updateAccount/updatePassword.component";
+import { AdminComponent } from "../components/admin/admin.component";
 
 const appRoutes: Routes = [
   {
@@ -52,7 +53,12 @@ const appRoutes: Routes = [
     component: CreateClass
   }, {
     path: "admin",
+    component: AdminComponent,
     children: [{
+        path: "",
+        pathMatch: "full",
+        component: UpdateAccountComponent
+      }, {
         path: "updateAccount",
         pathMatch: "full",
         component: UpdateAccountComponent
