@@ -1,9 +1,13 @@
 <?php
   require "../dbConnect.php";
+  require_once "../getParameters.php";
+  $inputs = getParameters(["email", "userId"]);
 
-  $email = $_GET["email"];
-
-  $response = $conn->query("call checkEmail('$email')")->fetch(PDO::FETCH_OBJ);
+  if($inputs->userId) {
+    $response = $conn->query("call checkEmail('$inputs->email', $inputs->userId)")->fetch(PDO::FETCH_OBJ);
+  } else {
+    $response = $conn->query("call checkEmail('$inputs->email', null)")->fetch(PDO::FETCH_OBJ);
+  }
 
   echo json_encode($response);
 

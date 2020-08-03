@@ -9,6 +9,7 @@ export class AccountUrls {
   public getUserDetails: string = baseUrl + "/account/getUserDetails.php";
   public getSecurityQuestion: string = baseUrl + "/account/getSecurityQuestion.php";
   public recoverAccount: string = baseUrl + "/account/recoverAccount.php";
+  public updateUserAccount: string = baseUrl + "/account/updateUserAccount.php";
 }
 
 export class AuthenticationUrls {

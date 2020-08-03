@@ -1,10 +1,11 @@
 export interface User {
-  firstName: string;
-  lastName: string;
-  email: string;
-  securityQuestion: number;
-  securityAnswer: string;
-  userName: string;
+  userId?: number;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  securityQuestion?: number;
+  securityAnswer?: string;
+  userName?: string;
   licenseKey?: string;
   password?: string;
 }

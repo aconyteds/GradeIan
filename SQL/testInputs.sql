@@ -3,15 +3,19 @@ use gradeian;
 -- gets all groups (SiteAdminUserID) - SITE ADMIN ONLY
 call getGroups(4);
 -- gets all users for (SiteAdminUserID, GroupID) - SITE ADMIN ONLY
-call getUsersByGroup(4, 2);
+call getUsersByGroup(1, 2);
 -- gets all licenses for a group (SiteAdminUserID, GroupID) - SITE ADMIN ONLY
 call getGroupLicenses(1, 2);
 -- gets all users for (AdminID) - Group ADMIN only
-call getGroupUsers(4);
+call getGroupUsers(1);
 -- Access Level, Group Name
 call createLicense(3, "Test Group2");
 -- Verifies that a license is legit (License)
 call checkToken('GU3OWEWYJEWMZI2');
+
+-- checks if an email is already in use
+call checkEmail('iw1234@gmail.com', null);
+call checkEmail('iw1234@gmail.com', 3);
 
 -- create a new user Account (firstName, lastName, email, securityAnswer, securityQuestion, userName, password, LicenseKey)
 call createAccount('Ian', 'Wilson', 'iw1234@gmail.com', 'answer', 1, 'iwilson', 'password', 'WRHYJVINMFHNDM2');
@@ -56,7 +60,7 @@ call checkUserName("iwilson");
 
 call authenticate((select token from Tokens where user_id=1));
 -- gets the account information for a user (userName, password)
-call getAccountDetails('iwilson','password');
+call getAccountDetails(3);
 
 call createClass("Title", "fa", 1, DATE(NOW()), DATE_ADD(NOW(), INTERVAL 2 MONTH));
 call updateClass(1, "Title updated", "fa", DATE(NOW()), DATE_ADD(NOW(), INTERVAL 2 MONTH));

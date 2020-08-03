@@ -12,6 +12,7 @@ import { ClassesService } from "../services/classes.service";
 import { StudentService } from "../services/students.service";
 import { AssignmentService } from "../services/assignment.service";
 import { RecoverAccountService } from "../components/recoverAccount/recoverAccount.services";
+import { UpdateAccountService } from "../components/updateAccount/updateAccount.service";
 //
 // //Route Components
 import { RouteModule } from "./router.module";
@@ -28,6 +29,7 @@ import { AddStudent } from "../components/students/addStudent.component";
 import { AssignmentView } from "../components/assignments/assignmentView.component";
 import { AssignmentList } from "../components/assignments/assignmentList.component";
 import { RecoverAccountComponent } from "../components/recoverAccount/recoverAccount.component";
+import { UpdateAccountComponent } from "../components/updateAccount/updateAccount.component";
 
 // Directives
 
@@ -53,14 +55,16 @@ import { RecoverAccountComponent } from "../components/recoverAccount/recoverAcc
     StudentsView,
     AssignmentView,
     AssignmentList,
-    RecoverAccountComponent
+    RecoverAccountComponent,
+    UpdateAccountComponent
   ],
   providers: [
     AccountService,
     ClassesService,
     StudentService,
     AssignmentService,
-    RecoverAccountService
+    RecoverAccountService,
+    UpdateAccountService
   ],
   bootstrap: [
     // TitleComponent,

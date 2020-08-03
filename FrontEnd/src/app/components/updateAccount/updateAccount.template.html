@@ -1,0 +1,83 @@
+<div class="col col-md-8 offset-md-2  col-lg-6 offset-lg-3 mb-2 mt-2">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title text-center">Update Account</h3>
+    </div>
+    <form *ngIf="!!user" class="form-horizontal card-body" #updateAccountForm="ngForm">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label class=" control-label"><strong>User Name:</strong></label>
+            <input type="text" class="form-control" [value]="userName" disabled="true"/>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label class="control-label" for="firstName">First Name:</label>
+              <input class="form-control" type="text" id="firstName" placeholder="John" [(ngModel)]="user.firstName" required name="firstName" #firstName="ngModel" maxlength="30">
+              <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">A First Name is Required</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label class="control-label" for="lastName">Last Name:</label>
+            <input class="form-control" type="text" id="lastName" placeholder="Doe" [(ngModel)]="user.lastName" required name="lastName" #lastName="ngModel" maxlength="30">
+            <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">A Last Name is Required</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label class=" control-label" for="email">Email:</label>
+            <input class="form-control" type="email" id="email" placeholder="jdoe@mail.com" [(ngModel)]="user.email"  name="email" email
+             required #email="ngModel" (change)="checkEmail()" maxlength="100">
+            <div [hidden]="email.valid || email.pristine" class="alert alert-danger">An email is Required</div>
+            <div [hidden]="!emailInUse" class="alert alert-danger">Email is already in use.</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group" >
+            <label class="control-label" for="securityQuestion">Security Question:</label>
+            <select id="securityQuestion" class='form-control' name="securityQuestion" [(ngModel)]="user.securityQuestion" >
+              <option *ngFor="let question of questions" [value]="question.ID">{{question.Question}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label class=" control-label" for="securityAnswer">Answer:</label>
+            <input class="form-control" type="text" id="securityAnswer" placeholder="Answer the question above" [(ngModel)]="user.securityAnswer"  name="securityAnswer" #securityAnswer="ngModel" maxlength="150">
+          </div>
+        </div>
+      </div>
+      <section *ngIf="!!updateState" class="row">
+        <div class="col">
+          <div *ngIf="updateState === 'success'" class="row">
+            <div class="col alert alert-success">Your account has been successfully updated.</div>
+          </div>
+          <div *ngIf="updateState === 'failure'" class="row">
+            <div class="col alert alert-danger">There was a problem saving your new account details, please verify the details and try again.</div>
+          </div>
+        </div>
+      </section>
+      <div class="row justify-content-center">
+        <div class="col-auto">
+          <button type="submit" class="btn btn-success" [disabled]="!updateAccountForm.form.valid" (click)="updateUserAccount()"><i class="fas fa-user-edit"></i> Update Account</button>
+        </div>
+      </div>
+    </form>
+    <div *ngIf="!user" class="card-body">
+      <h4>No User information found</h4>
+    </div>
+
+  </div>
+</div>

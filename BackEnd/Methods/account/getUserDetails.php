@@ -4,9 +4,8 @@
 
   if($userId){
     //userId should now only come from the server
-    $id = $userId;
 
-    $response = $conn->query("SELECT FirstName, LastName, email FROM Users WHERE ID = $id;")->fetch(PDO::FETCH_OBJ);
+    $response = $conn->query("call getAccountDetails($userId)")->fetch(PDO::FETCH_OBJ);
 
     echo json_encode($response);
   }

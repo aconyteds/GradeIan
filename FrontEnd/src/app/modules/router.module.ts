@@ -11,6 +11,7 @@ import { UserDashboard } from "../components/dashboard.component";
 import { ViewClass } from "../components/class/viewClass.component";
 // import { AssignmentView } from "../components/assignments/assignmentView.component";
 import { RecoverAccountComponent } from "../components/recoverAccount/recoverAccount.component";
+import { UpdateAccountComponent } from "../components/updateAccount/updateAccount.component";
 
 const appRoutes: Routes = [
   {
@@ -48,7 +49,17 @@ const appRoutes: Routes = [
     path: "editClass/:id",
     pathMatch: "full",
     component: CreateClass
-  }, /* {
+  }, {
+    path: "admin",
+    children: [
+      {
+        path: "updateAccount",
+        pathMatch: "full",
+        component: UpdateAccountComponent
+      }
+    ]
+  },
+  /* {
     path: "addStudent",
     pathMatch: "full",
     component: StudentsView
