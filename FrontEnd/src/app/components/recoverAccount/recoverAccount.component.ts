@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm, PatternValidator } from "@angular/forms";
 import { Router } from '@angular/router';
 import { RecoverAccountService } from "./recoverAccount.services";
 import { RecoverAccount, RecoverAccountModel } from "./recoverAccount.models";

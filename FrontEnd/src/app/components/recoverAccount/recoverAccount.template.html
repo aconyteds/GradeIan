@@ -8,7 +8,7 @@
       </div>
       <div class="card-body">
         <form class="form-horizontal" #recoverAccountForm="ngForm">
-          <section *ngIf="user.userId === null" class="col">
+          <section [hidden]="user.userId !== null" class="col">
             <p>Please provide either your username or the email you used to create your account.</p>
             <div class="row mt-3">
               <div class="col">
@@ -37,16 +37,16 @@
               </div>
             </div>
           </section>
-          <section *ngIf="user.userId !== null && !recovered" class="col">
-            <p>You account's user name is <strong>"{{user.userName}}"</strong>.Please provide an answer to the security Question and a new password.</p>
+          <section [hidden]="user.userId === null || recovered" class="col">
+            <p>Your user name is <strong>"{{user.userName}}"</strong>. Please provide an answer to the security Question and a new password.</p>
             <div class="form-group">
-              <label class=" control-label" for="securityAnswer"><h3>{{user.securityQuestion}}</h3></label>
+              <label class="control-label" for="securityAnswer"><h3>{{user.securityQuestion}}</h3></label>
               <input class="form-control" type="text" id="securityAnswer" placeholder="Answer the question above" [(ngModel)]="user.securityAnswer"  name="securityAnswer" required #securityAnswer="ngModel" maxlength="150" (keyup)="readyToRecover()">
               <div [hidden]="correctAnswer" class="alert alert-danger">The answer you provided does not match our records, please try again.</div>
             </div>
             <div class="form-group">
-              <label class="control-label" for="password">Password:</label>
-              <input class="form-control" type="password" id="password" placeholder="Password" (keyup)="checkPasswordStrength(user.password); readyToRecover()"
+              <label class="control-label" for="password">New Password:</label>
+              <input class="form-control" type="password" id="password" placeholder="New Password" (keyup)="checkPasswordStrength(user.password); readyToRecover();"
                [(ngModel)]="user.password"
                pattern="(?=^.{8,20}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$"  name="password" required #password="ngModel" maxlength="20">
                <div [hidden]="user.password != ''" class="alert alert-info">8 to 20 characters; include Upper, Lower, Numeric, and Special characters.</div>
@@ -58,13 +58,15 @@
                </div>
             </div>
             <div class="form-group">
-              <label class=" control-label" for="confirmPW">Confirm Password:</label>
-              <input class="form-control" type="password" id="confirmPW" placeholder="Confirm Password" [(ngModel)]="confirmPassword" name="confirmPW" pattern="{{user.password}}" required maxlength="20" (keyup)="readyToRecover()">
+              <label class=" control-label" for="confirmPW">Confirm New Password:</label>
+              <input class="form-control" type="password" id="confirmPW" placeholder="Confirm New Password" [(ngModel)]="confirmPassword" name="confirmPW" pattern="{{user.password}}" required maxlength="20" (keyup)="readyToRecover()">
             </div>
           </section>
           <section *ngIf="!!recovered" class="col">
-            <h2 class="text-center">Congratulations!</h2>
-            <p>You have successfully recovered your account! Click the button below to login using your username and new password.</p>
+            <div class="alert alert-success">
+              <h2 class="text-center">Congratulations!</h2>
+              <p>You have successfully recovered your account! Click the button below to login using your username and new password.</p>
+            </div>
           </section>
         </form>
       </div>
@@ -76,7 +78,7 @@
         </section>
         <section *ngIf="user.userId !== null && !recovered" class="row justify-content-center">
           <div class="col-auto">
-            <button class="btn btn-success" [disabled]="!userIsReadyToRecover" (click)="recoverUserAccount()"><i class="fas fa-unlock"></i> Update Password</button>
+            <button class="btn btn-success" [disabled]="!userIsReadyToRecover && !recoverAccountForm.form.valid" (click)="recoverUserAccount()"><i class="fas fa-unlock"></i> Update Password</button>
           </div>
         </section>
         <section *ngIf="!!recovered" class="row justify-content-center">

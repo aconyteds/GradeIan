@@ -52,12 +52,10 @@ export class UpdatePasswordComponent implements OnInit {
         } else {
           this.user = null;
         }
-        console.log(response);
       });
   }
 
   public updateUserPassword() {
-    console.log(this.user);
     if (this.user.newPassword !== ""  && this.user.password !== ""
     && this.user.newPassword === this.confirmPassword) {
       const userSubmission = new UpdatePasswordModel(
@@ -68,7 +66,6 @@ export class UpdatePasswordComponent implements OnInit {
 
       this.updateAccountService.updateUserPassword(userSubmission)
         .subscribe((response: any) => {
-          console.log(response);
           if (response.response !== "0" && response.response !== "-1") {
             // Success
             this.updateState = "success";
