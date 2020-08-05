@@ -12,11 +12,11 @@
     </div>
     <div class="col-auto dropdown">
       <button type="button" class="btn btn-primary dropdown-toggle" id="adminDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Admin Tools
+        <i class="fas fa-tools"></i> Admin Tools
       </button>
       <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="adminDropDown">
-        <a class="dropdown-item" [ngClass]="activeNavigation === 'account'? 'active': ''" href="#" (click)="updateAccount($event)">Update Account</a>
-        <a class="dropdown-item" [ngClass]="activeNavigation === 'password'? 'active': ''" href="#" (click)="updatePassword($event)">Update Password</a>
+        <a class="dropdown-item" [ngClass]="activeNavigation === 'account'? 'active': ''" href="#" (click)="updateAccount($event)"><i class="fas fa-user-edit"></i> Update Account</a>
+        <a class="dropdown-item" [ngClass]="activeNavigation === 'password'? 'active': ''" href="#" (click)="updatePassword($event)"><i class="fas fa-user-lock"></i> Update Password</a>
         <div *ngIf="isAdmin || isSiteAdmin">
           <div class="dropdown-divider"></div>
           <a class="dropdown-item disabled" href="#">View Users</a>

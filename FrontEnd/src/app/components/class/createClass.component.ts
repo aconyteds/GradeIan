@@ -56,7 +56,7 @@ export class CreateClass implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.classData = new ClassModel("", this.icons[0], this.now(), this.now(), window.sessionStorage.getItem("token"));
+    this.classData = new ClassModel("", this.icons[0], 75, this.now(), this.now(), window.sessionStorage.getItem("token"));
   }
 
   public ngOnInit() {
@@ -73,6 +73,7 @@ export class CreateClass implements OnInit {
       if (!!classDetails.response) {
         const responseObject = new ClassDetailModel(parseInt(classDetails.ID, 10),
           {
+            minPassing: parseInt(classDetails.classData.minPassing, 10),
             classTitle: classDetails.classData.classTitle,
             classIcon: classDetails.classData.classIcon,
             startDate: classDetails.classData.startDate,

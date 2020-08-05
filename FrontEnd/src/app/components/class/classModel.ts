@@ -4,6 +4,7 @@ export class ClassModel implements Class {
   constructor(
     public classTitle: string,
     public classIcon: string,
+    public minPassing: number,
     public startDate: string,
     public endDate: string,
     public token?: string,

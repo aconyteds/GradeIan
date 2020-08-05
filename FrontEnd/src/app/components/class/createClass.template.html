@@ -36,6 +36,15 @@
                   </div>
                 </div>
               </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label class="control-label" for="minPass">Minimum Passing Grade:</label>
+                    <input class="form-control" type="number" id="minPass" required [(ngModel)]="classData.minPassing" name="minPassing" #minPassing="ngModel" min="0" max="100" maxLegth="3" pattern="^0*(?:[1-9][0-9]?|100)$">
+                    <div [hidden]="minPassing.valid || minPassing.pristine" class="alert alert-danger">Please provide a number between 0 and 100 for the minimum passing grade.</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </form>
         </div>

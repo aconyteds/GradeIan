@@ -79,6 +79,8 @@ export class ClassGrades implements OnInit {
   public roster: Student [];
   @Input()
   public assignments: AssignmentItem [];
+  @Input()
+  public minPassing = 75;
   public gradeBook: GradeBookItem[];
   public allGrades: Grade[];
   public autoSave = true;
@@ -276,15 +278,7 @@ export class ClassGrades implements OnInit {
   }
 
   public getGradeColor(grade: number): string {
-    if ( grade < 75) {
-      return "bg-danger";
-    } else if ( grade < 80 ) {
-      return "bg-warning";
-    } else if ( grade < 90 ) {
-      return "bg-info";
-    } else {
-      return "bg-success";
-    }
+    return helpers.getGradeColor(grade, this.minPassing);
   }
 
   public getPendingGrades(): Grade[] {

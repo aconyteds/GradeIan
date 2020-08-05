@@ -41,7 +41,7 @@
                     <label class="col-7">Progress</label>
                     <span class="class-progress col-5 text-center">{{classData.classProgress}}%</span>
                   </li>
-                  <li class="row text-white" [ngClass]="getGradeColoration(classData.classAverage)">
+                  <li class="row text-white" [ngClass]="getGradeColoration(classData.classAverage, classData.minPassing)">
                     <label class="col-7">Average</label>
                     <span class="class-average col-5 text-center">{{classData.classAverage}}%</span>
                   </li>

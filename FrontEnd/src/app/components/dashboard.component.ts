@@ -90,16 +90,8 @@ export class UserDashboard implements OnInit {
     }
   }
 
-  public getGradeColoration(average: number): string {
-    if (average < 75) {
-      return "bg-danger";
-    } else if (average < 80) {
-      return "bg-warning";
-    } else if (average < 90) {
-      return "bg-info";
-    } else {
-      return "bg-success";
-    }
+  public getGradeColoration(average: number, minPassing: number): string {
+    return helpers.getGradeColor(average, minPassing);
   }
 
   public changeClassVisibility(value: string) {

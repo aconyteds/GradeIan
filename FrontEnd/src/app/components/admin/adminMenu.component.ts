@@ -43,9 +43,7 @@ export class AdminMenuComponent implements OnInit {
             this.userId = parseInt(response.userId, 10);
             this.fullName = response.firstName + " " + response.lastName;
           } else {
-            if (this.authFailed) {
-              this.logout();
-            } else {
+            if (!this.authFailed) {
               this.authFailed = true;
               setTimeout(() => { this.getUserDetails(); }, 2500);
             }

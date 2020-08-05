@@ -37,3 +37,17 @@ export function getContextualDateInformation(startDate: string, endDate: string)
 
   return returnString;
 }
+
+export function getGradeColor(grade, minPassing): string {
+  const passingGrades = 100 - minPassing;
+  const sections = Math.round(passingGrades / 3);
+  if ( grade < minPassing) {
+    return "bg-danger";
+  } else if ( grade < (100 - (sections * 2))) {
+    return "bg-warning";
+  } else if ( grade < (100 - sections)) {
+    return "bg-info";
+  } else {
+    return "bg-success";
+  }
+}
