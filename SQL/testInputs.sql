@@ -62,8 +62,8 @@ call authenticate((select token from Tokens where user_id=1));
 -- gets the account information for a user (userName, password)
 call getAccountDetails(3);
 
-call createClass("Title", "fa", 1, DATE(NOW()), DATE_ADD(NOW(), INTERVAL 2 MONTH));
-call updateClass(1, "Title updated", "fa", DATE(NOW()), DATE_ADD(NOW(), INTERVAL 2 MONTH));
+call createClass("Title", "fa", 1, DATE(NOW()), DATE_ADD(NOW(), INTERVAL 2 MONTH), 60);
+call updateClass(1, "Title updated", "fa", DATE(NOW()), DATE_ADD(NOW(), INTERVAL 2 MONTH), 60);
 call deleteClass(3);
 
 Update Tokens set ExpirationDate = NOW() where user_id = 1;

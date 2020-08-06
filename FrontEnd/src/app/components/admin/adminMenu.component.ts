@@ -24,6 +24,7 @@ export class AdminMenuComponent implements OnInit {
 
   public ngOnInit() {
     this.getUserDetails();
+    this.checkYourPrivelege();
     this.updateActiveNavigation(this.router.url);
     this.router.events.subscribe((event: RouterEvent) => {
       if (event instanceof NavigationEnd) {
@@ -31,6 +32,18 @@ export class AdminMenuComponent implements OnInit {
         if (!this.userId) {
           this.getUserDetails();
         }
+      }
+    });
+  }
+
+  private checkYourPrivelege() {
+    this.adminService.checkYourPrivelege().subscribe((response: any)  => {
+      if (response.response !== "0") {
+        this.isAdmin = response.groupAdmin === "1";
+        this.isSiteAdmin = response.groupAdmin === "1";
+      } else {
+        this.isAdmin = false;
+        this.isSiteAdmin = false;
       }
     });
   }
@@ -49,6 +62,8 @@ export class AdminMenuComponent implements OnInit {
             }
           }
         });
+    } else {
+      this.router.navigate(["login"]);
     }
   }
 
@@ -70,12 +85,17 @@ export class AdminMenuComponent implements OnInit {
 
   public updateAccount(event: Event) {
     event.preventDefault();
-    this.router.navigate(["/admin/updateAccount"]);
+    this.router.navigate(["admin/updateAccount"]);
   }
 
   public updatePassword(event: Event) {
     event.preventDefault();
-    this.router.navigate(["/admin/updatePassword"]);
+    this.router.navigate(["admin/updatePassword"]);
+  }
+
+  public viewUsers(event: Event) {
+    event.preventDefault();
+    this.router.navigate(["admin/groupUsers"]);
   }
 
   public logout(event?: Event) {

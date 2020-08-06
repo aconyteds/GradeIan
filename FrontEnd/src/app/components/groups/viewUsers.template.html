@@ -1,0 +1,111 @@
+<div class="col mt-2">
+  <div *ngIf="groupUsers.length > 0">
+    <section class="d-none d-lg-block table-responsive ">
+      <table class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col-auto"><div class="text-center">#</div></th>
+            <th scope="col">User Name</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col-auto"><div class="text-center">Lock Status</div></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let groupUser of groupUsers; index as indx">
+            <th scope="row" class="text-center">{{indx + 1}}</th>
+            <td>{{groupUser.userName}}</td>
+            <td>{{groupUser.firstName}}</td>
+            <td>{{groupUser.lastName}}</td>
+            <td>{{groupUser.email}}</td>
+            <td class="text-center">
+              <span *ngIf="!groupUser.locked" class="fas fa-lock-open text-success"></span>
+              <span *ngIf="groupUser.locked"  class="fas text-danger fa-lock" style="cursor:pointer;" (click)="unlockAccount(groupUser)" title="Click to unlock account"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="d-block d-lg-none">
+      <div class="row">
+        <div class="col">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label for="selectUserDropDown" class="input-group-text">User</label>
+            </div>
+            <select id="selectUserDropDown" class="form-control form-control-lg" [ngModel]="selectedUser" (ngModelChange)="selectUser($event)">
+              <option disabled="true" selected value="">Select a User</option>
+              <option *ngFor="let groupUser of groupUsers;" [ngValue]="groupUser">{{groupUser.email}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2" *ngIf="selectedUser" style="overflow-x:auto;">
+        <div class="col">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item list-group-item-primary text-center">User Details</li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-6">
+                  <strong>User Name:</strong>
+                </div>
+                <div class="col-6">
+                  {{selectedUser.userName}}
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-6">
+                  <strong>First Name:</strong>
+                </div>
+                <div class="col-6">
+                  {{selectedUser.firstName}}
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-6">
+                  <strong>Last Name:</strong>
+                </div>
+                <div class="col-6">
+                  {{selectedUser.lastName}}
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-6">
+                  <strong>Email:</strong>
+                </div>
+                <div class="col-6">
+                  {{selectedUser.email}}
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row justify-content-center">
+                <div class="col-auto">
+                  <button *ngIf="selectedUser.locked" class="btn btn-danger" (click)="unlockAccount(selectedUser)"><i class="fas fa-lock"></i> Account Locked</button>
+                  <span *ngIf="!selectedUser.locked" class="text-success"><i class="fas fa-lock-open"></i> Account Unocked</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row mt-2 justify-content-center" *ngIf="!selectedUser">
+        <div class="col-auto">
+          <h3>No User Selected</h3>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div *ngIf="groupUsers.length < 1">
+    <div class="jumbotron">
+      <h1>Group doesn't have any users</h1>
+    </div>
+  </div>
+</div>

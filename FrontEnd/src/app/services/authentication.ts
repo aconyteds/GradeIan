@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Login, Credential } from "../interfaces";
 import { AuthenticationUrls } from "../config";
-import { tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import * as helpers from "../utilities/helpers";
 
 const httpOptions = {
@@ -10,10 +10,15 @@ const httpOptions = {
 };
 
 export class Authentication {
-  private loginUrl: string = new AuthenticationUrls().login;
+  private loginUrl: AuthenticationUrls = new AuthenticationUrls();
   constructor(public http: HttpClient) { }
   public login(credentials: Login): Observable<Credential> {
-    return this.http.post<Credential>(this.loginUrl, JSON.stringify(credentials));
+    return this.http.post<Credential>(this.loginUrl.login, JSON.stringify(credentials));
+  }
+
+  public checkYourPrivelege(): Observable<any> {
+    return this.http.post<Credential>(this.loginUrl.checkYourPrivelege, JSON.stringify({token: window.sessionStorage.getItem("token")}))
+      .pipe(catchError(this.authenticateValidation('checkYourPrivelege')));
   }
 
   public authenticateValidation<T>( operation = 'operation') {

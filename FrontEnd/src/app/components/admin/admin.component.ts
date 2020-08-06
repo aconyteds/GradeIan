@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent, NavigationEnd } from "@angular/router";
+import { AdminService } from "./admin.service";
 
 @Component({
   selector: 'app-admin',
@@ -18,14 +19,28 @@ export class AdminComponent implements OnInit {
   public isSiteAdmin = false;
   private routes: string[] = ["password", "account", "users", "students", "licenses"];
   constructor(
+    private adminService: AdminService,
     private router: Router
   ) {}
 
   public ngOnInit() {
+    this.checkYourPrivelege();
     this.updateActiveNavigation(this.router.url);
     this.router.events.subscribe((event: RouterEvent) => {
       if (event instanceof NavigationEnd) {
         this.updateActiveNavigation(event.urlAfterRedirects);
+      }
+    });
+  }
+
+  private checkYourPrivelege() {
+    this.adminService.checkYourPrivelege().subscribe((response: any)  => {
+      if (response.response !== "0") {
+        this.isAdmin = response.groupAdmin === "1";
+        this.isSiteAdmin = response.groupAdmin === "1";
+      } else {
+        this.isAdmin = false;
+        this.isSiteAdmin = false;
       }
     });
   }
@@ -47,5 +62,10 @@ export class AdminComponent implements OnInit {
   public updatePassword(event: Event) {
     event.preventDefault();
     this.router.navigate(["/admin/updatePassword"]);
+  }
+
+  public viewUsers(event: Event) {
+    event.preventDefault();
+    this.router.navigate(["admin/groupUsers"]);
   }
 }

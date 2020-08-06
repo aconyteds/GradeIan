@@ -1,6 +1,6 @@
 <div class="col">
   <div class="row justify-content-center">
-    <div class="col col-lg-8">
+    <div class="col col-lg-10 col-xl-8">
       <div class="row">
         <div class="d-none d-md-block col-4 col-lg-3 text-right border-right">
           <div class="row">
@@ -21,7 +21,7 @@
                 <div *ngIf="isAdmin || isSiteAdmin">
                   <div class="dropdown-divider"></div>
                   <li class="nav-item">
-                    <a class="nav-link disabled" href="#">View Users</a>
+                    <a class="nav-link" [ngClass]="activeNavigation === 'users'? 'active': ''" href="#" (click)="viewUsers($event)">View Users</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link disabled" href="#">View Students</a>

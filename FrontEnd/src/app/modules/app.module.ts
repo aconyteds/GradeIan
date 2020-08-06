@@ -14,6 +14,7 @@ import { AssignmentService } from "../services/assignment.service";
 import { RecoverAccountService } from "../components/recoverAccount/recoverAccount.services";
 import { UpdateAccountService } from "../components/updateAccount/updateAccount.service";
 import { AdminService } from "../components/admin/admin.service";
+import { GroupsService } from "../components/groups/groups.service";
 //
 // //Route Components
 import { RouteModule } from "./router.module";
@@ -34,6 +35,7 @@ import { UpdateAccountComponent } from "../components/updateAccount/updateAccoun
 import { UpdatePasswordComponent } from "../components/updateAccount/updatePassword.component";
 import { AdminComponent } from "../components/admin/admin.component";
 import { AdminMenuComponent } from "../components/admin/adminMenu.component";
+import { ViewUsersComponent } from "../components/groups/viewUsers.component";
 
 // Directives
 
@@ -63,7 +65,8 @@ import { AdminMenuComponent } from "../components/admin/adminMenu.component";
     UpdateAccountComponent,
     UpdatePasswordComponent,
     AdminComponent,
-    AdminMenuComponent
+    AdminMenuComponent,
+    ViewUsersComponent
   ],
   providers: [
     AccountService,
@@ -72,7 +75,8 @@ import { AdminMenuComponent } from "../components/admin/adminMenu.component";
     AssignmentService,
     RecoverAccountService,
     UpdateAccountService,
-    AdminService
+    AdminService,
+    GroupsService
   ],
   bootstrap: [
     // TitleComponent,
