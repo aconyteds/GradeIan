@@ -36,6 +36,7 @@ import { UpdatePasswordComponent } from "../components/updateAccount/updatePassw
 import { AdminComponent } from "../components/admin/admin.component";
 import { AdminMenuComponent } from "../components/admin/adminMenu.component";
 import { ViewUsersComponent } from "../components/groups/viewUsers.component";
+import { ViewStudentsComponent } from "../components/groups/viewStudents.component";
 
 // Directives
 
@@ -66,7 +67,8 @@ import { ViewUsersComponent } from "../components/groups/viewUsers.component";
     UpdatePasswordComponent,
     AdminComponent,
     AdminMenuComponent,
-    ViewUsersComponent
+    ViewUsersComponent,
+    ViewStudentsComponent
   ],
   providers: [
     AccountService,

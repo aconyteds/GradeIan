@@ -22,6 +22,15 @@ export class GroupsService extends Authentication {
       .pipe(catchError(this.authenticateValidation('getGroupUsers')));
   }
 
+  public getGroupStudents(groupIdentifier?: number): Observable<any> {
+    const groupData = {
+      token: window.sessionStorage.getItem("token"),
+      groupId: groupIdentifier
+    };
+    return this.http.post<any>(this.urls.getGroupStudents, JSON.stringify(groupData))
+      .pipe(catchError(this.authenticateValidation('getGroupStudents')));
+  }
+
   public unlockAccount(accountIdentifier: number) {
     const unlockRequest = {
       token: window.sessionStorage.getItem("token"),
@@ -29,5 +38,15 @@ export class GroupsService extends Authentication {
     };
     return this.http.post<any>(this.urls.unlockAccount, JSON.stringify(unlockRequest))
       .pipe(catchError(this.authenticateValidation('unlockAccount')));
+  }
+
+  public setStudentStatus(studentIdentifier: number, newStatus: boolean) {
+    const studentStatusUpdate = {
+      token: window.sessionStorage.getItem("token"),
+      studentId: studentIdentifier,
+      status: newStatus ? 1 : 0
+    };
+    return this.http.post<any>(this.urls.setStudentStatus, JSON.stringify(studentStatusUpdate))
+      .pipe(catchError(this.authenticateValidation('setStudentStatus')));
   }
 }

@@ -87,8 +87,9 @@ call getClassesByGroup(1);
 call getStudentCount(3);
 -- Searches for active students based on (searchString, TeacherID) Teacher ID is used to find group
 call getStudent("joh", 1);
--- gets all the students for a provided (groupID)
-call getStudentsByGroup(1);
+-- gets all the students for a provided (TeacherID, GroupID)
+call getStudentsByGroup(1, null);
+call getStudentsByGroup(1, 2);
 
 -- gets all students for a provided (classID)
 call getStudents(3);

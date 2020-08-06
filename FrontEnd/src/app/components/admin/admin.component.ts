@@ -68,4 +68,9 @@ export class AdminComponent implements OnInit {
     event.preventDefault();
     this.router.navigate(["admin/groupUsers"]);
   }
+
+  public viewStudents(event: Event) {
+    event.preventDefault();
+    this.router.navigate(["admin/groupStudents"]);
+  }
 }

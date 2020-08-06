@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterEvent, NavigationEnd } from "@angular/router";
+import { Router } from "@angular/router";
 import { GroupsService } from "./groups.service";
 import { GroupUserModel } from "./groups.models";
 
@@ -13,7 +13,6 @@ import { GroupUserModel } from "./groups.models";
 export class ViewUsersComponent implements OnInit {
   public groupUsers: GroupUserModel[] = [];
   public selectedUser!: GroupUserModel;
-  public activeNavigation: string;
   public isAdmin = false;
   public isSiteAdmin = false;
   constructor(
@@ -59,7 +58,6 @@ export class ViewUsersComponent implements OnInit {
           );
         });
       }
-      console.log(response);
     });
   }
 
@@ -68,7 +66,6 @@ export class ViewUsersComponent implements OnInit {
   }
 
   public unlockAccount(user: GroupUserModel) {
-    console.log(user);
     if (user.locked) {
       this.groupsService.unlockAccount(user.userID).subscribe((response: any) => {
         if (response.response === "1") {

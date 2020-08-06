@@ -41,7 +41,7 @@ export class UpdatePasswordComponent implements OnInit {
   }
 
   public getUserDetails(): void {
-    this.updateAccountService.getUserDetails()
+    this.updateAccountService.getAccountDetails()
       .subscribe((response: any) => {
         if (!!response.userId) {
           this.user = new UpdatePasswordModel(

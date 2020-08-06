@@ -24,7 +24,7 @@
                     <a class="nav-link" [ngClass]="activeNavigation === 'users'? 'active': ''" href="#" (click)="viewUsers($event)">View Users</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link disabled" href="#">View Students</a>
+                    <a class="nav-link" [ngClass]="activeNavigation === 'students'? 'active': ''" href="#" (click)="viewStudents($event)">View Students</a>
                   </li>
                 </div>
                 <div *ngIf="isSiteAdmin">

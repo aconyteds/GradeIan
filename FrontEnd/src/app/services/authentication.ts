@@ -21,6 +21,11 @@ export class Authentication {
       .pipe(catchError(this.authenticateValidation('checkYourPrivelege')));
   }
 
+  public getAccountDetails(): Observable<any> {
+    return this.http.post<Credential>(this.loginUrl.getUserDetails, JSON.stringify({token: window.sessionStorage.getItem("token")}))
+      .pipe(catchError(this.authenticateValidation('getAccountDetails')));
+  }
+
   public authenticateValidation<T>( operation = 'operation') {
     return (error: any) => {
       if (error.status === 401) {

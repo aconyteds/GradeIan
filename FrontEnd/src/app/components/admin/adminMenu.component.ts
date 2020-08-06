@@ -98,6 +98,11 @@ export class AdminMenuComponent implements OnInit {
     this.router.navigate(["admin/groupUsers"]);
   }
 
+  public viewStudents(event: Event) {
+    event.preventDefault();
+    this.router.navigate(["admin/groupStudents"]);
+  }
+
   public logout(event?: Event) {
     if (!!event) {
       event.preventDefault();

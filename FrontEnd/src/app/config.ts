@@ -16,6 +16,7 @@ export class AccountUrls {
 export class AuthenticationUrls {
   public login: string = baseUrl + "/account/login.php";
   public checkYourPrivelege: string = baseUrl + "/account/checkYourPrivelege.php";
+  public getUserDetails: string = baseUrl + "/account/getUserDetails.php";
 }
 
 export class ClassesUrls {
@@ -49,7 +50,9 @@ export class AssignmentUrls {
 
 export class GroupsUrls {
   public getGroupUsers: string = baseUrl + "/admin/getGroupUsers.php";
+  public getGroupStudents: string = baseUrl + "/admin/getGroupStudents.php";
   public unlockAccount: string = baseUrl + "/admin/unlockAccount.php";
+  public setStudentStatus: string = baseUrl + "/admin/setStudentStatus.php";
 }
 
 // Icons available for selection for classes

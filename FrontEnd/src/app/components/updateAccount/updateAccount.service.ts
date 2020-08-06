@@ -21,10 +21,7 @@ export class UpdateAccountService extends Authentication {
   public getSecurityQuestions(): Observable<SecurityQuestion[]> {
     return this.http.get<SecurityQuestion[]>(this.urls.getSecurityQuestions);
   }
-  public getUserDetails(): Observable<any> {
-    return this.http.post<any>(this.urls.getUserDetails, JSON.stringify({ "token": window.sessionStorage.getItem("token") }))
-      .pipe(catchError(this.authenticateValidation('getUserDetails')));
-  }
+
   public updateUserAccount(updatedUserObject: UpdateUserModel): Observable<any> {
     updatedUserObject.token = window.sessionStorage.getItem("token");
     return this.http.post<Response>(this.urls.updateUserAccount, JSON.stringify(updatedUserObject))

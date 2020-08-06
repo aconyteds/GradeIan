@@ -44,7 +44,7 @@ export class UpdateAccountComponent implements OnInit {
   }
 
   public getUserDetails(): void {
-    this.updateAccountService.getUserDetails()
+    this.updateAccountService.getAccountDetails()
       .subscribe((response: any) => {
         if (!!response.userId) {
           this.userId = parseInt(response.userId, 10);

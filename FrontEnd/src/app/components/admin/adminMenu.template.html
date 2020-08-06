@@ -20,7 +20,7 @@
         <div *ngIf="isAdmin || isSiteAdmin">
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" [ngClass]="activeNavigation === 'users'? 'active': ''" href="#" (click)="viewUsers($event)"><i class="fas fa-user-graduate"></i> View Users</a>
-          <a class="dropdown-item disabled" href="#"><i class="fas fa-users"></i> View Students</a>
+          <a class="dropdown-item" [ngClass]="activeNavigation === 'students'? 'active': ''" href="#" (click)="viewStudents($event)"><i class="fas fa-users"></i> View Students</a>
         </div>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#" (click)="logout($event)"><i class="fas fa-sign-out-alt"></i> Logout</a>
