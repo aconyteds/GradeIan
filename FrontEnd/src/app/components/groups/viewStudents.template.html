@@ -2,31 +2,39 @@
   <div class="w-100"></div>
   <app-admin-group-selector (groupChange)="selectGroup($event)"></app-admin-group-selector>
   <div *ngIf="groupStudents.length > 0">
-      <div class="table-responsive" >
-        <table class="table table-striped table-bordered table-hover">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col-auto"><div class="text-center">Active</div></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let groupStudent of groupStudents">
-              <td>{{groupStudent.name}}</td>
-              <td>{{groupStudent.email}}</td>
-              <td class="text-center">
-                <span *ngIf="groupStudent.active" class="fas fa-check text-success" style="cursor:pointer;" (click)="toggleActive(groupStudent)" title="Click to de-activate student"></span>
-                <span *ngIf="!groupStudent.active"  class="fas fa-times text-danger" style="cursor:pointer;" (click)="toggleActive(groupStudent)" title="Click to activate student"></span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div>
+      <input type="text" placeholder="Find Student" class="form-control" #studentFilter [value]="filterString" (keyup)="filterStudents(studentFilter.value)"/>
+    </div>
+    <div class="text-muted p-2">
+      Displaying: {{showingStudents.length}} of {{groupStudents.length}}
+    </div>
+    <div class="table-responsive" *ngIf="showingStudents.length > 0">
+      <table class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col-auto">
+              <div class="text-center">Active</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let groupStudent of showingStudents">
+            <td>{{groupStudent.name}}</td>
+            <td>{{groupStudent.email}}</td>
+            <td class="text-center">
+              <span *ngIf="groupStudent.active" class="fas fa-check text-success" style="cursor:pointer;" (click)="toggleActive(groupStudent)" title="Click to de-activate student"></span>
+              <span *ngIf="!groupStudent.active" class="fas fa-times text-danger" style="cursor:pointer;" (click)="toggleActive(groupStudent)" title="Click to activate student"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <div *ngIf="groupStudents.length < 1">
+  <div *ngIf="showingStudents.length < 1">
     <div class="jumbotron responsive">
-      <h3>Group doesn't have any students</h3>
+      <h3>No student found</h3>
     </div>
   </div>
   <create-student [groupId]="groupId" (rosterSave)="addStudentHandler($event)"></create-student>

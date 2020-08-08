@@ -12,6 +12,9 @@ import { GroupUserModel } from "./groups.models";
 
 export class ViewUsersComponent implements OnInit {
   public groupUsers: GroupUserModel[] = [];
+  public showingUsers: GroupUserModel[] = [];
+  public filterString = "";
+  private searchableFields: string[] = ["email", "firstName", "lastName", "userName"];
   public selectedUser!: GroupUserModel;
   public isAdmin = false;
   public isSiteAdmin = false;
@@ -58,6 +61,7 @@ export class ViewUsersComponent implements OnInit {
             locked
           );
         });
+        this.filterUsers("");
       }
     });
   }
@@ -81,6 +85,18 @@ export class ViewUsersComponent implements OnInit {
       this.groupId = groupId;
       this.getGroupUsers();
       this.selectedUser = null;
+    }
+  }
+
+  public filterUsers(filterString: string) {
+    this.filterString = filterString;
+    if (this.filterString !== "") {
+      this.showingUsers = this.groupUsers.filter((user: GroupUserModel) => {
+        return this.searchableFields.some((field: string) =>
+        user[field] && user[field].toString().toLowerCase().search(this.filterString.toLowerCase()) !== -1);
+      });
+    } else {
+      this.showingUsers = this.groupUsers;
     }
   }
 }

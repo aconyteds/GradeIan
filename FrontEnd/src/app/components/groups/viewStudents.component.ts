@@ -12,6 +12,9 @@ import { GroupStudentModel } from "./groups.models";
 
 export class ViewStudentsComponent implements OnInit {
   public groupStudents: GroupStudentModel[] = [];
+  public showingStudents: GroupStudentModel[] = [];
+  private searchableFields = ["name", "email"];
+  public filterString = "";
   public groupId!: number;
   public isAdmin = false;
   public isSiteAdmin = false;
@@ -52,6 +55,7 @@ export class ViewStudentsComponent implements OnInit {
             groupStudent.email
           );
         });
+        this.filterStudents("");
       }
     });
   }
@@ -82,5 +86,17 @@ export class ViewStudentsComponent implements OnInit {
     });
 
     this.groupStudents = this.groupStudents.concat(formattedStudents);
+  }
+
+  public filterStudents(filterString: string) {
+    this.filterString = filterString;
+    if (this.filterString !== "") {
+      this.showingStudents = this.groupStudents.filter((student: GroupStudentModel) => {
+        return this.searchableFields.some((field: string) =>
+        student[field] && student[field].toString().toLowerCase().search(this.filterString.toLowerCase()) !== -1);
+      });
+    } else {
+      this.showingStudents = this.groupStudents;
+    }
   }
 }
