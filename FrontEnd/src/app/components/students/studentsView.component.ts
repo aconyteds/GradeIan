@@ -34,7 +34,7 @@ import { StudentModel } from "./studentModel";
     </ul>
   </div>
   <add-student (addStudent)="addStudent($event)"></add-student>
-  <create-student class="row" style="margin-bottom:10px;" ></create-student>
+  <create-student class="row" style="margin-bottom:10px;" (rosterSave)="addNewStudents($event)"></create-student>
   `
 })
 
@@ -108,6 +108,12 @@ export class StudentsView implements OnInit {
       this.enrollableStudents.push(student);
     }
     this.withdrawableStudents = this.withdrawableStudents.filter((withdrawableStudent) => student.ID !== withdrawableStudent.ID);
+  }
+
+  public addNewStudents(newStudents: StudentModel[]) {
+    newStudents.forEach((student) => {
+      this.addStudent(student);
+    });
   }
 
   public updateStudents(): Observable<any> {

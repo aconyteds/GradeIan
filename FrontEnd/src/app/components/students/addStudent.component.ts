@@ -43,7 +43,8 @@ import {StudentService} from "../../services/students.service";
 export class AddStudent implements OnInit {
   public searchTerm = new Subject<string>();
   public searchResultCount = 0;
-  @Output() public addStudent: EventEmitter<StudentModel> = new EventEmitter();
+  @Output()
+  public addStudent: EventEmitter<StudentModel> = new EventEmitter();
   public students$: Observable<StudentModel[]>;
   constructor(
     private studentService: StudentService

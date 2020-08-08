@@ -5,8 +5,8 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 @import "./themes/minty/bootstrap.scss";
 $header-bg: #171B20;
 
-body,
-html {
+html,
+body{
   margin: 0;
   padding: 0;
   height: 100%;
@@ -22,12 +22,14 @@ body.gradeian {
   display: table;
   border-collapse: collapse;
   font-family: "Source Code Pro", monospace;
+
   .header{
     border-bottom: 1px solid #333;
   }
 
   .body {
     position: relative;
+
   }
 
   .fa {

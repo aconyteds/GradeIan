@@ -43,7 +43,7 @@ export interface Class {
 export interface Student {
   ID?: number;
   name: string;
-  email: string;
+  email?: string;
 }
 
 export interface AssignmentGroup {

@@ -1,7 +1,7 @@
 use gradeian;
 
 -- gets all groups (SiteAdminUserID) - SITE ADMIN ONLY
-call getGroups(4);
+call getGroups(1);
 -- gets all users for (SiteAdminUserID, GroupID) - SITE ADMIN ONLY
 call getUsersByGroup(1, 2);
 -- gets all licenses for a group (SiteAdminUserID, GroupID) - SITE ADMIN ONLY
@@ -68,8 +68,8 @@ call deleteClass(3);
 
 Update Tokens set ExpirationDate = NOW() where user_id = 1;
 
-call createStudent(1, "John Doe", "mail@mail.com");
-call createStudent(1, "Jane Doe", "jane@mail.com");
+call createStudent(1, "John Doe", "mail@mail.com", null);
+call createStudent(1, "John Doe", null, null);
 -- Updates the details of a student (studentID, studentName, studentEmail, TeacherID)
 call updateStudent(1, "pupil", "email@mail.com", 1);
 

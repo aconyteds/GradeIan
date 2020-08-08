@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import {NgClass} from "@angular/common";
 import {NgForm, PatternValidator, EmailValidator} from "@angular/forms";
 
@@ -34,6 +34,10 @@ import {Student} from "../../interfaces";
 })
 
 export class CreateStudents {
+  @Input()
+  public groupId!: number;
+  @Output()
+  public rosterSave = new EventEmitter();
   @ViewChild("studentName", {read: ElementRef}) public studentName: ElementRef;
   public studentData: StudentModel;
   public students: Student[] = [];
@@ -49,7 +53,7 @@ export class CreateStudents {
     // See if the email is already in the list
     this.students.forEach((student) => {
       // set the validit flag
-      invalid = student.email === this.studentData.email;
+      invalid = student.email !== "" && student.email === this.studentData.email;
       if (invalid) {
         this.invalidEmail = true;
         return;
@@ -79,10 +83,10 @@ export class CreateStudents {
     }
   }
   public addStudent(): void {
-    if (this.studentData.name && this.studentData.email) {
+    if (this.studentData.name) {
       this.students.push({
         name: this.studentData.name,
-        email: this.studentData.email
+        email: this.studentData.email === "" ? null : this.studentData.email
       });
       this.studentData = new StudentModel("", "");
       // Reset the input form so that multiple students can be added quickly
@@ -90,13 +94,17 @@ export class CreateStudents {
     }
   }
   public createStudents() {
-    this.studentService.createStudents(this.students)
+    this.studentService.createStudents(this.students, this.groupId)
       .subscribe((response) => {
         if (!!response.token) {
           // Had to log in again, token expired
           this.createStudents();
         } else if (!!response.students) {
           // Students Created
+          response.students.forEach((studentId: number, indx: number) => {
+            this.students[indx].ID = studentId;
+          });
+          this.rosterSave.emit(this.students.filter((student) => student.ID !== 0));
           // Reset
           this.students = [];
           // Send the student list to the parent handler

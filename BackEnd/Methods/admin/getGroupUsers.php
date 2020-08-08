@@ -7,7 +7,7 @@
   if ($userId) {
     $siteAdmin = $conn->query("call checkYourSiteAdminPrivelege($userId)")->fetch(PDO::FETCH_OBJ)->response;
     if($siteAdmin && $inputs->groupId) {
-      $response = $conn->query("call getUsersByGroup($userId, $groupId)")->fetchAll(PDO::FETCH_OBJ);
+      $response = $conn->query("call getUsersByGroup($userId, $inputs->groupId)")->fetchAll(PDO::FETCH_OBJ);
     } else {
       $response = $conn->query("call getGroupUsers($userId)")->fetchAll(PDO::FETCH_OBJ);
     }

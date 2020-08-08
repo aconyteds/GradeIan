@@ -49,4 +49,9 @@ export class GroupsService extends Authentication {
     return this.http.post<any>(this.urls.setStudentStatus, JSON.stringify(studentStatusUpdate))
       .pipe(catchError(this.authenticateValidation('setStudentStatus')));
   }
+
+  public getGroups() {
+    return this.http.post<any>(this.urls.getGroups, JSON.stringify({token: window.sessionStorage.getItem("token")}))
+      .pipe(catchError(this.authenticateValidation('getGroups')));
+  }
 }

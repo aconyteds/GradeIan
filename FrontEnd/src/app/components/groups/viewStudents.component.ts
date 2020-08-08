@@ -12,8 +12,7 @@ import { GroupStudentModel } from "./groups.models";
 
 export class ViewStudentsComponent implements OnInit {
   public groupStudents: GroupStudentModel[] = [];
-  public selectedStudent!: GroupStudentModel;
-  private groupId!: number;
+  public groupId!: number;
   public isAdmin = false;
   public isSiteAdmin = false;
   constructor(
@@ -42,7 +41,7 @@ export class ViewStudentsComponent implements OnInit {
   }
 
   private getGroupStudents() {
-    this.groupsService.getGroupStudents().subscribe((response: any) => {
+    this.groupsService.getGroupStudents(this.groupId).subscribe((response: any) => {
       if (response !== "0") {
         this.groupStudents = response.map((groupStudent: any) => {
           const active = groupStudent.isActive === "1";
@@ -57,15 +56,31 @@ export class ViewStudentsComponent implements OnInit {
     });
   }
 
-  public selectUser(selectedStudent: GroupStudentModel) {
-    this.selectedStudent = selectedStudent;
-  }
-
   public toggleActive(student: GroupStudentModel) {
     this.groupsService.setStudentStatus(student.studentID, !student.active).subscribe((response: any) => {
       if (response !== "0") {
         student.active = !student.active;
       }
     });
+  }
+
+  public selectGroup(groupId: number) {
+    if (groupId !== this.groupId) {
+      this.groupId = groupId;
+      this.getGroupStudents();
+    }
+  }
+
+  public addStudentHandler(newStudents: any[]) {
+    const formattedStudents = newStudents.map((newStudent: any) => {
+      return new GroupStudentModel(
+        parseInt(newStudent.ID, 10),
+        newStudent.name,
+        true,
+        newStudent.email
+      );
+    });
+
+    this.groupStudents = this.groupStudents.concat(formattedStudents);
   }
 }

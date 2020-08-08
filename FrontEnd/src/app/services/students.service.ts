@@ -16,10 +16,11 @@ export class StudentService extends Authentication {
     super(http);
   }
   // Creates a new Class
-  public createStudents(studentData: Student[]): Observable<any> {
+  public createStudents(studentData: Student[], groupIdentifier: number): Observable<any> {
     const data = {
       token: window.sessionStorage.getItem("token"),
-      students: studentData
+      students: studentData,
+      groupId: groupIdentifier
     };
     return this.http.post<any>(this.urls.createStudents, JSON.stringify(data))
       .pipe(catchError(this.authenticateValidation('createStudents')));

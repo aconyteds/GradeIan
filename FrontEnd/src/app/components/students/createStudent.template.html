@@ -40,7 +40,7 @@
             <div class="form-group row">
               <div class="input-group">
                 <input class="form-control" type="text" id="studentName" aria-label="Student Name" placeholder="Student Name" [(ngModel)]="studentData.name" required name="name" #studentName="ngModel" maxlength="100">
-                <input class="form-control" type="email" id="studentEmail" aria-label="Student Email" placeholder="Student Email" [(ngModel)]="studentData.email" required name="email" #studentEmail="ngModel" maxlength="100" email
+                <input class="form-control" type="email" id="studentEmail" aria-label="Student Email" placeholder="Student Email" [(ngModel)]="studentData.email" name="email" #studentEmail="ngModel" maxlength="100" email
                   (keyup)="checkStudentEmail()">
                 <span class="input-group-append">
                   <button type="submit" class="btn btn-primary" id="addStudentButton" aria-label="Add to list" (click)="addStudent(); createStudentForm.reset();" [disabled]="createStudentForm.invalid || invalidEmail"><i
@@ -48,7 +48,6 @@
                 </span>
               </div>
               <div [hidden]="studentName.valid || studentName.pristine" class="alert alert-danger">Student name is required</div>
-              <div [hidden]="studentEmail.valid || studentEmail.pristine" class="alert alert-danger">Student email is required</div>
               <div [hidden]="!invalidEmail" class="alert alert-danger">Email is already in use</div>
             </div>
           </div>

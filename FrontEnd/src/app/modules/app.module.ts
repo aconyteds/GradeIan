@@ -37,6 +37,7 @@ import { AdminComponent } from "../components/admin/admin.component";
 import { AdminMenuComponent } from "../components/admin/adminMenu.component";
 import { ViewUsersComponent } from "../components/groups/viewUsers.component";
 import { ViewStudentsComponent } from "../components/groups/viewStudents.component";
+import { GroupSelectorComponent } from "../components/groups/groupSelector.component";
 
 // Directives
 
@@ -68,7 +69,8 @@ import { ViewStudentsComponent } from "../components/groups/viewStudents.compone
     AdminComponent,
     AdminMenuComponent,
     ViewUsersComponent,
-    ViewStudentsComponent
+    ViewStudentsComponent,
+    GroupSelectorComponent
   ],
   providers: [
     AccountService,

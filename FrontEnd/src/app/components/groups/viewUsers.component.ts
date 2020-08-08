@@ -15,6 +15,7 @@ export class ViewUsersComponent implements OnInit {
   public selectedUser!: GroupUserModel;
   public isAdmin = false;
   public isSiteAdmin = false;
+  public groupId: number;
   constructor(
     private groupsService: GroupsService,
     private router: Router
@@ -41,7 +42,7 @@ export class ViewUsersComponent implements OnInit {
   }
 
   private getGroupUsers() {
-    this.groupsService.getGroupUsers().subscribe((response: any) => {
+    this.groupsService.getGroupUsers(this.groupId).subscribe((response: any) => {
       if (response !== "0") {
         this.groupUsers = response.map((groupUser: any) => {
           let locked = false;
@@ -72,6 +73,14 @@ export class ViewUsersComponent implements OnInit {
           user.locked = false;
         }
       });
+    }
+  }
+
+  public selectGroup(groupId: number) {
+    if (groupId !== this.groupId) {
+      this.groupId = groupId;
+      this.getGroupUsers();
+      this.selectedUser = null;
     }
   }
 }

@@ -3,7 +3,11 @@ import {Component} from "@angular/core";
 @Component({
   selector: "content",
   template: `
-    <router-outlet></router-outlet>
+    <div class="row m-0">
+      <div class="col p-0">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
   `
 })
 

@@ -1,0 +1,21 @@
+<div *ngIf="isSiteAdmin">
+  <div class="row mb-1">
+    <div class="col d-none d-lg-flex">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <label for="selectGroupDropDown" class="input-group-text">Groups: </label>
+        </div>
+        <select id="selectGroupDropDown" class="form-control" [ngModel]="selectedGroup" (ngModelChange)="selectGroup($event)">
+          <option *ngFor="let group of groups;" [ngValue]="group">{{group.groupName}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col d-block d-lg-none">
+      <label for="selectGroupDropDown">Groups: </label>
+      <div class="w-100 p1"></div>
+      <select id="selectGroupDropDown" class="form-control" [ngModel]="selectedGroup" (ngModelChange)="selectGroup($event)">
+        <option *ngFor="let group of groups;" [ngValue]="group">{{group.groupName}}</option>
+      </select>
+    </div>
+  </div>
+</div>

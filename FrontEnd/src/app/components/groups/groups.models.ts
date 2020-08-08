@@ -14,6 +14,11 @@ export interface GroupStudent {
   email?: string;
 }
 
+export interface Groups {
+  groupId: number;
+  groupName: string;
+}
+
 export class GroupUserModel implements GroupUser {
   constructor(
     public email: string,
@@ -31,5 +36,12 @@ export class GroupStudentModel implements GroupStudent {
     public name: string,
     public active: boolean,
     public email?: string
+  ) {}
+}
+
+export class GroupsModel implements Groups {
+  constructor(
+    public groupId: number,
+    public groupName: string
   ) {}
 }

@@ -53,6 +53,7 @@ export class GroupsUrls {
   public getGroupStudents: string = baseUrl + "/admin/getGroupStudents.php";
   public unlockAccount: string = baseUrl + "/admin/unlockAccount.php";
   public setStudentStatus: string = baseUrl + "/admin/setStudentStatus.php";
+  public getGroups: string = baseUrl + "/admin/getGroups.php";
 }
 
 // Icons available for selection for classes
