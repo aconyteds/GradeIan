@@ -16,7 +16,7 @@ export class AdminMenuComponent implements OnInit {
   public fullName = "";
   public isAdmin = false;
   public isSiteAdmin = false;
-  private routes: string[] = ["password", "account", "users", "students", "licenses"];
+  private routes: string[] = ["password", "account", "users", "students", "license"];
   constructor(
     private adminService: AdminService,
     private router: Router
@@ -40,7 +40,7 @@ export class AdminMenuComponent implements OnInit {
     this.adminService.checkYourPrivelege().subscribe((response: any)  => {
       if (response.response !== "0") {
         this.isAdmin = response.groupAdmin === "1";
-        this.isSiteAdmin = response.groupAdmin === "1";
+        this.isSiteAdmin = response.siteAdmin === "1";
       } else {
         this.isAdmin = false;
         this.isSiteAdmin = false;
@@ -83,24 +83,9 @@ export class AdminMenuComponent implements OnInit {
     return months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
   }
 
-  public updateAccount(event: Event) {
+  public navigateToPage(event: Event, route: string) {
     event.preventDefault();
-    this.router.navigate(["admin/updateAccount"]);
-  }
-
-  public updatePassword(event: Event) {
-    event.preventDefault();
-    this.router.navigate(["admin/updatePassword"]);
-  }
-
-  public viewUsers(event: Event) {
-    event.preventDefault();
-    this.router.navigate(["admin/groupUsers"]);
-  }
-
-  public viewStudents(event: Event) {
-    event.preventDefault();
-    this.router.navigate(["admin/groupStudents"]);
+    this.router.navigate([route]);
   }
 
   public logout(event?: Event) {

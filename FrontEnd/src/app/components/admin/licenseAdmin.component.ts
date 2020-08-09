@@ -83,6 +83,18 @@ export class LicenseAdminComponenet implements OnInit {
     }
   }
 
+  public getUserGroupName(groupId: number) {
+    let groupName = "";
+    this.userGroups.some((group: UserGroupModel) => {
+      if (group.groupId === groupId) {
+        groupName = group.groupName;
+        return true;
+      }
+    });
+
+    return groupName;
+  }
+
   public filterUserGroups(filterString: string) {
     this.filterString = filterString;
     if (this.filterString !== "") {
