@@ -223,7 +223,7 @@ export class AssignmentView implements OnInit {
     });
     // console.log("Create Assignments: ", newAssignmentGroups, newGroupAssignmentItems);
     // console.log("Create Assignment Items: ", newAssignmentItems);
-    console.log("Delete Assignments: ", deletedAssignmentGroups, deletedAssignmentItems);
+    // console.log("Delete Assignments: ", deletedAssignmentGroups, deletedAssignmentItems);
     // console.log("Updated Assignments: ", updatedAssignmentGroups, updatedAssignmentItems);
 
     // CRUD Assignments
