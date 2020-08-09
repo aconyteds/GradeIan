@@ -15,7 +15,6 @@ export class ViewUsersComponent implements OnInit {
   public showingUsers: GroupUserModel[] = [];
   public filterString = "";
   private searchableFields: string[] = ["email", "firstName", "lastName", "userName"];
-  public selectedUser!: GroupUserModel;
   public isAdmin = false;
   public isSiteAdmin = false;
   public groupId: number;
@@ -66,10 +65,6 @@ export class ViewUsersComponent implements OnInit {
     });
   }
 
-  public selectUser(selectedUser: GroupUserModel) {
-    this.selectedUser = selectedUser;
-  }
-
   public unlockAccount(user: GroupUserModel) {
     if (user.locked) {
       this.groupsService.unlockAccount(user.userID).subscribe((response: any) => {
@@ -84,7 +79,6 @@ export class ViewUsersComponent implements OnInit {
     if (groupId !== this.groupId) {
       this.groupId = groupId;
       this.getGroupUsers();
-      this.selectedUser = null;
     }
   }
 

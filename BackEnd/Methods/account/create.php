@@ -11,7 +11,7 @@
     }
 
     //Check for unique email
-    $uniqueEmail = $conn->query("call checkEmail('$inputs->email')")->fetch(PDO::FETCH_OBJ);
+    $uniqueEmail = $conn->query("call checkEmail('$inputs->email', null)")->fetch(PDO::FETCH_OBJ);
     if(!!$uniqueEmail->response){
       echo "Account already esists for " . $inputs->email . ".";
       return;
