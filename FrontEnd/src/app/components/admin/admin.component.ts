@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit {
   public activeNavigation: string;
   public isAdmin = false;
   public isSiteAdmin = false;
-  private routes: string[] = ["password", "account", "users", "students", "licenses"];
+  private routes: string[] = ["password", "account", "users", "students", "license"];
   constructor(
     private adminService: AdminService,
     private router: Router
@@ -54,23 +54,8 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  public updateAccount(event: Event) {
+  public navigateToPage(event: Event, route: string) {
     event.preventDefault();
-    this.router.navigate(["/admin/updateAccount"]);
-  }
-
-  public updatePassword(event: Event) {
-    event.preventDefault();
-    this.router.navigate(["/admin/updatePassword"]);
-  }
-
-  public viewUsers(event: Event) {
-    event.preventDefault();
-    this.router.navigate(["admin/groupUsers"]);
-  }
-
-  public viewStudents(event: Event) {
-    event.preventDefault();
-    this.router.navigate(["admin/groupStudents"]);
+    this.router.navigate([route]);
   }
 }

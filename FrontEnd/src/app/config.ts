@@ -54,6 +54,12 @@ export class GroupsUrls {
   public unlockAccount: string = baseUrl + "/admin/unlockAccount.php";
   public setStudentStatus: string = baseUrl + "/admin/setStudentStatus.php";
   public getGroups: string = baseUrl + "/admin/getGroups.php";
+  public getGroupsDetails: string = baseUrl + "/admin/getGroupsDetails.php";
+  public getGroupLicenseDetails: string = baseUrl + "/admin/getGroupLicenseDetails.php";
+  public checkGroupName: string = baseUrl + "/admin/checkGroupName.php";
+  public createGroup: string = baseUrl + "/admin/createGroup.php";
+  public getAccessLevels: string = baseUrl + "/admin/getAccessLevels.php";
+  public createLicense: string = baseUrl + "/admin/createLicense.php";
 }
 
 // Icons available for selection for classes

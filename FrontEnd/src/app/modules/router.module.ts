@@ -16,6 +16,7 @@ import { UpdatePasswordComponent } from "../components/updateAccount/updatePassw
 import { AdminComponent } from "../components/admin/admin.component";
 import { ViewUsersComponent } from "../components/groups/viewUsers.component";
 import { ViewStudentsComponent } from "../components/groups/viewStudents.component";
+import { LicenseAdminComponenet } from "../components/admin/licenseAdmin.component";
 
 const appRoutes: Routes = [
   {
@@ -76,6 +77,10 @@ const appRoutes: Routes = [
         path: "groupStudents",
         pathMatch: "full",
         component: ViewStudentsComponent
+      }, {
+        path: "licenseAdmin",
+        pathMatch: "full",
+        component: LicenseAdminComponenet
       }
     ]
   },

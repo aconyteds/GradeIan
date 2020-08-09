@@ -38,6 +38,9 @@ import { AdminMenuComponent } from "../components/admin/adminMenu.component";
 import { ViewUsersComponent } from "../components/groups/viewUsers.component";
 import { ViewStudentsComponent } from "../components/groups/viewStudents.component";
 import { GroupSelectorComponent } from "../components/groups/groupSelector.component";
+import { LicenseAdminComponenet } from "../components/admin/licenseAdmin.component";
+import { CreateGroupComponent } from "../components/groups/createGroup.component";
+import { CreateLicenseComponent } from "../components/admin/createLicense.component";
 
 // Directives
 
@@ -70,7 +73,10 @@ import { GroupSelectorComponent } from "../components/groups/groupSelector.compo
     AdminMenuComponent,
     ViewUsersComponent,
     ViewStudentsComponent,
-    GroupSelectorComponent
+    GroupSelectorComponent,
+    LicenseAdminComponenet,
+    CreateGroupComponent,
+    CreateLicenseComponent
   ],
   providers: [
     AccountService,

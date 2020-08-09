@@ -13,24 +13,24 @@
             <div class="col">
               <ul class="nav flex-column">
                 <li class="nav-item">
-                  <a class="nav-link" [ngClass]="activeNavigation === 'account'? 'active': ''" href="#" (click)="updateAccount($event)">Update Account</a>
+                  <a class="nav-link" [ngClass]="activeNavigation === 'account'? 'active': ''" href="#" (click)="navigateToPage($event, 'admin/updateAccount')">Update Account</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" [ngClass]="activeNavigation === 'password'? 'active': ''" href="#" (click)="updatePassword($event)">Update Password</a>
+                  <a class="nav-link" [ngClass]="activeNavigation === 'password'? 'active': ''" href="#" (click)="navigateToPage($event, 'admin/updatePassword')">Update Password</a>
                 </li>
                 <div *ngIf="isAdmin || isSiteAdmin">
                   <div class="dropdown-divider"></div>
                   <li class="nav-item">
-                    <a class="nav-link" [ngClass]="activeNavigation === 'users'? 'active': ''" href="#" (click)="viewUsers($event)">View Users</a>
+                    <a class="nav-link" [ngClass]="activeNavigation === 'users'? 'active': ''" href="#" (click)="navigateToPage($event, 'admin/groupUsers')">View Users</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" [ngClass]="activeNavigation === 'students'? 'active': ''" href="#" (click)="viewStudents($event)">View Students</a>
+                    <a class="nav-link" [ngClass]="activeNavigation === 'students'? 'active': ''" href="#" (click)="navigateToPage($event, 'admin/groupStudents')">View Students</a>
                   </li>
                 </div>
                 <div *ngIf="isSiteAdmin">
                   <div class="dropdown-divider"></div>
                   <li *ngIf="isSiteAdmin" class="nav-item">
-                    <a class="nav-link disabled" href="#">License Admin</a>
+                    <a class="nav-link " [ngClass]="activeNavigation === 'license'? 'active': ''" href="#" (click)="navigateToPage($event, 'admin/licenseAdmin')">License Admin</a>
                   </li>
                 </div>
               </ul>

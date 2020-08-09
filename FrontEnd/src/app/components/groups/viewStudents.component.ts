@@ -32,7 +32,7 @@ export class ViewStudentsComponent implements OnInit {
     this.groupsService.checkYourPrivelege().subscribe((response: any)  => {
       if (response.response !== "0") {
         this.isAdmin = response.groupAdmin === "1";
-        this.isSiteAdmin = response.groupAdmin === "1";
+        this.isSiteAdmin = response.siteAdmin === "1";
       } else {
         this.isAdmin = false;
         this.isSiteAdmin = false;

@@ -54,4 +54,22 @@ export class GroupsService extends Authentication {
     return this.http.post<any>(this.urls.getGroups, JSON.stringify({token: window.sessionStorage.getItem("token")}))
       .pipe(catchError(this.authenticateValidation('getGroups')));
   }
+
+  public checkGroupName(newGroupName: string) {
+    const checkGroupNameRequest = {
+      token: window.sessionStorage.getItem("token"),
+      groupName: newGroupName
+    };
+    return this.http.post<any>(this.urls.checkGroupName, JSON.stringify(checkGroupNameRequest))
+      .pipe(catchError(this.authenticateValidation('checkGroupName')));
+  }
+
+  public createGroup(newGroupName: string) {
+    const createGroupRequest = {
+      token: window.sessionStorage.getItem("token"),
+      groupName: newGroupName
+    };
+    return this.http.post<any>(this.urls.createGroup, JSON.stringify(createGroupRequest))
+      .pipe(catchError(this.authenticateValidation('createGroup')));
+  }
 }

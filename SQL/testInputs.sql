@@ -2,14 +2,24 @@ use gradeian;
 
 -- gets all groups (SiteAdminUserID) - SITE ADMIN ONLY
 call getGroups(1);
+-- gets all groups and extra details (SiteAdminUserID) - SITE ADMIN ONLY
+call getGroupsDetails(1);
 -- gets all users for (SiteAdminUserID, GroupID) - SITE ADMIN ONLY
 call getUsersByGroup(1, 2);
 -- gets all licenses for a group (SiteAdminUserID, GroupID) - SITE ADMIN ONLY
 call getGroupLicenses(1, 2);
 -- gets all users for (AdminID) - Group ADMIN only
 call getGroupUsers(1);
--- Access Level, Group Name
-call createLicense(3, "Test Group2");
+-- checks if a group name exists (GroupName)
+call checkGroupName("test group");
+call checkGroupName("does not exists");
+-- creates a group with the given (GroupName) or returns the ID for a group with the same name
+call createGroup(1, "test group");
+call createGroup(4, "new group5");
+-- get all Access levels (AdminID) -- Admin Only
+call getAccessLevels(1);
+-- Access Level, Group ID
+call createLicense(3, 2);
 -- Verifies that a license is legit (License)
 call checkToken('GU3OWEWYJEWMZI2');
 
@@ -39,7 +49,7 @@ call unlockAccount(3);
 
 -- Checks whether the user is an admin (TeacherID)
 call checkYourAdminPrivelege(1);
-call checkYourSiteAdminPrivelege(1);
+call checkYourSiteAdminPrivelege(4);
 
 -- login to an account (userName, password)
 call login('iwilson','');
