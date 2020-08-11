@@ -5,7 +5,7 @@
 
   $token = getParameters(["token"])->token;
   if($token){
-    $userId = $conn->query("call authenticate('$token', '$user_ip')")->fetch(PDO::FETCH_OBJ)->UserId;
+    $userId = $conn->query("call authenticate('$token', '$user_ip')")->fetch(PDO::FETCH_OBJ)->UserID;
     if(!$userId){
       http_response_code(401);
     }

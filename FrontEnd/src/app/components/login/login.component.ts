@@ -24,16 +24,15 @@ export class LoginForm implements OnInit {
   constructor(
     private accountService: AccountService,
     private router: Router
-  ) {
+  ) {  }
+
+  public ngOnInit() {
     // we want to get any stored credentials
     this.getCredentials();
     // Create a login model using stored credentials (if available)
     this.credentials = new LoginModel(this.userName, this.password);
-  }
-
-  public ngOnInit() {
     this.rememberMe = window.localStorage.getItem("autoLogin") === "true";
-    if (!!this.encryptedPassword && this.rememberMe) {
+    if (this.encryptedPassword !== "" && this.rememberMe) {
       this.login({
         userName: this.userName,
         password: this.encryptedPassword
@@ -56,9 +55,6 @@ export class LoginForm implements OnInit {
   }
 
   public login(loginObject?: any): void {
-    window.sessionStorage.setItem("token", null);
-    // Call the login service
-    if (this.credentials.userName === "" || this.credentials.password === "") { return; }
     // This is where we obfuscate the password
     if (!loginObject) {
       loginObject = {
@@ -66,7 +62,9 @@ export class LoginForm implements OnInit {
         password: this.passwordService.obfuscatePassword(this.credentials.password)
       };
     }
-
+    // Call the login service
+    if (loginObject.userName === "" || loginObject.password === "") { return; }
+    window.sessionStorage.setItem("token", null);
     this.accountService.login(loginObject)
       .subscribe((response) => {
         const token: string = response.token;
