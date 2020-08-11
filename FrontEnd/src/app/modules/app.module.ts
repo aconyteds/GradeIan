@@ -93,8 +93,7 @@ import { CreateLicenseComponent } from "../components/admin/createLicense.compon
     // MenuComponent,
     // SearchComponent,
     // AvatarComponent,
-    ContentComponent,
-    AdminMenuComponent
+    ContentComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

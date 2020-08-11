@@ -1,0 +1,36 @@
+<div class="fluid-container">
+  <section *ngIf="!!loggedIn">
+    <div class="header navbar navbar-expand-lg navbar-light bg-light" style="border-bottom:1px solid #333;">
+      <a href="./home" class="navbar-brand">
+        <h1>GradeIan</h1>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarExpandedContent" aria-controls="navbarExpandedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarExpandedContent">
+        <ul class="navbar-nav mr-auto ml-3 ml-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" href="https://youtu.be/Ev8y-_qyu7w" target="_blank">View Demo <i class="fas fa-external-link-alt"></i></a>
+          </li>
+        </ul>
+        <div class="nav-item">
+          <app-admin-menu></app-admin-menu>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+    </div>
+  </section>
+  <div class="body">
+    <div class="fluid-container">
+      <div class="row m-0">
+        <div class="col p-0">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="loader" *ngIf="!loaded">
+    <div><span>Loading...</span></div>
+  </section>
+</div>

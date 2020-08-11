@@ -18,7 +18,6 @@ export class LoginForm implements OnInit {
   private userName = "";
   private password = "";
   private encryptedPassword = "";
-  private token: string;
   public response = "success";
   private passwordService: PasswordService = new PasswordService();
   public rememberMe = false;
@@ -54,13 +53,12 @@ export class LoginForm implements OnInit {
 
     this.userName = window[type].getItem("userName");
     this.encryptedPassword = window[type].getItem("loginCredential");
-    this.token = window[type].getItem("token");
   }
 
   public login(loginObject?: any): void {
     window.sessionStorage.setItem("token", null);
     // Call the login service
-    if (!this.credentials.userName && !this.credentials.password) { return; }
+    if (this.credentials.userName === "" || this.credentials.password === "") { return; }
     // This is where we obfuscate the password
     if (!loginObject) {
       loginObject = {

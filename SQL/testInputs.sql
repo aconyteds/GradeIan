@@ -61,7 +61,7 @@ call login('iwilson', "abFFF");
 call login('user', 'e9b3c904a0b80fcf5674061e57f1c7d6539c9393ec7b404b136a0b216a67d037');
 
 -- Generates a new authentication token for a user (userID)
-call generateToken(6);
+call generateToken(1, "127.0.0.1");
 
 -- Verifies whether an email is in use (email)
 call checkEmail("ianwilson1337@gmail.com");
