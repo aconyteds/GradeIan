@@ -22,6 +22,13 @@
   </head>
   <!-- 3. Display the application -->
   <body class="gradeian">
+    <noscript>
+      <h1>Uh Oh!</h1>
+      <p>Your browser does not support JavaScript! JavaScript is required to use this application. I don't know why you have it turned off, but please turn it back on if you wish to use GradeIan!</p>
+    </noscript>
     <app-content></app-content>
+    <section class="loader" *ngIf="!loaded">
+      <h1>Loading...</h1>
+    </section>
   </body>
 </html>

@@ -1,8 +1,8 @@
-<div class="fluid-container">
+<div class="body">
   <section *ngIf="!!loggedIn">
-    <div class="header navbar navbar-expand-lg navbar-light bg-light" style="border-bottom:1px solid #333;">
+    <div class="header navbar navbar-expand-lg navbar-light bg-light" style="border-bottom:1px solid #333; z-index:999;">
       <a href="./home" class="navbar-brand">
-        <h1>GradeIan</h1>
+        <h2>GradeIan</h2>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarExpandedContent" aria-controls="navbarExpandedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -21,16 +21,10 @@
     <div class="footer">
     </div>
   </section>
-  <div class="body">
-    <div class="fluid-container">
-      <div class="row m-0">
-        <div class="col p-0">
-          <router-outlet></router-outlet>
-        </div>
-      </div>
-    </div>
+  <div class="container-fluid m-0 p-0" style="overflow-y: auto;">
+    <router-outlet></router-outlet>
   </div>
-  <section class="loader" *ngIf="!loaded">
-    <div><span>Loading...</span></div>
-  </section>
 </div>
+<section class="loader" *ngIf="!loaded">
+  <h1>Loading...</h1>
+</section>

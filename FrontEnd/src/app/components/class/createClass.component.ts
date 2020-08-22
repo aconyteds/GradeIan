@@ -108,6 +108,7 @@ export class CreateClass implements OnInit {
         this.classDetails = responseObject;
         this.classData = this.classDetails.classData;
         this.classData.classId = classDetails.ID;
+        this.classId = classDetails.ID;
       } else {
         this.classDetails = null;
       }
@@ -134,6 +135,7 @@ export class CreateClass implements OnInit {
           // Had to log in again, token expired
           this.createClass();
         } else if (!!response.classId) {
+          this.classId = response.classId;
           // Class Created
           forkJoin({
             // Enroll Students
@@ -143,7 +145,7 @@ export class CreateClass implements OnInit {
           }).subscribe((responses) => {
             // console.log(responses);
             // Route to the class
-            this.router.navigate(["/home"]);
+            this.router.navigate(["class/" + response.classId]);
           });
         } else {
           // Failure

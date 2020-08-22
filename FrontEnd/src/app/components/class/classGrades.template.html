@@ -1,4 +1,4 @@
-<div style="width:100%; padding:0 20px;">
+<div class="col-auto">
   <section class="actions-container row justify-content-center align-items-center border-bottom pb-2">
     <div class="col-auto">
       Edit Mode:
@@ -11,53 +11,57 @@
       </div>
     </div>
   </section>
-  <section class="d-none d-md-block grade-grid-section mt-3 pb-2 border-bottom">
-    <table class="table table-bordered grade-grid" [ngClass]="editMode">
-      <thead>
-        <tr>
-          <th scope="col" style="z-index: {{assignments.length + 2}};">
-            <span class="assignment-header">Name</span>
-          </th>
-          <th scope="col" *ngFor="let assignment of assignments; index as indx;" [ngStyle]="{'z-index':(assignments.length + 1) - indx}">
-            <span class="assignment-header">{{assignment.label}}</span>
-          </th>
-          <th scope="col" style="z-index: 1;">
-            <span class="assignment-header">Average</span>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let student of gradeBook; index as studentIndx">
-          <th scope="row" class="bg-primary text-white">{{student.studentDetails.name}}</th>
-          <td *ngFor="let grade of student.grades; index as indx;" [ngClass]="grade.status !== 'empty' ?getGradeColor(grade.grade): ''">
-            <input *ngIf="editMode === 'grade'" class="form-control" type="number" id="{{grade.gradeId}}_grade" aria-label="Assignment Grade" placeholder="100" [(ngModel)]="grade.grade" required name="grade" #gradeGrade="ngModel" min="0" max="100"
-              (change)="saveGrade(grade)" tabindex="{{(studentIndx + (gradeBook.length * indx) + indx) + 1}}">
-            <div *ngIf="editMode === 'questions'">
-              <div *ngIf="assignments[indx].questions > 0" class="input-group">
-                <input class="form-control" type="number" id="{{grade.gradeId}}_questionsCorrect" aria-label="Assignment Questions Correct" [(ngModel)]="grade.questionsCorrect" name="questionsCorrect" #questionsCorrect="ngModel" min="0" max="100"
+  <section class="d-none d-md-block mt-3 pb-2 border-bottom row" style="max-width:90vw;">
+    <div class="col">
+      <div class="table-responsive">
+        <table class="table table-bordered grade-grid" [ngClass]="editMode">
+          <thead>
+            <tr>
+              <th scope="col" style="z-index: {{assignments.length + 2}};">
+                <span class="assignment-header">Name</span>
+              </th>
+              <th scope="col" *ngFor="let assignment of assignments; index as indx;" [ngStyle]="{'z-index':(assignments.length + 1) - indx}">
+                <span class="assignment-header">{{assignment.label}}</span>
+              </th>
+              <th scope="col" style="z-index: 1;">
+                <span class="assignment-header">Average</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of gradeBook; index as studentIndx">
+              <th scope="row" class="bg-primary text-white">{{student.studentDetails.name}}</th>
+              <td *ngFor="let grade of student.grades; index as indx;" [ngClass]="grade.status !== 'empty' ?getGradeColor(grade.grade): ''">
+                <input *ngIf="editMode === 'grade'" class="form-control" type="number" id="{{grade.gradeId}}_grade" aria-label="Assignment Grade" placeholder="100" [(ngModel)]="grade.grade" required name="grade" #gradeGrade="ngModel" min="0" max="100"
                   (change)="saveGrade(grade)" tabindex="{{(studentIndx + (gradeBook.length * indx) + indx) + 1}}">
-                <div class="input-group-append">
-                  <span class="input-group-text">of {{assignments[indx].questions}}</span>
+                <div *ngIf="editMode === 'questions'">
+                  <div *ngIf="assignments[indx].questions > 0" class="input-group">
+                    <input class="form-control" type="number" id="{{grade.gradeId}}_questionsCorrect" aria-label="Assignment Questions Correct" [(ngModel)]="grade.questionsCorrect" name="questionsCorrect" #questionsCorrect="ngModel" min="0" max="100"
+                      (change)="saveGrade(grade)" tabindex="{{(studentIndx + (gradeBook.length * indx) + indx) + 1}}">
+                    <div class="input-group-append">
+                      <span class="input-group-text">of {{assignments[indx].questions}}</span>
+                    </div>
+                  </div>
+                  <div *ngIf="assignments[indx].questions < 1" [ngClass]="grade.status !== 'empty' ?'text-white': ''">
+                    No Question Data
+                  </div>
                 </div>
-              </div>
-              <div *ngIf="assignments[indx].questions < 1" [ngClass]="grade.status !== 'empty' ?'text-white': ''">
-                No Question Data
-              </div>
-            </div>
-          </td>
-          <td [ngClass]="getGradeColor(student.average)" class="text-center align-middle text-white">{{student.average.toFixed(2)}}</td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr class="text-center align-items-center">
-          <th scope="row" class="bg-secondary text-white">Average</th>
-          <td *ngFor="let average of assignmentAverages;" class="text-white" [ngClass]="getGradeColor(average)">
-            {{average.toFixed(2)}}
-          </td>
-          <td [ngClass]="getGradeColor(classAverage)" class="text-white" style="font-weight:bold;">{{classAverage.toFixed(2)}}</td>
-        </tr>
-      </tfoot>
-    </table>
+              </td>
+              <td [ngClass]="getGradeColor(student.average)" class="text-center align-middle text-white">{{student.average.toFixed(2)}}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="text-center align-items-center">
+              <th scope="row" class="bg-secondary text-white">Average</th>
+              <td *ngFor="let average of assignmentAverages;" class="text-white" [ngClass]="getGradeColor(average)">
+                {{average.toFixed(2)}}
+              </td>
+              <td [ngClass]="getGradeColor(classAverage)" class="text-white" style="font-weight:bold;">{{classAverage.toFixed(2)}}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
   </section>
   <section class="d-md-none mt-3 border-bottom">
     <div class="row justify-content-center pb-2">

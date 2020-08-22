@@ -27,6 +27,9 @@ export class Authentication {
   }
 
   public authenticateValidation<T>( operation = 'operation') {
+    if (window.sessionStorage.getItem("token") === null) {
+      window.location.replace(window.location.origin + "/login");
+    }
     return (error: any) => {
       if (error.status === 401) {
         if (window.sessionStorage.getItem("userName") && window.sessionStorage.getItem("loginCredential")) {
