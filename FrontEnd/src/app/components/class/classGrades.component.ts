@@ -15,6 +15,17 @@ import * as helpers from "../../utilities/helpers";
       white-space: nowrap;
     }
 
+    .class-grades-container{
+      display:grid;
+      height:auto;
+      grid-template-rows:max-content max-content;
+    }
+
+    .grade-container{
+      display:grid;
+      grid-template-rows: max-content auto max-content;
+    }
+
     .grade-grid-section {
       width:100%;
       margin:10px 0;
@@ -91,6 +102,7 @@ export class ClassGrades implements OnInit {
   public pendingChanges = false;
   public selectedStudent: GradeBookItem;
   public selectedAssignment: AssignmentItem;
+  public selectedGrades: number[] = [];
   constructor(
     private classesService: ClassesService
   ) { }
@@ -103,7 +115,7 @@ export class ClassGrades implements OnInit {
 
   public getGrades() {
     this.classesService.getAssignmentGrades(this.assignments).subscribe((response) => {
-      const responseGrades = response.grades.map((gradeItem) => {
+      const responseGrades = response.grades.map((gradeItem: any) => {
         return new GradeModel(parseInt(gradeItem.gradeId, 10),
         parseInt(gradeItem.studentId, 10),
         parseInt(gradeItem.assignmentId, 10),
@@ -113,6 +125,7 @@ export class ClassGrades implements OnInit {
       );
       });
       this.buildGradeBook(responseGrades);
+      this.runStatistics();
     });
   }
 
@@ -304,10 +317,12 @@ export class ClassGrades implements OnInit {
 
   public selectStudent(student: GradeBookItem) {
     this.selectedStudent = student;
+    this.runStatistics("student", student.studentDetails.ID);
   }
 
   public selectAssignment(assignment: AssignmentItem) {
     this.selectedAssignment = assignment;
+    this.runStatistics("assignment", assignment.ID);
   }
 
   public getGrade(studentId: number, assignmentId: number): Grade {
@@ -319,5 +334,23 @@ export class ClassGrades implements OnInit {
       }
     });
     return selectedGrade;
+  }
+
+  public runStatistics(selectionMode?: string, selectionId?: number) {
+    let relevantGrades: Grade[] = [];
+    if (selectionMode === "assignment" && selectionId) {
+       relevantGrades = this.allGrades.filter((gradeItem: Grade) => {
+        return gradeItem.assignmentId === selectionId && gradeItem.status !== "empty";
+      });
+    } else if (selectionMode === "student" && selectionId) {
+      relevantGrades = this.allGrades.filter((gradeItem: Grade) => {
+        return gradeItem.studentId === selectionId && gradeItem.status !== "empty";
+      });
+    } else {
+      relevantGrades = this.gradeBook.map((currItem: GradeBookItem) => {
+        return {grade: currItem.average} as Grade;
+      });
+    }
+    this.selectedGrades = relevantGrades.map((gradeItem: Grade) => gradeItem.grade);
   }
 }

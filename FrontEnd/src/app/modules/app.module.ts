@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 // Bootstraped Components
 import { ContentComponent } from "../components/content.component";
@@ -41,6 +42,9 @@ import { GroupSelectorComponent } from "../components/groups/groupSelector.compo
 import { LicenseAdminComponenet } from "../components/admin/licenseAdmin.component";
 import { CreateGroupComponent } from "../components/groups/createGroup.component";
 import { CreateLicenseComponent } from "../components/admin/createLicense.component";
+import { StatisticsComponent } from "../components/statistics/statistics.component";
+import { NormalDistributionComponent } from "../components/statistics/normalDistribution.component";
+import { PassPercentageComponent } from "../components/statistics/passPercentage.component";
 
 // Directives
 
@@ -50,7 +54,10 @@ import { CreateLicenseComponent } from "../components/admin/createLicense.compon
     RouteModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ],
   declarations: [
     CreateAccount,
@@ -76,7 +83,10 @@ import { CreateLicenseComponent } from "../components/admin/createLicense.compon
     GroupSelectorComponent,
     LicenseAdminComponenet,
     CreateGroupComponent,
-    CreateLicenseComponent
+    CreateLicenseComponent,
+    StatisticsComponent,
+    NormalDistributionComponent,
+    PassPercentageComponent
   ],
   providers: [
     AccountService,

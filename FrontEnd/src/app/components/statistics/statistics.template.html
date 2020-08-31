@@ -1,0 +1,58 @@
+<div>
+  <div>
+    <h3>Class Statistics</h3>
+  </div>
+  <div class="alert alert-info d-none d-md-block">
+    <div>In order to view statistics, please click any of the table cells which contain an "average"</div>
+  </div>
+  <div *ngIf="grades.length < 2" class="jumbotron">
+    <h3>Unable to display statistics with such a small dataset.</h3>
+  </div>
+  <div *ngIf="grades.length > 1" class="col">
+    <div class="row mb-1">
+      <div class="col col-md-4">
+        <ul class="list-group stats-list">
+          <li class="list-group-item">
+            <label>Mean: </label>{{mean.toFixed(2)}}%
+          </li>
+          <li class="list-group-item">
+            <label>Median: </label>{{median}}
+          </li>
+          <li class="list-group-item">
+            <label>Mode: </label>{{mode.toString().replace(",", ", ")}}
+          </li>
+          <li class="list-group-item">
+            <label>Range: </label>{{range.toString().replace(",", ", ")}}
+          </li>
+          <li class="list-group-item">
+            <label>Standard Deviation: </label>{{standardDeviation.toFixed(2)}}
+          </li>
+          <li class="list-group-item">
+            <label>Pass Percentage: </label>{{passPercentage.toFixed(2)}}%
+          </li>
+        </ul>
+      </div>
+      <div class="col-8 d-none d-md-block">
+        <div class="row mb-1">
+          <div class="col">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <label class="input-group-text">Select Chart</label>
+              </div>
+              <select #chartSelection class="form-control" (change)="selectChart(chartSelection.value)">
+                <option value="bell-curve" selected>Bell Curve</option>
+                <option value="passing">Pass Percentage</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <app-normal-distribution [dataSet]="sortedGrades" [mean]="mean" [standardDeviation]="standardDeviation" [minPassing]="minPassing" *ngIf="selectedChart === 'bell-curve'"></app-normal-distribution>
+            <app-pass-percentage [dataSet]="sortedGrades" [minPassing]="minPassing" *ngIf="selectedChart === 'passing'"></app-pass-percentage>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
