@@ -16,13 +16,13 @@
             <label>Mean: </label>{{mean.toFixed(2)}}%
           </li>
           <li class="list-group-item">
-            <label>Median: </label>{{median}}
+            <label>Median: </label>{{median.toFixed(2)}}
           </li>
           <li class="list-group-item">
-            <label>Mode: </label>{{mode.toString().replace(",", ", ")}}
+            <label>Mode: </label>{{displayNumberArray(mode)}}
           </li>
           <li class="list-group-item">
-            <label>Range: </label>{{range.toString().replace(",", ", ")}}
+            <label>Range: </label>{{displayNumberArray(range)}}
           </li>
           <li class="list-group-item">
             <label>Standard Deviation: </label>{{standardDeviation.toFixed(2)}}

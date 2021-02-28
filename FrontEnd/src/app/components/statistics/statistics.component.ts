@@ -104,4 +104,17 @@ export class StatisticsComponent implements OnChanges {
   public selectChart(newSelection: string) {
     this.selectedChart = newSelection;
   }
+
+  public displayNumberArray(numbers: number[]): string {
+    let returnString = "";
+    if (numbers.length < 6) {
+      numbers.forEach((currNumber: number, indx: number) => {
+        returnString += (indx ? ", " : "") + currNumber.toFixed(2);
+      });
+    } else {
+      returnString = "More than 5 unique values";
+    }
+
+    return returnString;
+  }
 }
