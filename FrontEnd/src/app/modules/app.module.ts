@@ -45,6 +45,7 @@ import { CreateLicenseComponent } from "../components/admin/createLicense.compon
 import { StatisticsComponent } from "../components/statistics/statistics.component";
 import { NormalDistributionComponent } from "../components/statistics/normalDistribution.component";
 import { PassPercentageComponent } from "../components/statistics/passPercentage.component";
+import { GroupAverage } from "../components/class/GroupAverage/groupAverage.component";
 
 // Directives
 
@@ -86,7 +87,8 @@ import { PassPercentageComponent } from "../components/statistics/passPercentage
     CreateLicenseComponent,
     StatisticsComponent,
     NormalDistributionComponent,
-    PassPercentageComponent
+    PassPercentageComponent,
+    GroupAverage
   ],
   providers: [
     AccountService,

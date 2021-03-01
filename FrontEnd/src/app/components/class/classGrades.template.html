@@ -189,10 +189,14 @@
         <div class="col-auto">
           <button class="btn btn-success" [disabled]="!pendingChanges" (click)="saveGrades()"><i class="fas fa-save"></i> Save Changes</button>
         </div>
+        <div class="col-auto">
+          <app-group-average [gradeBook]="gradeBook" [minPassing]="minPassing"></app-group-average>
+        </div>
       </div>
     </section>
   </div>
   <div>
     <app-statistics [grades]="selectedGrades" [minPassing]="minPassing"></app-statistics>
   </div>
+
 </div>

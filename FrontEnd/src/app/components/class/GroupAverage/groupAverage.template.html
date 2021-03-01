@@ -1,0 +1,64 @@
+<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#classSummaryModal" (click)="calculateSummary()">
+  <i class="fas fa-table"></i> View Class Summary
+</button>
+
+<div class="modal" id="classSummaryModal" tabindex="-1">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Class Summary</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <div class="alert alert-warning">
+                <p>
+                  <strong>WARNING: </strong> These totals represent the weighted averages for the entire class. Any missing grades are treated as 0's.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div style="overflow:auto">
+              <div class="col-auto">
+                <div class="table-responsive" style="max-height: 50vh;">
+                  <table class="table table-bordered table-striped table-hover summary-grade-grid">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th *ngFor="let assignmentGroup of assignmentGroups">
+                          {{assignmentGroup.title}}
+                        </th>
+                        <th scope="col">Average</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let student of summaryGrades">
+                        <th scope="row" class="bg-primary text-white">{{student.name}}</th>
+                        <td scope="col" *ngFor="let grade of student.grades" class="text-white" [ngClass]="getGradeColor(grade)">{{grade.toFixed(2)}}</td>
+                        <td scope="col" class="text-white" [ngClass]="getGradeColor(student.average)">{{student.average.toFixed(2)}}</td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th scope="row" class="bg-secondary text-white">Average</th>
+                        <td scope="col" *ngFor="let average of getGroupAverages()" class="text-white" [ngClass]="getGradeColor(average)">{{average.toFixed(2)}}</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,11 +8,8 @@ import * as helpers from "../../utilities/helpers";
   selector: 'app-statistics',
   styles: [`
     .stats-list li label {
-      width: 50%;
-      text-align: right;
       padding-right: 1rem;
       font-weight: bold;
-      margin:0;
     }
 
     .tab-content {

@@ -1,0 +1,20 @@
+.summary-grade-grid {
+  th, td {
+    border:1px solid #ccc;
+  }
+
+  th {
+    position: sticky;
+  }
+
+  tbody th,
+  tfoot th {
+    left: 0;
+  }
+
+  thead th {
+    top: -1px;
+    background-color: white;
+    z-index: 1;
+  }
+}
